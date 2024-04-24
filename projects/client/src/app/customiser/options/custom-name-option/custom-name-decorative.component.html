@@ -1,0 +1,23 @@
+<div [formGroup]="form">
+  <bx-custom-material-group [materialPrice]="true" [materialGroups]="type.name_fill_materials" [selectedMaterial]="selectedFill"
+    (materialColourSelected)="colourFillSelected($event)" *ngIf="type.name_fill_materials.length">
+    <div class="sub-header">
+      <h4 [class.danger]="!selectedFill">
+        Choose base <span *ngIf="!selectedFill"> required</span>
+      </h4>
+    </div>
+  </bx-custom-material-group>
+  <div class="add-outline" *ngIf="type.outline">
+    <mat-checkbox formControlName="add_outline">Add outline + <bx-price [price]="type.outline_price"></bx-price> per
+      letter
+    </mat-checkbox>
+  </div>
+  <bx-custom-material-group [materials]="type.name_outline_material.materials" [selectedMaterial]="selectedOutline"
+    (materialColourSelected)="colourOutlineSelected($event)" *ngIf="type.name_outline_material && form.get('add_outline').value">
+    <div class="sub-header">
+      <h4 [class.danger]="!selectedOutline">
+        Choose outline <span *ngIf="!selectedOutline"> required</span>
+      </h4>
+    </div>
+  </bx-custom-material-group>
+</div>

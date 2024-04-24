@@ -1,0 +1,27 @@
+<bx-header></bx-header>
+<div class="app-body">
+  <bx-sidebar></bx-sidebar>
+  <!-- Main content -->
+  <main class="main">
+    <div class="alert alert-danger" *ngIf="state.update">
+      <div class="d-flex align-items-center">
+        <div class="flex-grow-1">
+          Admin update available, press update when convenient.
+        </div>
+        <button class="btn btn-light" type="button" (click)="reloadPage()">Update</button>
+      </div>
+    </div>
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+      <bx-breadcrumbs></bx-breadcrumbs>
+    </ol>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+      <bx-loading-indicator></bx-loading-indicator>
+    </div>
+    <!-- /.conainer-fluid -->
+  </main>
+  <bx-aside></bx-aside>
+</div>
+<bx-footer></bx-footer>
+<toaster-container [toasterconfig]="toasterconfig"></toaster-container>

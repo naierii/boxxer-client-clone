@@ -1,0 +1,22 @@
+@import 'variables';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.important,
+::ng-deep .important {
+  color: $red;
+}
+
+.units-selector {
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  .option {
+    margin: 5px 0;
+  }
+}

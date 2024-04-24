@@ -1,0 +1,55 @@
+<div class="card">
+  <div class="card-header">Attributes
+  </div>
+  <div class="card-block">
+    <div class="form-group" *ngIf="categories && categories.length">
+      <div class="input-group" [formGroup]="categoryForm">
+        <select class="form-control" formControlName="category">
+          <option [value]="term._id" *ngFor="let term of categories">{{term.title}}</option>
+        </select>
+        <span class="input-group-append">
+          <button class="btn btn-primary" type="button" (click)="addAttribute()">Add</button>
+        </span>
+      </div>
+    </div>
+    <div [formGroup]="form">
+      <div formArrayName="attributes">
+        <accordion [closeOthers]="true">
+          <accordion-group *ngFor="let attribute of formAttributes.controls; let i=index" #group [formGroupName]="i">
+            <div accordion-heading>
+              <span *ngIf="attribute.get('title').value;else other_title">{{attribute.get('title').value}}</span>
+              <ng-template #other_title>New attribute..</ng-template>
+              <i class="pull-right float-xs-right" [ngClass]="{'icon-arrow-up': group?.isOpen, 'icon-arrow-down': !group?.isOpen}"></i>
+            </div>
+            <button *ngIf="attribute.get('_id').value" class="btn btn-danger pull-right" (click)="removeAttribute(i)">Remove</button>
+            <div class="clearfix"></div>
+          </accordion-group>
+        </accordion>
+      </div>
+    </div>
+    <hr>
+    <!-- <div [formGroup]="bulkaddForm">
+      <h5>Bulk add variations</h5>
+      <bx-form-field label="Base Title">
+        <input type="text" class="form-control" placeholder="Title" formControlName="title" bosInputRef>
+      </bx-form-field>
+      <bx-form-field label="Base SKU">
+        <input type="text" class="form-control" placeholder="SKU" formControlName="sku" bosInputRef>
+      </bx-form-field>
+      <bx-form-field label="Price">
+        <input type="tel" class="form-control" placeholder="Price" formControlName="price" bosInputRef>
+      </bx-form-field>
+      <ng-container *ngFor="let attribute of form.get('attributes').value">
+        <bx-form-field [label]="attribute.title">
+          <ng-select [items]="terms$(attribute._id) | async" [multiple]="true" [closeOnSelect]="false" [searchable]="false"
+            bindLabel="title" placeholder="Select {{attribute.title}}" [formControlName]="attribute.title">
+          </ng-select>
+          <bx-category-select class="form-group" [category]="attribute._id" [nested]="false" [multiple]="true"
+              [parentForm]="bulkaddForm" [field]="attribute.title"></bx-category-select>
+        </bx-form-field>
+      </ng-container>
+      <button type="button" class="btn btn-primary" (click)="addVaritions()" [disabled]="!bulkaddForm.valid">Add
+        variations</button>
+    </div> -->
+  </div>
+</div>

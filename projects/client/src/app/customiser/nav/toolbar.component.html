@@ -1,0 +1,35 @@
+<div class="btn-group">
+  <button class="btn btn-white" (click)=goBack()>Back</button>
+</div>
+<div class="menu" tourAnchor="template.options">
+  <button class="btn btn-success" (click)="openChat()">
+    <fa-icon class="icon" [icon]="['fal', 'comment']" [fixedWidth]="true" size="1x"></fa-icon> Chat
+  </button>
+  <button class="btn btn-white" [matMenuTriggerFor]="menu" #trigger="matMenuTrigger"
+    (click)=menuClicked($event)>Options</button>
+  <mat-menu #menu="matMenu" yPosition="below" [hasBackdrop]="false">
+    <button mat-menu-item [matMenuTriggerFor]="currencyMenu">
+      <span>Currency</span>
+    </button>
+    <button mat-menu-item *ngIf="auth.loggedIn()" (click)="designSaved.emit()">
+      <span>Save Design to Account</span>
+    </button>
+    <button mat-menu-item *ngIf="!auth.loggedIn()" (click)="loginToSave()">
+      <span>Login to save design</span>
+    </button>
+    <button mat-menu-item *ngIf="auth.loggedIn() && isClub" (click)="submitClubkit()">
+      <span>Submit Club Kit</span>
+    </button>
+    <button mat-menu-item (click)="clearDesign()">
+      <span>Clear Design</span>
+    </button>
+    <button mat-menu-item (click)="viewTour()">
+      <span>Start guided tour</span>
+    </button>
+  </mat-menu>
+  <mat-menu #currencyMenu="matMenu">
+    <button *ngFor="let currency of currencies" mat-menu-item (click)="setCurrency(currency)">
+      <span>{{currency}}</span>
+    </button>
+  </mat-menu>
+</div>

@@ -1,0 +1,56 @@
+<div class="animated fadeIn" *ngIf="!loading">
+  <form class="row" [formGroup]="editForm" (ngSubmit)="setPricesCustom(editForm.value)">
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header">Bulk set product sale prices and dates on Custom Products</div>
+        <div class="card-block">
+          <div class="form-group" formArrayName="terms">
+            <div class="checkbox" *ngFor="let term of editForm.get('terms')['controls']; index as i" [formGroup]="term">
+              <label>
+                <input type="checkbox" formControlName="checked"> {{ term.controls.value.value }}
+              </label>
+            </div>
+          </div>
+          <bx-form-field label="Sale Amount">
+            <input type="tel" class="form-control" placeholder="£30" formControlName="sale_amount">
+            <span class="help-text">Enter the amount to be deducted from the original price.</span>
+          </bx-form-field>
+          <bx-form-field label="Sale Percent Discount">
+            <input type="tel" class="form-control" placeholder="20" formControlName="sale_percent">
+            <span class="help-text">Enter the percentage to be deducted from the original price. This will override any
+              amount entered above.</span>
+          </bx-form-field>
+          <bx-form-field label="Start Date">
+            <div class="input-group" dropdown>
+              <input class="form-control" [minDate]="minDate" placeholder="Start date" bsDatepicker #dps="bsDatepicker"
+                formControlName="sale_start_date" [bsConfig]="bsConfig" value="{{minDate | date: 'dd/MM/yyyy':'Z'}}">
+              <span class="input-group-append calendar-point" (click)="dps.show()">
+                <span class="input-group-text">
+                  <span class="icon-calendar"></span>
+                </span>
+              </span>
+            </div>
+          </bx-form-field>
+          <bx-form-field label="End Date">
+            <div class="input-group" dropdown>
+              <input class="form-control" [minDate]="minDate" placeholder="End date" bsDatepicker #dpe="bsDatepicker"
+                formControlName="sale_end_date" [bsConfig]="bsConfig">
+              <span class="input-group-append calendar-point" (click)="dpe.show()">
+                <span class="input-group-text">
+                  <span class="icon-calendar"></span>
+                </span>
+              </span>
+            </div>
+            <span class="help-text">If you want the discount to run to the end of the day be sure to select the next
+              days date.</span>
+          </bx-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!editForm.valid">Set prices</button>
+      </div>
+    </div>
+  </form>
+</div>

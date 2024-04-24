@@ -1,0 +1,6 @@
+@import "./variables";
+
+%card-box {
+    background-color: white;
+    border: 1px solid lighten($midgrey, 33);
+}

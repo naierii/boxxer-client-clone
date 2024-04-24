@@ -1,0 +1,42 @@
+<div class="app flex-row align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card-group mb-4">
+          <div class="card p-4">
+            <div class="card-body">
+              <h1>Login</h1>
+              <p class="text-muted">Sign In to your account</p>
+              <form [formGroup]="form" (ngSubmit)="login(form.value)">
+                <div class="input-group mb-3">
+                  <span class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="icon-user"></i>
+                    </span>
+                  </span>
+                  <input type="email" class="form-control" placeholder="Email" formControlName="email" autocomplete="email">
+                </div>
+                <div class="input-group mb-4">
+                  <span class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="icon-lock"></i>
+                    </span>
+                  </span>
+                  <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <button class="btn btn-primary px-4" [disabled]="!form.valid || loading">{{label}}</button>
+                  </div>
+                  <div class="col-6 text-right">
+                    <a href="https://www.boxxerworld.com/login/forgot" target="_blank" type="button" class="btn btn-link px-0">Forgot password?</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

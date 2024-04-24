@@ -1,0 +1,18 @@
+<div [formGroup]="form">
+  <mat-checkbox formControlName="add_patch"
+    >Add patch +
+    <bx-price [price]="type.patch_price"></bx-price>
+  </mat-checkbox>
+  <bx-custom-material-group
+    [materials]="type.patch_material.materials"
+    [selectedMaterial]="selectedPatch"
+    (materialColourSelected)="patchSelected($event)"
+    *ngIf="form.get('add_patch').value"
+  >
+    <div class="sub-header">
+      <h4 [class.danger]="!selectedPatch">
+        Choose patch <span *ngIf="!selectedPatch"> required</span>
+      </h4>
+    </div>
+  </bx-custom-material-group>
+</div>

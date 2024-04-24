@@ -1,0 +1,51 @@
+<div class="row" [formGroup]="group">
+  <div class="col-3">
+    <div *ngIf="image; else uploadBlock">
+      <img [bxLazysizes]="image.key" *ngIf="image" />
+      <button class="btn btn-secondary btn-block mt-1" (click)="removeImage()">
+        Remove
+      </button>
+    </div>
+    <ng-template #uploadBlock>
+      <dropzone
+        [config]="dropzone_config"
+        [message]="'Click or drag image here to upload'"
+        (success)="onUploadSuccess($event)"
+        [useDropzoneClass]="false"
+      ></dropzone>
+    </ng-template>
+  </div>
+  <div class="col-9">
+    <bx-form-field label="Title">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Title"
+        formControlName="title"
+      />
+    </bx-form-field>
+    <bx-form-field label="Subtitle">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Subtitle"
+        formControlName="subtitle"
+      />
+    </bx-form-field>
+    <bx-form-field label="Price">
+      <div class="input-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fa fa-gbp"></i>
+          </span>
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Price"
+          formControlName="price"
+        />
+      </div>
+    </bx-form-field>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<h2>Shipping options</h2>
+<div [formGroup]="parentForm">
+    <mat-radio-group class="shipping-options" formControlName="shippingmethod">
+        <mat-radio-button class="option" *ngFor="let option of shipping$ | async" [value]="option.type">
+            {{option.description}}
+            <strong> -
+                <bx-price-shipping [firstPrice]="option.firstPrice" [secondPrice]="option.secondPrice"></bx-price-shipping>
+            </strong>
+        </mat-radio-button>
+    </mat-radio-group>
+</div>

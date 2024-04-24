@@ -1,0 +1,26 @@
+<h2>Order Summary</h2>
+<bx-checkout-cart-item *ngFor="let cart of carts$ | async" [cart]="cart"></bx-checkout-cart-item>
+<div class="cart-footer" *ngIf="order$ | async as order">
+  <div class="totals">
+    <span>Subtotal</span>
+    <span bx-price [price]="order.subtotal"></span>
+  </div>
+  <div class="totals">
+    <span>Shipping</span>
+    <span bx-price [price]="order.shippingprice"></span>
+  </div>
+  <div class="totals" *ngIf="order.discountAmount">
+    <span>Discount</span>
+    <span bx-price [price]="order.discountAmount"></span>
+  </div>
+  <div class="totals" *ngIf="order.voucher_amount">
+    <span>Voucher</span>
+    <span>-
+      <span bx-price [price]="order.voucher_amount"></span>
+    </span>
+  </div>
+  <div class="totals">
+    <span>Total</span>
+    <span bx-price [price]="order.total"></span>
+  </div>
+</div>

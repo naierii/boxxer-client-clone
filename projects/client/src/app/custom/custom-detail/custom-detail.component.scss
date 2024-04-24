@@ -1,0 +1,42 @@
+@import 'product-layout';
+@import 'flickity-style';
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints';
+@import 'node_modules/bootstrap/scss/mixins/_grid';
+
+.intro-header {
+  text-align: center;
+  margin: 20px 0;
+  h2,
+  p {
+    margin: 0;
+  }
+}
+
+.inspriation {
+  padding-bottom: 2rem;
+}
+
+.gallery:not(.flickity-enabled) {
+  display: flex;
+}
+
+.view-more {
+  margin: 0.5rem 0;
+  width: auto;
+}
+
+.carousel-cell {
+  width: 100%;
+  padding: 0 15px;
+  @include media-breakpoint-up(sm) {
+    width: 50%;
+  }
+  @include media-breakpoint-up(md) {
+    width: 33.33333%;
+  }
+  @include media-breakpoint-up(lg) {
+    width: 25%;
+  }
+}

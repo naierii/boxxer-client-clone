@@ -1,0 +1,15 @@
+{
+  "BUTTON": {
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "UPDATE": "Update"
+  },
+  "LABEL": {
+    "FIRSTNAME": "First Name",
+    "LASTNAME": "Last Name",
+    "EMAIL": "Email",
+    "ROLES": "Roles",
+    "PASSWORD": "Password",
+    "CONFIRM": "Confirm"
+  }
+}

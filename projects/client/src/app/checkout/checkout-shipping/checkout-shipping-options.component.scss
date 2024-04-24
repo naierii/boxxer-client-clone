@@ -1,0 +1,7 @@
+.shipping-options {
+  display: inline-flex;
+  flex-direction: column;
+  .option {
+    margin: 5px 0;
+  }
+}

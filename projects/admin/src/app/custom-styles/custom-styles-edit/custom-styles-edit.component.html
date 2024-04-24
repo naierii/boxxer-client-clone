@@ -1,0 +1,58 @@
+<div class="animated fadeIn" *ngIf="!loading">
+  <form class="row" [formGroup]="editForm" (ngSubmit)="updateItem(editForm.value)">
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header">{{isNew ? 'New Custom Style' : 'Edit ' + editForm.controls['title'].value}}</div>
+        <div class="card-block">
+          <bx-form-field label="Title">
+            <input type="text" class="form-control" placeholder="Title" formControlName="title" bosInputRef>
+          </bx-form-field>
+          <bx-form-field label="Description">
+            <angular-tinymce formControlName="description" [settings]="tinymce"></angular-tinymce>
+          </bx-form-field>
+          <bx-form-field label="Category">
+            <bx-category-select category="58ac1318dc142c612ab61fad" [nested]="true" [parentForm]="editForm" [item]="item"
+              field="category"></bx-category-select>
+          </bx-form-field>
+          <bx-form-field label="Type">
+            <select class="form-control" formControlName="type">
+              <option value="Style">Style</option>
+              <option value="Cut">Cut</option>
+            </select>
+          </bx-form-field>
+        </div>
+      </div>
+      <div class="card" formArrayName="options">
+        <div class="card-header">Options
+          <div class="card-actions">
+            <a (click)="addOption()">
+              <i class="icon-plus icons font-xl"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card-block">
+          <accordion [closeOthers]="oneAtATime" [dragula]='"product"' [(dragulaModel)]="editForm.get('options')['controls']">
+            <accordion-group *ngFor="let option of editForm.get('options')['controls']; let i=index" [attr.data-id]="option.controls._id.value"
+              [attr.data-index]="i" #group [formGroupName]="i">
+              <div accordion-heading>
+                <i *ngIf="option.controls._id.value" class="icon-cursor-move icons font-xl mr-2" [ngClass]="{'ignore-item': !option.controls._id.value}"></i>
+                <span *ngIf="option.controls.title.value;else other_title">{{option.controls.title.value}}</span>
+                <ng-template #other_title>New option..</ng-template>
+                <i class="pull-right float-xs-right" [ngClass]="{'icon-arrow-up': group?.isOpen, 'icon-arrow-down': !group?.isOpen}"></i>
+              </div>
+              <!-- content -->
+              <bx-custom-styles-option [index]="i" [group]="editForm.get('options')['controls'][i]" [image]="item.options && item.options[i] ? item.options[i].image : null"></bx-custom-styles-option>
+              <button *ngIf="!option.controls._id.value" class="btn btn-danger pull-right" (click)="removeOption(i)">Remove</button>
+              <div class="clearfix"></div>
+            </accordion-group>
+          </accordion>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!editForm.valid">{{isNew ? 'Create' : 'Update'}}</button>
+      </div>
+    </div>
+  </form>
+</div>

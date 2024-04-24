@@ -1,0 +1,103 @@
+<!-- Normal Product Cart -->
+<div class="cart-item" *ngIf="cart && cart.product_variation">
+  <div class="cart-content">
+    <div class="cart-image">
+      <img
+        [bxLazysizes]="cart.product_variation.image.key"
+        *ngIf="cart.product_variation.image; else mainImage"
+      />
+      <ng-template #mainImage>
+        <img
+          [bxLazysizes]="getReadyMadeImage(cart.product_variation)"
+          *ngIf="getReadyMadeImage(cart.product_variation)"
+        />
+      </ng-template>
+    </div>
+    <div class="cart-details">
+      <h3
+        *ngIf="
+          cart.product_variation.attribute_terms &&
+            cart.product_variation.attribute_terms.length;
+          else noAttributes
+        "
+      >
+        {{ cart.product_variation.title
+        }}<span
+          *ngFor="let attribute of cart.product_variation.attribute_terms"
+        >
+          - {{ attribute.term.title }}</span
+        >
+      <span *ngIf="cart.product_variation.product_display.club_kit"> - Club kit</span>
+      </h3>
+      <ng-template #noAttributes>
+        <h3>
+          {{ cart.product_variation.title }} -
+          {{ cart.product_variation.option_name }}
+        </h3>
+      </ng-template>
+      <h4>
+        <bx-price [price]="cart.total"></bx-price> ({{ cart.qty }} x
+        <bx-price [price]="cart.original_price"></bx-price>
+        <span *ngIf="cart.product_customisation.total > 0">
+          +
+          <bx-price [price]="cart.product_customisation.total"></bx-price>
+          Custom</span
+        >)
+      </h4>
+      <div class="qty-btn">
+        <button class="increment" (click)="decreaseQty()">-</button>
+        <span class="value">{{ qty }}</span>
+        <button class="increment" (click)="increaseQty()">+</button>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer buttons">
+    <button
+      class="btn btn-success"
+      [disabled]="!updated"
+      (click)="updateItem()"
+    >
+      Update
+    </button>
+    <button class="btn btn-danger" (click)="removeItem()">Remove</button>
+  </div>
+</div>
+<!-- Custom Product Cart -->
+<div class="cart-item" *ngIf="cart && cart.custom_design">
+  <div class="cart-content">
+    <div class="cart-image">
+      <div [inlineSVG]="cart.custom_design.svg.key" [replaceContents]="true" *ngIf="cart | hasKey: 'custom_design.svg.key'"></div>
+    </div>
+    <div class="cart-details">
+      <h3 *ngIf="cart | hasKey: 'custom_product.title'">
+        {{ cart.custom_product.title
+        }}<span *ngIf="cart | hasKey: 'custom_design.sizing.size'">
+          - {{ cart.custom_design.sizing.size }}</span
+        >
+      </h3>
+      <h4>
+        <bx-price-sale
+          [price]="cart.original_price"
+          [sale_price]="cart.sale_price"
+        ></bx-price-sale>
+        x {{ cart.qty }}
+      </h4>
+      <div class="qty-btn">
+        <button class="increment" (click)="decreaseQty()">-</button>
+        <span class="value">{{ qty }}</span>
+        <button class="increment" (click)="increaseQty()">+</button>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer buttons">
+    <button class="btn" (click)="editDesign(cart)">Edit Design</button>
+    <button
+      class="btn btn-success"
+      [disabled]="!updated"
+      (click)="updateItem()"
+    >
+      Update
+    </button>
+    <button class="btn btn-danger" (click)="removeItem()">Remove</button>
+  </div>
+</div>

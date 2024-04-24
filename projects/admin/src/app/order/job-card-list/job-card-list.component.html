@@ -1,0 +1,39 @@
+<bx-list-view pageTitle="Job Cards" (confirmDelete)="deleteItem($event)" [addNew]="false" #listView>
+  <div class="row mb-1 justify-content-end" filter>
+    <div class="form-group col-md-auto ml-auto">
+      <select #orderstatus [(ngModel)]="selectedStatus" class="form-control" (change)="filterStatus(orderstatus.value)">
+        <option [value]="undefined" selected>All orders</option>
+        <option [value]="status" *ngFor="let status of statuses">{{status}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-auto">
+      <select #ordersort [(ngModel)]="selectedSort" class="form-control" (change)="filterSort(ordersort.value)">
+        <option [value]="sort.value" *ngFor="let sort of sortOptions">{{sort.title}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-auto">
+      <bx-category-select category="58ac1318dc142c612ab61fad" [selectedTerm]="category" (onFilter)="filterCategory($event)"></bx-category-select>
+    </div>
+    <div class="form-group col-md-auto">
+      <bx-production-select [selectedType]="productionType" (onFilter)="filterProductionType($event)"></bx-production-select>
+    </div>
+    <div class="col-md-auto">
+      <div class="input-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fa fa-search"></i>
+          </span>
+        </span>
+        <input #term [(ngModel)]="terms" (keyup)="search(term.value)" type="text" class="form-control" placeholder="Order ID / Customer" />
+      </div>
+    </div>
+  </div>
+  <div list>
+    <div class="row">
+      <div class="col-sm-6 col-md-4" *ngFor="let item of items;" [item]="item" bx-job-card-item></div>
+    </div>
+    <div *ngIf="(totalCount$ | async) as totalCount">
+      <pagination [maxSize]="maxSize" [totalItems]="totalCount" [(ngModel)]="page" [itemsPerPage]="limit" (pageChanged)="goToPage($event)"></pagination>
+    </div>
+  </div>
+</bx-list-view>

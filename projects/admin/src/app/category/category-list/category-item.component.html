@@ -1,0 +1,8 @@
+<td>{{item.title}}
+  <div>
+    <a class="btn btn-link" [routerLink]="[item._id, 'terms']">View terms</a>
+  </div>
+</td>
+<td class="fit">
+  <bx-list-edit-btn [item]="item" (onDeleted)="delete($event)"></bx-list-edit-btn>
+</td>

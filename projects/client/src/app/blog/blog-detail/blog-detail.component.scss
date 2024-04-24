@@ -1,0 +1,10 @@
+@import 'mixins';
+
+:host {
+  padding: 20px 10px;
+  background-color: white;
+  display: block;
+  article {
+    @include wrapper(900px);
+  }
+}

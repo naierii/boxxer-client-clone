@@ -1,0 +1,29 @@
+<div class="options-panel" *ngIf="productSetting as panel">
+  <bx-custom-scroll-container>
+    <div class="option-panel">
+      <div class="content">
+        <ng-container *ngIf="panel.material_groups && panel.material_groups.length > 1; else normalColors">
+          <bx-custom-material-colour [panel]="panel" [selectedMaterial]="selectedMaterial"
+            (materialColourSelected)="colourSelected($event)"></bx-custom-material-colour>
+        </ng-container>
+        <ng-template #normalColors>
+          <bx-custom-material-group [basePrice]="panel.area_size.price_adjust" [materialGroups]="panel.material_groups"
+            [selectedMaterial]="selectedMaterial" (materialColourSelected)="colourSelected($event)">
+          </bx-custom-material-group>
+        </ng-template>
+      </div>
+    </div>
+  </bx-custom-scroll-container>
+  <bx-actions [canDelete]="panel.area_size.optional && canDelete" (designCancel)="cancel()" (designSave)="save()"
+    (designDelete)="delete()" [validated]="validated">
+    <div class="options-selection">
+      <h5>{{ panel.name }}</h5>
+      <h5 *ngIf="selectedMaterial">
+        {{ selectedMaterial.title }} {{ selectedMaterial.materialType.title }}
+      </h5>
+      <h5 *ngIf="selectedMaterial">
+        <bx-price [price]="getPrice()"></bx-price>
+      </h5>
+    </div>
+  </bx-actions>
+</div>

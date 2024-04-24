@@ -1,0 +1,31 @@
+<form [formGroup]="paymentForm" *ngIf="(order$ | async) as order">
+  <div *ngIf="order.total > 0; else noPayment">
+    <bx-checkout-payment-address [parentForm]="paymentForm" [order]="order"></bx-checkout-payment-address>
+    <bx-checkout-payment-stripe [parentForm]="paymentForm" [order]="order" #stripe></bx-checkout-payment-stripe>
+  </div>
+  <ng-template #noPayment>
+    <h2>Nice. Looks likes you're fully paid, just press Complete Order to finish.</h2>
+  </ng-template>
+  <div class="checkout-box">
+
+    <ng-container *ngIf="checkout.clubKitMinCheck(order); else clubKitWarning">
+      <div class="next-box">
+        <div class="info">
+          <p>By making payment you are agreeing to our
+            <button class="btn-link" title="TERMS & CONDITIONS" (click)="showTerms()">TERMS & CONDITIONS</button>
+          </p>
+        </div>
+        <div class="buttons">
+          <button class="btn btn-success" type="submit" (click)="makePayment()" *ngIf="order.total > 0">Make
+            Payment</button>
+          <button class="btn btn-success" (click)="completeOrder()" *ngIf="order.total === 0">Complete Order</button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #clubKitWarning>
+      <bx-club-kit-warning></bx-club-kit-warning>
+    </ng-template>
+
+
+  </div>
+</form>

@@ -1,0 +1,7 @@
+<div class="loading-indicator" [style.top]="offsetTop$ | async">
+  <div class="loader-container">
+    <div class="loader"></div>
+    <h4>{{message$ | async}}</h4>
+    <h5 *ngIf="(subMessage$ | async) as subMessage">{{subMessage}}</h5>
+  </div>
+</div>

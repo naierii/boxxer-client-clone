@@ -1,0 +1,38 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">Users</div>
+    <div class="card-block" *ngIf="!loading">
+      <form [formGroup]="userForm" (ngSubmit)="updateUser(userForm.value)">
+        <bx-form-field label="First Name">
+          <input type="text" class="form-control" placeholder="First Name" formControlName="firstName">
+        </bx-form-field>
+        <bx-form-field label="Last Name">
+          <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
+        </bx-form-field>
+        <bx-form-field label="Email">
+          <input type="email" class="form-control" placeholder="Email" formControlName="email" required>
+        </bx-form-field>
+        <bx-form-field label="Password">
+          <input type="password" class="form-control" placeholder="Password" formControlName="password" minlength="8">
+          <span class="help-block text-danger" *ngIf="userForm.controls['password'].hasError('minlength') && !userForm.controls['password'].touched">Please
+            enter a password of at least 8 characters</span>
+        </bx-form-field>
+        <bx-form-field label="Confirm Password">
+          <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirm_password">
+          <span class="help-block text-danger" *ngIf="userForm.controls['confirm_password'].hasError('minlength') && !userForm.controls['confirm_password'].touched">Please
+            enter a password of at least 8 characters</span>
+          <span class="help-block text-danger" *ngIf="userForm.controls['confirm_password'].hasError('MatchPassword') && !userForm.controls['confirm_password'].touched">Passwords
+            must match</span>
+        </bx-form-field>
+        <div class="form-group" formArrayName="roles">
+          <div class="checkbox" *ngFor="let role of userForm.get('roles')['controls']; index as i" [formGroup]="role">
+            <label>
+              <input type="checkbox" formControlName="checked"> {{ role.controls.value.value }}
+            </label>
+          </div>
+        </div>
+        <button class="btn btn-primary" [disabled]="!userForm.valid">{{isNew ? 'Create' : 'Update'}}</button>
+      </form>
+    </div>
+  </div>
+</div>

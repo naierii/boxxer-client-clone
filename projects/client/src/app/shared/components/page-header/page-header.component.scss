@@ -1,0 +1,22 @@
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints';
+@import 'node_modules/bootstrap/scss/mixins/_grid';
+
+.title-bar {
+  display: flex;
+  margin-top: 15px;
+  .page-header {
+    flex: 1 0 auto;
+    margin-bottom: 0.5rem;
+    @include media-breakpoint-up(md) {
+      margin-bottom: 0;
+    }
+  }
+  @include media-breakpoint-up(xs) {
+    flex-direction: column;
+  }
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+  }
+}

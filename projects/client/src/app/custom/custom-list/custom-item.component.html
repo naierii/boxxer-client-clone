@@ -1,0 +1,22 @@
+<a [routerLink]="[item.slug]" bxCard (click)="productClicked()">
+  <div bxImageWrapper [aspect_ratio]="item.category.aspect_ratio | ratio">
+    <img
+      [alt]="imageTitle()"
+      [bxLazysizes]="item.image.key"
+      [crop_ratio]="item.category.aspect_ratio | ratio"
+      [sizes]="'[320, 480, 640]'"
+      *ngIf="item.image && item.image.key"
+    />
+  </div>
+  <div bxCardContent>
+    <h2 bxCardTitle>{{ item.title }}</h2>
+  </div>
+  <div bxCardFooter>
+    <span
+      prefix="From "
+      [price]="item.price"
+      [sale_price]="item.sale_price"
+      bx-price-sale
+    ></span>
+  </div>
+</a>

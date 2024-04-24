@@ -1,0 +1,18 @@
+<header class="page-header">
+  <h1>Forgot</h1>
+</header>
+<div class="page-body">
+  <form class="forgot-form" [formGroup]="forgotForm" (ngSubmit)="reset(forgotForm.value)">
+    <mat-form-field>
+      <input type="email" matInput placeholder="Email" formControlName="email" autocomplete="email" [errorStateMatcher]="matcher"
+        required>
+      <mat-error *ngIf="forgotForm.get('email').hasError('required')">
+        This field is required
+      </mat-error>
+      <mat-error *ngIf="forgotForm.get('email').hasError('email') && !forgotForm.get('email').hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+    <button class="btn btn-success" [disabled]="!forgotForm.valid">Reset password</button>
+  </form>
+</div>

@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-header">Publishing</div>
+  <div class="card-block" [formGroup]="parentForm">
+    <div class="form-group" *ngIf="parentForm.controls && parentForm.controls['published']">
+      <div class="checkbox">
+        <label [attr.for]="'published'">
+          <input [attr.id]="'published'" type="checkbox" formControlName="published"> {{parentForm.controls['published'].value ? 'Published' : 'Unpublished'}}
+        </label>
+      </div>
+    </div>
+    <bx-form-field label="Slug" *ngIf="hasSlug && parentForm.controls && parentForm.controls['slug']">
+      <input [attr.id]="'slug'" type="text" class="form-control" [ngClass]="{'is-invalid': parentForm.controls['slug'] && !parentForm.controls['slug'].valid, 'is-valid':parentForm.controls['slug'] && parentForm.controls['slug'].valid}"
+        placeholder="Enter url" formControlName="slug">
+    </bx-form-field>
+  </div>
+</div>

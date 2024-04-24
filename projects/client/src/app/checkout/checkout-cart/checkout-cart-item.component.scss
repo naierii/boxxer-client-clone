@@ -1,0 +1,9 @@
+@import 'variables';
+.cart-item {
+  display: flex;
+  padding: 0.5rem 0;
+  border-top: 1px solid $midgrey;
+  .cart-image {
+    flex: 0 0 80px;
+  }
+}

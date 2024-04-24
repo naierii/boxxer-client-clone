@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  overflow: hidden;
+}
+
+.video-wrapper {
+  position: relative;
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin-top: -50px;
+  margin-left: -50px;
+  display: block;
+  cursor: pointer;
+}
+
+.icon {
+  color: white;
+}
+
+video {
+  line-height: 0;
+}

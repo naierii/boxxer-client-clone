@@ -1,0 +1,36 @@
+<div class="row" [formGroup]="group">
+  <div class="col-3">
+    <bx-single-image-upload [config]="dropzone_config" [image]="image" [template]="false"
+      (imageAdded)="imageAdded($event)" (imageRemoved)="imageRemoved()"></bx-single-image-upload>
+  </div>
+  <div class="col-9">
+    <bx-form-field label="SKU">
+      <input type="text" class="form-control" placeholder="SKU" formControlName="sku">
+    </bx-form-field>
+    <bx-form-field label="Title">
+      <input type="text" class="form-control" placeholder="Title" formControlName="title">
+    </bx-form-field>
+    <bx-form-field label="Price">
+      <input type="tel" class="form-control" placeholder="Price" formControlName="price" bosInputRef>
+    </bx-form-field>
+    <div formArrayName="attribute_terms">
+      <div *ngFor="let attribute of attributeTerms.controls; let i=index" [formGroupName]="i">
+        <bx-form-field [label]="attribute.get('title').value">
+          <bx-category-select class="form-group" [category]="attribute.get('category').value" [nested]="false"
+            [parentForm]="attribute" field="term"></bx-category-select>
+        </bx-form-field>
+      </div>
+    </div>
+    <bx-form-field label="Option Name">
+      <input type="text" class="form-control" placeholder="Option Name" formControlName="option_name">
+    </bx-form-field>
+    <div class="form-group">
+      <div class="checkbox">
+        <label [attr.for]="'published'">
+          <input [attr.id]="'published'" type="checkbox" formControlName="published">
+          {{group.get('published').value ? 'Published' : 'Unpublished'}}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

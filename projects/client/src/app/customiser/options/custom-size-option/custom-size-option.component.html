@@ -1,0 +1,80 @@
+<form class="options-panel" [formGroup]="sizingForm">
+  <bx-custom-scroll-container>
+    <div class="options-form" formGroupName="sizing">
+      <div *ngIf="needsSize">
+        <mat-form-field appearance="standard">
+          <mat-label>Enter height</mat-label>
+          <input type="text" matInput placeholder="Enter height" formControlName="height" required />
+          <mat-error *ngIf="
+              sizingForm
+                .get('sizing')
+                .get('height')
+                .hasError('required')
+            ">Please
+            enter your height.</mat-error>
+        </mat-form-field>
+        <mat-radio-group class="units-selector" formControlName="unit_height" appearance="standard">
+          <mat-radio-button class="option" value="CMS">CMS</mat-radio-button>
+          <mat-radio-button class="option" value="FEET & INCHES">FEET & INCHES</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field appearance="standard">
+          <mat-label>Enter weight</mat-label>
+          <input type="number" matInput placeholder="Enter weight" formControlName="weight"
+            pattern="[0-9]+([\.,][0-9]+)?" minlength="1" maxlength="10" required />
+          <mat-hint>Please enter your weight (numbers only).</mat-hint>
+          <mat-error *ngIf="
+              sizingForm
+                .get('sizing')
+                .get('weight')
+                .hasError('required')
+            ">Please
+            enter your weight (numbers only).</mat-error>
+        </mat-form-field>
+        <mat-radio-group class="units-selector" formControlName="unit" appearance="standard">
+          <mat-radio-button class="option" value="KGS">KGS</mat-radio-button>
+          <mat-radio-button class="option" value="LBS">LBS</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-form-field appearance="standard" *ngIf="sizes && sizes.length">
+        <mat-label>Your size</mat-label>
+        <mat-select placeholder="Select size" formControlName="size">
+          <mat-option [value]="size.title" *ngFor="let size of sizes">{{ size.title }}
+            <span *ngIf="size.price_adjust < 0">({{ size.price_adjust }}%)</span>
+            <span *ngIf="size.price_adjust > 0">(+{{ size.price_adjust }}%)</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="options-content">
+      <h4 class="group-title">Production</h4>
+      <span class="important" [innerHTML]="customSettings.production_info"></span>
+    </div>
+    <div class="options-form" formGroupName="production">
+      <mat-radio-group class="production-options" formControlName="type">
+        <mat-radio-button [value]="type.title" *ngFor="let type of customSettings.production_types">
+          <span [innerHTML]="type.description"></span>
+          <span *ngIf="type.price">( <bx-price [price]="type.price"></bx-price>)</span>
+        </mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field>
+        <textarea matInput placeholder="Enter date item needed & any other instructions" matTextareaAutosize
+          matAutosizeMinRows="3" matAutosizeMaxRows="10" formControlName="instructions"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="options-content">
+      <h4 class="group-title">Boxxer Logo</h4>
+      <p class="important">
+        To keep our prices reasonable, all products need to include a Boxxer
+        logo. You can drag this to where want it (except small waist band logos
+        on shorts which are in a set position). A fee applies if you want all
+        logos removed.
+      </p>
+    </div>
+    <div class="options-form" formGroupName="boxxer_logo">
+      <mat-checkbox formControlName="remove_logo">Remove Boxxer logo +
+        <bx-price [price]="customSettings.remove_logo_price"></bx-price>
+      </mat-checkbox>
+    </div>
+  </bx-custom-scroll-container>
+  <bx-actions (designCancel)="cancel()" (designSave)="save()" [validated]="sizingForm.valid"></bx-actions>
+</form>

@@ -1,0 +1,20 @@
+.loading-indicator {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+::ng-deep .aside-menu-fixed {
+  .loading-indicator {
+    left: 250px;
+  }
+}
+
+::ng-deep .sidebar-minimized.sidebar-fixed {
+  .loading-indicator {
+    left: 50px;
+  }
+}

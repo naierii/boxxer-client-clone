@@ -1,0 +1,6 @@
+<select class="form-control" [(ngModel)]="selectedType" (ngModelChange)="filterChanged($event)">
+  <option [ngValue]="undefined">All</option>
+  <option [ngValue]="type._id" *ngFor="let type of (productionTypes$ | async)">{{
+    type.title
+}}</option>
+</select>

@@ -1,0 +1,147 @@
+@import 'variables';
+@import 'mixins';
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints';
+@import 'node_modules/bootstrap/scss/mixins/_grid';
+
+.options-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $verylightgrey;
+  @include media-breakpoint-up(md) {
+    left: auto;
+    width: 33.33%;
+    max-width: 370px;
+  }
+}
+
+.scroll-container {
+  display: block;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 48px;
+  height: calc(100% - 115px);
+}
+
+.options-content {
+  padding: 0.5rem;
+  text-align: center;
+  border-bottom: 2px solid $midgrey;
+  h5 {
+    margin: 0;
+  }
+}
+
+.options-selection {
+  background-color: $black;
+  padding: 0.5rem;
+  h5 {
+    margin: 0;
+    @include font-size(14, 14);
+    color: white;
+  }
+}
+
+.options-form {
+  padding: 0.5rem;
+  mat-radio-button {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.option-panel {
+  .header {
+    padding: 0 0.5rem;
+    margin-bottom: 1rem;
+    h4 {
+      @include font-size(14, 14);
+      letter-spacing: 2px;
+      margin: 0;
+    }
+  }
+  ::ng-deep .sub-header {
+    padding: 0.5rem 0;
+    h4 {
+      @include font-size(14, 14);
+      letter-spacing: 2px;
+      margin: 0;
+    }
+  }
+  ::ng-deep .content {
+    padding: 0.5rem;
+  }
+  ::ng-deep .mat-stepper-vertical {
+    background-color: transparent;
+  }
+  ::ng-deep .mat-vertical-stepper-header {
+    padding: 24px 0.5rem;
+  }
+  ::ng-deep .mat-vertical-content-container {
+    margin-left: 20px;
+  }
+  ::ng-deep .mat-vertical-content {
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    .content {
+      padding: 0;
+    }
+  }
+  ::ng-deep .mat-step-icon i {
+    color: white;
+    font-size: 0.7rem;
+  }
+}
+
+.option-box {
+  background-color: white;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  h3,
+  h4 {
+    margin: 0;
+  }
+  .image {
+    padding: 0.5rem;
+  }
+  .content {
+    padding: 0.5rem;
+  }
+  &.selected {
+    .content {
+      background-color: $green;
+      h3,
+      h4 {
+        color: white;
+      }
+    }
+  }
+}
+
+.group-title {
+  padding: 1rem 0.5rem;
+  text-align: center;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.group-title:before,
+.group-title:after {
+  content: ' ';
+  position: absolute;
+  top: 50%;
+  margin-left: -999em;
+  height: 1px;
+  width: 998em;
+  border-top: 1px solid $midgrey;
+}
+.group-title:after {
+  left: auto;
+  width: 999em;
+  margin: 0 0 0 1em;
+}

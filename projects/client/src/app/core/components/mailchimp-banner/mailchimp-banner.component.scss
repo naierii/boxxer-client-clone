@@ -1,0 +1,43 @@
+@import 'variables';
+@import 'mixins';
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints';
+@import 'node_modules/bootstrap/scss/mixins/_grid';
+
+:host {
+  display: block;
+  position: relative;
+  position: sticky;
+  z-index: 1000;
+  bottom: 0;
+  padding: 0.8rem 0.7rem;
+  text-align: center;
+  background-color: $green;
+  h4 {
+    margin: 0 0 0.5rem;
+    max-width: 800px;
+    color: white;
+  }
+  h5 {
+    color: white;
+    margin: 0.2rem 0;
+  }
+  .wrapper-narrow {
+    @include make-container();
+    max-width: 800px;
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+  .menu-icon {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    .btn-menu {
+      margin: 0;
+    }
+  }
+  .btn__hamburger__line {
+    background-color: white;
+  }
+}

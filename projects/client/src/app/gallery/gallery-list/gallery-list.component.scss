@@ -1,0 +1,28 @@
+@import 'page-grid-layout';
+@import 'variables';
+@import 'mixins';
+.search {
+  margin: 1rem 0;
+  .search-field {
+    width: 100%;
+    border: 0;
+    padding: 1rem 0;
+    background-color: $verylightgrey;
+    font-family: $displayFont;
+    text-transform: uppercase;
+    @include fluid-type(font-size, 320px, 1400px, 16px, 32px);
+  }
+  .search-wrapper {
+    border-bottom: 3px solid $darkgrey;
+    display: flex;
+    align-items: center;
+  }
+  .search-icon {
+    color: $darkgrey;
+    margin-right: 0.5rem;
+  }
+  .clear-icon {
+    color: $darkgrey;
+    margin-left: 0.5rem;
+  }
+}

@@ -1,0 +1,43 @@
+<div class="animated fadeIn" *ngIf="!loading">
+  <form class="row" [formGroup]="editForm" (ngSubmit)="updateItem(editForm.value)">
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header">{{isNew ? 'New Name Option' : 'Edit ' + editForm.controls['title'].value}}</div>
+        <div class="card-block">
+          <bx-form-field label="Title">
+            <input type="text" class="form-control" placeholder="Title" formControlName="title" bosInputRef>
+          </bx-form-field>
+          <bx-form-field label="Category">
+            <bx-category-select category="58ac1318dc142c612ab61fad" [nested]="true" [parentForm]="editForm" [item]="item" field="category"></bx-category-select>
+          </bx-form-field>
+          <bx-form-field label="Price">
+            <div class="input-group">
+              <span class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-gbp"></i>
+                </span>
+              </span>
+              <input type="tel" class="form-control" placeholder="Price" formControlName="price" bosInputRef>
+            </div>
+          </bx-form-field>
+          <bx-form-field label="Type">
+            <select class="form-control" formControlName="type">
+              <option value="Fixed">Fixed</option>
+              <option value="Drag & Drop">Drag & Drop</option>
+            </select>
+          </bx-form-field>
+          <bx-form-field label="Name ID">
+            <input type="text" class="form-control" placeholder="Name ID" formControlName="nameId" bosInputRef>
+            <small class="text-muted">This is only required on fixed position names i.e. Waistband names</small>
+          </bx-form-field>
+        </div>
+      </div>
+      <bx-publishing-form [parentForm]="editForm" [item]="item" [endpoint]="'name-option'"></bx-publishing-form>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!editForm.valid">{{isNew ? 'Create' : 'Update'}}</button>
+      </div>
+    </div>
+  </form>
+</div>

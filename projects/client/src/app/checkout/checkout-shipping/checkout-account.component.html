@@ -1,0 +1,21 @@
+<div [hidden]="auth.loggedIn()">
+  <h2>Login</h2>
+  <div class="next-box" *ngIf="!showLogin">
+    <div class="info">
+      <p>If you already have an account, please login, alternatively please continue, and you can create an account
+        after completing
+        your order.</p>
+    </div>
+    <div class="buttons">
+      <button class="btn btn-line btn-block" type="submit" [routerLink]="['./']" fragment="shipping-address">Continue as
+        guest</button>
+      <h5 class="button-or">Or</h5>
+      <button class="btn btn-success" type="submit" (click)="showLogin = !showLogin">Login</button>
+    </div>
+  </div>
+  <bx-login *ngIf="showLogin" (loginComplete)="login()"></bx-login>
+</div>
+<div class="user-details" *ngIf="auth.loggedIn() && user">
+  <h2>Your details</h2>
+  <p>{{user.email}}</p>
+</div>

@@ -1,0 +1,83 @@
+<div class="options-panel">
+  <bx-custom-scroll-container>
+    <div class="option-panel">
+      <div class="content">
+        <div
+          class="dropzone"
+          [dropzone]="dropzone_config"
+          (success)="onUploadSuccess($event)"
+          *ngIf="
+            !selectedUpload || (selectedUpload && !selectedUpload.image);
+            else uploadImage
+          "
+        >
+          <div class="dz-message">
+            <fa-icon
+              class="icon"
+              [icon]="['fal', 'cloud-upload']"
+              [fixedWidth]="true"
+              size="1x"
+            ></fa-icon>
+            <h5>Click or drag images here to upload</h5>
+          </div>
+        </div>
+        <ng-template #uploadImage>
+          <div class="engraving-image">
+            <img [bxLazysizes]="selectedUpload.image.key" [crop_ratio]="1" />
+            <button class="btn btn-solid btn-block" (click)="removeImage()">
+              Clear Image
+            </button>
+          </div>
+        </ng-template>
+        <div class="upload-options" [formGroup]="uploadForm">
+          <p class="danger">
+            Logos will normally be printed. We may not be able to use low
+            quality images. If there is a problem we will email you.
+          </p>
+          <mat-checkbox formControlName="remove_background"
+            >Do you want us to remove the background around this logo when we
+            make your item?</mat-checkbox
+          >
+          <mat-form-field>
+            <textarea
+              matInput
+              placeholder="Special instructions about logo"
+              matTextareaAutosize
+              matAutosizeMinRows="3"
+              matAutosizeMaxRows="10"
+              formControlName="instructions"
+            ></textarea>
+          </mat-form-field>
+          <h4 [hidden]="!hasSizes">Select size</h4>
+          <mat-radio-group class="graphic-sizes" formControlName="size">
+            <mat-radio-button
+              class="option"
+              *ngFor="let size of uploadSizes$ | async"
+              [value]="size.title"
+            >
+              {{ size.title }} - <bx-price [price]="size.price"></bx-price
+              ><br /><small>{{ size.description }}</small>
+            </mat-radio-button>
+          </mat-radio-group>
+          <p [hidden]="!hasSizes">
+            Logo size will be at the widest or longest point depending on shape
+          </p>
+        </div>
+      </div>
+    </div>
+  </bx-custom-scroll-container>
+  <bx-actions
+    [canDelete]="canDelete"
+    (designCancel)="cancel()"
+    (designSave)="save()"
+    (designDelete)="delete()"
+    [validated]="validated"
+  >
+    <div class="options-selection">
+      <h5>Upload Image</h5>
+      <h5>
+        <bx-price [price]="price"></bx-price>
+      </h5>
+    </div>
+  </bx-actions>
+</div>

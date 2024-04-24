@@ -1,0 +1,19 @@
+<dot-breadcrumbs [allowBootstrap]="true"></dot-breadcrumbs>
+<div class="dashboard" *ngIf="loaded$ | async">
+  <a [routerLink]="['add']" class="dashboard-item-container" bx-dashboard-add title="Profile"></a>
+  <div class="dashboard-item-container" *ngFor="let profile of profiles$ | async">
+    <div class="dashboard-item">
+      <div class="content">
+        <p>
+          <strong>{{profile.name}}</strong>
+          <br>Height: {{profile.sizing.height}}
+          <br>Weight: {{profile.sizing.weight}} {{profile.sizing.unit}}
+        </p>
+      </div>
+      <div class="footer">
+        <button class="btn-text" [routerLink]="['edit', profile._id]">Edit</button>
+        <button class="btn-text danger" (click)="deleteProfile(profile)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

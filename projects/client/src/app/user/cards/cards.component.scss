@@ -1,0 +1,14 @@
+@import './../scss/dashboard';
+
+.dashboard-item {
+  height: 100%;
+  .content {
+    p {
+      @include font-size(16, 18);
+    }
+    .card-icon {
+      width: 36px;
+      height: 32px;
+    }
+  }
+}

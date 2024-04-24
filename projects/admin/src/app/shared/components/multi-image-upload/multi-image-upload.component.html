@@ -1,0 +1,7 @@
+<div class="card">
+  <div class="card-header">{{title}}</div>
+  <div class="card-block">
+    <dropzone [config]="dropzone_config" [message]="message" (success)="onUploadSuccess($event)" [useDropzoneClass]="false"></dropzone>
+    <bx-image-list [images]="imageService.images" *ngIf="imageService.images && imageService.images.length"></bx-image-list>
+  </div>
+</div>

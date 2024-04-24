@@ -1,0 +1,17 @@
+<dot-breadcrumbs [allowBootstrap]="true"></dot-breadcrumbs>
+<form class="dashboard-form" [formGroup]="form">
+  <h2>Add Credit/Debit Card</h2>
+  <div class="content">
+    <mat-form-field>
+      <input type="text" matInput placeholder="Cardholder name" formControlName="name" name="ccname" autocomplete="cc-name">
+    </mat-form-field>
+    <div class="stripe-form">
+      <div class="field">
+        <div id="card-element" class="input empty" #card></div>
+        <label for="card-element">Credit or debit card</label>
+        <div class="baseline"></div>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-success" type="submit" (click)="addCard()">Add Card</button>
+</form>

@@ -1,0 +1,5 @@
+<h1>{{page_data?.title}}</h1>
+<div class="page-body">
+  <div class="blog eq-height" *ngFor="let item of blogs$ | async" [item]="item" bx-blog-item>
+  </div>
+</div>

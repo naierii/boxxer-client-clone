@@ -1,0 +1,35 @@
+<div class="animated fadeIn" *ngIf="!loading">
+  <form class="row" [formGroup]="editForm" (ngSubmit)="updateItem(editForm.value)">
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header">{{isNew ? 'New Shipping' : 'Edit ' + editForm.controls['type'].value}}</div>
+        <div class="card-block">
+          <bx-form-field label="Shipping Method">
+            <input type="text" class="form-control" placeholder="Shipping Method" formControlName="type" bosInputRef>
+          </bx-form-field>
+          <bx-form-field label="Shipping Type">
+            <select class="form-control" formControlName="shipping_type" bosInputRef>
+              <option [ngValue]="'Flat'">Flat</option>
+            </select>
+          </bx-form-field>
+          <bx-form-field label="Description">
+            <input type="text" class="form-control" placeholder="Description" formControlName="description" bosInputRef>
+          </bx-form-field>
+          <bx-form-field label="1st Tier Price">
+            <input type="tel" class="form-control" placeholder="1st Tier Price" formControlName="firstPrice"
+              bosInputRef>
+          </bx-form-field>
+          <bx-form-field label="2nd Tier Price">
+            <input type="tel" class="form-control" placeholder="2nd Tier Price" formControlName="secondPrice"
+              bosInputRef>
+          </bx-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!editForm.valid">{{isNew ? 'Create' : 'Update'}}</button>
+      </div>
+    </div>
+  </form>
+</div>

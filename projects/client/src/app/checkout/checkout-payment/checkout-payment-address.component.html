@@ -1,0 +1,37 @@
+<h2>Billing address</h2>
+<div [formGroup]="parentForm">
+  <mat-checkbox formControlName="addBilling">Billing address is the same as shipping address?</mat-checkbox>
+</div>
+<div *ngIf="!parentForm.get('addBilling').value">
+  <div [formGroup]="parentForm" *ngIf="(addresses$ | async)?.length; else addressForm">
+    <ng-select [items]="(addresses$ | async)" [searchable]="false" [clearable]="false" formControlName="saved_billing">
+      <ng-template ng-label-tmp let-item="item">
+        <strong>{{item.firstName}} {{item.lastName}}</strong>
+        <br> {{item.address1}}
+        <span *ngIf="item.postcode">
+          <br> {{item.postcode}}</span>
+      </ng-template>
+      <ng-template ng-option-tmp let-item="item" let-index="index">
+        <div class="card">
+          <strong>{{item.firstName}} {{item.lastName}}</strong>
+          <br> {{item.address1}}
+          <span *ngIf="item.postcode">
+            <br> {{item.postcode}}</span>
+        </div>
+      </ng-template>
+    </ng-select>
+    <div class="next-box">
+      <div class="buttons">
+        <button class="btn-text" (click)="addNewAddress()">Add Address</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #addressForm>
+    <bx-address-form [parentForm]="parentForm" groupName="billing" [address]="order?.billing"></bx-address-form>
+  </ng-template>
+</div>
+<p class="danger">
+  <strong>We must have a billing address that matches your bank statements or your payment won't work. If it is different to the
+    shipping address already entered, untick the box & enter the billing address here.
+  </strong>
+</p>

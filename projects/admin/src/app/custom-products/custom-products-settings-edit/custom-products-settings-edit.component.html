@@ -1,0 +1,17 @@
+<div class="animated fadeIn" *ngIf="!loading">
+  <form class="row" [formGroup]="editForm" (ngSubmit)="updateItem(editForm.value)">
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header">{{isNew ? 'New Custom Product' : 'Edit ' + editForm.controls['name'].value}}</div>
+        <div class="card-block">
+          <bx-custom-products-setting [group]="editForm" [material_types]="material_types" [material_groups]="material_groups" [design_areas]="design_areas"></bx-custom-products-setting>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!editForm.valid">{{isNew ? 'Create' : 'Update'}}</button>
+      </div>
+    </div>
+  </form>
+</div>

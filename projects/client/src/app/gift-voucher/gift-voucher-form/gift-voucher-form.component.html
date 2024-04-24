@@ -1,0 +1,62 @@
+<h2>Purchase a Gift Voucher</h2>
+<span [innerHtml]="product.description"></span>
+<form [formGroup]="addToCartForm" (ngSubmit)="addToCart(addToCartForm.value); myNgForm.resetForm()" #myNgForm="ngForm">
+  <div formGroupName="gift_voucher">
+    <mat-form-field>
+      <input type="text" matInput placeholder="Recipient's Name" formControlName="recipient_name" required>
+      <mat-error *ngIf="addToCartForm.get('gift_voucher').get('recipient_name').hasError('required')">
+        Recipient's Name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="email" matInput placeholder="Recipient's Email" formControlName="recipient_email" required>
+      <mat-error *ngIf="addToCartForm.get('gift_voucher').get('recipient_email').hasError('required')">
+        Recipient's Email is required
+      </mat-error>
+      <mat-error *ngIf="addToCartForm.get('gift_voucher').get('recipient_email').hasError('email')">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Your Name" formControlName="sender_name" required>
+      <mat-error *ngIf="addToCartForm.get('gift_voucher').get('sender_name').hasError('required')">
+        Your Name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="email" matInput placeholder="Your Email" formControlName="sender_email" required>
+      <mat-error *ngIf="addToCartForm.get('gift_voucher').get('sender_email').hasError('required')">
+        Your Email is required
+      </mat-error>
+      <mat-error *ngIf="addToCartForm.get('gift_voucher').get('sender_email').hasError('email')">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput formControlName="message" placeholder="Enter your message" matTextareaAutosize
+        matAutosizeMinRows="3" matAutosizeMaxRows="10"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="number" matInput placeholder="Amount" formControlName="amount" required>
+      <mat-hint>Amount must be between £1 and £150</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Enter send date</mat-label>
+      <input matInput [min]="minDate" [matDatepicker]="picker" placeholder="DD/MM/YYYY" formControlName="send_date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi="true" #picker></mat-datepicker>
+      <mat-hint>If you want the gift voucher to be sent on a specific date please enter it here otherwise it will be
+        sent on the date
+        of purchase.</mat-hint>
+    </mat-form-field>
+    <div class="legals">
+      <p>
+        <mat-checkbox formControlName="expire_confirm">I understand that gift vouchers expire after 365 days</mat-checkbox>
+      </p>
+      <p>
+        <mat-checkbox formControlName="non_refund_confirm">I understand that gift vouchers are non-refundable</mat-checkbox>
+      </p>
+    </div>
+  </div>
+  <button class="btn btn-success" [disabled]="!addToCartForm.valid">Add to basket</button>
+</form>

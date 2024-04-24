@@ -1,0 +1,32 @@
+<div [formGroup]="parentForm">
+  <bx-form-field label="Sale Amount">
+    <input type="tel" class="form-control" placeholder="Sale Amount" formControlName="sale_amount" bxInputRef>
+  </bx-form-field>
+  <bx-form-field label="Sale Percent">
+    <input type="tel" class="form-control" placeholder="Sale Percent" formControlName="sale_percent" bxInputRef>
+  </bx-form-field>
+  <bx-form-field label="Sale Start Date">
+    <div class="input-group" dropdown>
+      <input class="form-control" placeholder="Start date" bsDatepicker #dp_start="bsDatepicker" formControlName="sale_start_date"
+        [bsConfig]="bsConfig">
+      <span class="input-group-append calendar-point" (click)="dp_start.show()">
+        <span class="input-group-text">
+          <span class="icon-calendar"></span>
+        </span>
+      </span>
+    </div>
+  </bx-form-field>
+  <bx-form-field label="Sale End Date">
+    <div class="input-group" dropdown>
+      <input class="form-control" placeholder="End date" bsDatepicker #dp_end="bsDatepicker" formControlName="sale_end_date"
+        [bsConfig]="bsConfig">
+      <span class="input-group-append calendar-point" (click)="dp_end.show()">
+        <span class="input-group-text">
+          <span class="icon-calendar"></span>
+        </span>
+      </span>
+    </div>
+    <span class="help-text">If you want the sale to run to the end of the day be sure to select the next days
+      date.</span>
+  </bx-form-field>
+</div>

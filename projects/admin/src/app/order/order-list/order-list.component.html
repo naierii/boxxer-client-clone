@@ -1,0 +1,43 @@
+<bx-list-view pageTitle="Orders" (confirmDelete)="deleteItem($event)" #listView>
+  <div class="row mb-1" filter>
+    <div class="form-group col-md-2 offset-md-6">
+      <select #orderstatus [(ngModel)]="selectedStatus" class="form-control" (change)="filterStatus(orderstatus.value)">
+        <option [value]="undefined" selected>All orders</option>
+        <option [value]="status" *ngFor="let status of statuses">{{status}}</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <div class="input-group">
+        <span class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fa fa-search"></i>
+          </span>
+        </span>
+        <input #term [(ngModel)]="terms" (keyup)="search(term.value)" type="text" class="form-control" placeholder="Order ID / Customer" />
+      </div>
+    </div>
+  </div>
+  <div list>
+    <table class="table table-striped table-responsive mt-3">
+      <thead>
+        <tr>
+          <th class="fit">Order Id</th>
+          <th class="fit">Status</th>
+          <th class="fit">Type</th>
+          <th class="fit">Dates</th>
+          <th>Customer</th>
+          <th>Products</th>
+          <th class="fit">Total</th>
+          <th class="fit">Balance</th>
+          <th class="fit"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr bx-order-item *ngFor="let order of items;" [order]="order"></tr>
+      </tbody>
+    </table>
+    <div *ngIf="(totalCount$ | async) as totalCount">
+      <pagination [maxSize]="maxSize" [totalItems]="totalCount" [(ngModel)]="page" [itemsPerPage]="limit" (pageChanged)="goToPage($event)"></pagination>
+    </div>
+  </div>
+</bx-list-view>

@@ -1,0 +1,45 @@
+<td>{{payment.type}}</td>
+<td>{{payment.action}}</td>
+<td>{{payment.createdAt | date}}</td>
+<td>{{payment.amount | currency:'GBP':'symbol'}}</td>
+<td>
+  <span *ngIf="payment.data && payment.action == 'Payment' && payment.type == 'Stripe'">
+    <ng-container *ngIf="payment.data.source && payment.data.source.three_d_secure">
+      Card type: {{payment.data.source.three_d_secure.brand}}
+      <br />Exp date:
+      {{payment.data.source.three_d_secure.exp_month}}/{{payment.data.source.three_d_secure.exp_year}}
+      <br />Last 4: {{payment.data.source.three_d_secure.last4}}
+    </ng-container>
+    <ng-container *ngIf="payment.data.source && payment.data.source.card">
+      Card type: {{payment.data.source.card.brand}}
+      <br />Exp date: {{payment.data.source.card.exp_month}}/{{payment.data.source.card.exp_year}}
+      <br />Last 4: {{payment.data.source.card.last4}}
+    </ng-container>
+    <ng-container *ngIf="payment.data.payment_method_details">
+      Card type: {{payment.data.payment_method_details.card.brand}}
+      <br />Exp date:
+      {{payment.data.payment_method_details.card.exp_month}}/{{payment.data.payment_method_details.card.exp_year}}
+      <br />Last 4: {{payment.data.payment_method_details.card.last4}}
+    </ng-container>
+    <ng-container *ngIf="payment.data.source && !payment.data.source.card &&!payment.data.payment_method_data">
+      Card type: {{payment.data.source.brand}}
+      <br />Exp date: {{payment.data.source.exp_month}}/{{payment.data.source.exp_year}}
+      <br />Last 4: {{payment.data.source.last4}}
+    </ng-container>
+  </span>
+</td>
+<td class="fit">
+  <div class="btn-group" dropdown container="body" placement="bottom right"
+    *ngIf="payment.type == 'Stripe' && payment.action == 'Payment' || payment.type == 'PayPal' && payment.action == 'Payment'">
+    <button type="button" class="btn btn-sm btn-success">Options</button>
+    <button type="button" dropdownToggle class="btn btn-sm btn-success dropdown-toggle dropdown-toggle-split">
+      <span class="caret"></span>
+      <span class="sr-only">Split button!</span>
+    </button>
+    <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+      <li role="menuitem">
+        <a class="dropdown-item" href="javascript:;" (click)="refundPayment(payment)">Refund</a>
+      </li>
+    </ul>
+  </div>
+</td>

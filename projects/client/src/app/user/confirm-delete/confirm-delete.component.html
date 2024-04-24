@@ -1,0 +1,7 @@
+<h1 mat-dialog-title>Delete {{data.title}}</h1>
+<div mat-dialog-content>Are you sure?</div>
+<div mat-dialog-actions>
+  <button class="btn btn-solid" mat-dialog-close>No</button>
+  <button class="btn btn-solid btn-danger" [mat-dialog-close]="true">Yes</button>
+</div>
+<i class="arrow-after"></i>

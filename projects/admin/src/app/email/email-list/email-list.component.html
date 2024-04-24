@@ -1,0 +1,19 @@
+<bx-list-view pageTitle="Emails" (confirmDelete)="deleteItem($event)" #listView>
+  <div list>
+    <table class="table table-striped mt-3">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Type</th>
+          <th class="fit"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr bx-email-item *ngFor="let item of items" [item]="item" (onDeleted)="listView.deleteConfirm($event)"></tr>
+      </tbody>
+    </table>
+    <div *ngIf="(totalCount$ | async) as totalCount">
+      <pagination [maxSize]="maxSize" [totalItems]="totalCount" [(ngModel)]="page" [itemsPerPage]="limit" (pageChanged)="goToPage($event)"></pagination>
+    </div>
+  </div>
+</bx-list-view>

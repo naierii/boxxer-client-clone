@@ -1,0 +1,76 @@
+<div class="wrapper">
+  <div class="footer-menus" *ngIf="!checkout">
+    <div class="logos">
+      <img
+        src="https://cdn2.boxxerworld.com/assets/img/logo-originals-white.svg?v6"
+        alt="Boxxerworld"
+      />
+    </div>
+    <div class="fmenu help">
+      <h3>Help & Info</h3>
+      <ul>
+        <li *ngFor="let menu of footerNav">
+          <a [routerLink]="[menu.url]">{{ menu.name }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="fmenu contact">
+      <h3>Contact Us</h3>
+      <p>
+        Boxxerworld
+        <br />
+        58/23 M.8, Chalong, <br />
+        Muang, <br />
+        Phuket, <br />
+        Thailand, <br />
+        83130
+        <br />
+        <a href="mailto:sales@boxxerworld.com">sales@boxxerworld.com</a>
+      </p>
+    </div>
+  </div>
+  <div class="checkout" *ngIf="checkout">
+    <ul class="payment-methods">
+      <li>
+        <fa-icon
+          class="icon"
+          [icon]="['fab', 'cc-stripe']"
+          [fixedWidth]="true"
+          size="2x"
+        ></fa-icon>
+      </li>
+      <li>
+        <fa-icon
+          class="icon"
+          [icon]="['fab', 'cc-paypal']"
+          [fixedWidth]="true"
+          size="2x"
+        ></fa-icon>
+      </li>
+      <li>
+        <fa-icon
+          class="icon"
+          [icon]="['fab', 'cc-visa']"
+          [fixedWidth]="true"
+          size="2x"
+        ></fa-icon>
+      </li>
+      <li>
+        <fa-icon
+          class="icon"
+          [icon]="['fab', 'cc-mastercard']"
+          [fixedWidth]="true"
+          size="2x"
+        ></fa-icon>
+      </li>
+      <li>
+        <fa-icon
+          class="icon"
+          [icon]="['fab', 'cc-amex']"
+          [fixedWidth]="true"
+          size="2x"
+        ></fa-icon>
+      </li>
+    </ul>
+  </div>
+</div>

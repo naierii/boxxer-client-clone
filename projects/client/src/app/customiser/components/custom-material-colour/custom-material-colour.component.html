@@ -1,0 +1,42 @@
+<div class="material-group">
+  <div class="header">
+    <h4>Filter by colour</h4>
+  </div>
+  <div class="material-colours group-colours">
+    <div
+      class="material"
+      [ngClass]="{ selected: group._id === selectedGroup?._id }"
+      *ngFor="let group of panel.colour_groups"
+      (click)="showGroup(group)"
+    >
+      <div class="image">
+        <svg
+          class="swatch"
+          *ngIf="group.hex; else imageSwatch"
+          viewBox="0 0 600 600"
+        >
+          <rect
+            width="100%"
+            height="100%"
+            class="swatch-colour"
+            [attr.fill]="group.hex"
+          />
+        </svg>
+        <ng-template #imageSwatch>
+          <img [bxLazysizes]="group.image.key" [crop_ratio]="1" />
+        </ng-template>
+      </div>
+      <div class="info">
+        <h4>{{ group.title }}</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<bx-custom-material-group
+  [large]="true"
+  [basePrice]="panel.area_size.price_adjust"
+  [materialGroups]="materialGroups$ | async"
+  [selectedMaterial]="selectedMaterial"
+  (materialColourSelected)="colourSelected($event)"
+>
+</bx-custom-material-group>

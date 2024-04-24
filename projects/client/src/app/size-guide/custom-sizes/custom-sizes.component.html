@@ -1,0 +1,33 @@
+<div class="page-layout">
+  <aside>
+    <div bxCard>
+      <div bxCardContent>
+        <div class="parent-menu">
+          <div class="header">
+            <h2>Filter Size by type</h2>
+          </div>
+          <ul class="product-type">
+            <li [ngClass]="{'selected': selectedType === term._id}" *ngFor="let term of terms$ | async" (click)="filterByType(term._id)">{{term.title}}</li>
+          </ul>
+          <div class="header" *ngIf="sizes && sizes.length">
+            <h2>Filter by size</h2>
+          </div>
+          <ul class="sizes" *ngIf="sizes && sizes.length">
+            <li [ngClass]="{'selected': selectedSize === size}" *ngFor="let size of sizes" (click)="filterBySize(size)">{{size}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <section class="page-content">
+    <bx-page-header>
+      <div class="page-header" *ngIf="(page$ | async) as page">
+        <h1>{{page.title}}</h1>
+        <span [innerHTML]="page.description"></span>
+      </div>
+    </bx-page-header>
+    <div class="page-grid">
+      <div class="page-grid-item" bx-custom-sizes-item *ngFor="let item of sizes$ | async" [item]="item"></div>
+    </div>
+  </section>
+</div>

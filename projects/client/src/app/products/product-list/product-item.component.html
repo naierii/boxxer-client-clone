@@ -1,0 +1,15 @@
+<a [routerLink]="[item.slug]" bxCard (click)="productClicked()">
+  <div bxImageWrapper [aspect_ratio]="1" *ngIf="mainImage">
+    <img
+      alt="Boxxerworld {{ item.title }}"
+      [bxLazysizes]="mainImage.key"
+      [crop_ratio]="1"
+    />
+  </div>
+  <div bxCardContent>
+    <h2 bxCardTitle>{{ item.title }}</h2>
+  </div>
+  <div bxCardFooter>
+    <span bx-price-from [variations]="item.variations"></span>
+  </div>
+</a>

@@ -1,0 +1,76 @@
+<div class="fixed-bar" *ngIf="!checkout; else isCheckout">
+  <bx-header-toolbar></bx-header-toolbar>
+  <div class="nav-bar">
+    <div class="menu-icon">
+      <button
+        class="btn-menu"
+        [ngClass]="{ 'menu-open': menuOpen$ | async }"
+        (click)="toggleMenu(menuOpen$)"
+      >
+        <span class="btn__hamburger__line"></span>
+        <span class="btn__hamburger__line"></span>
+        <span class="btn__hamburger__line"></span>
+      </button>
+    </div>
+    <a class="logo" [routerLink]="['/']">
+      <svg viewBox="0 0 194.04 213.74">
+        <title>Boxxerworld</title>
+        <g>
+          <path
+            d="M152.41,83.87l38-59.18s-29.91,11.52-52.34,12.14L129.36,49,96.56,0,63.23,49.92,56.38,38.7s-34.58-4-56.38-14L40.18,84.81,2.18,144s29.9-11.52,52.33-12.15l8.72-12.15L96.3,170.08l33.06-51.32L136.22,130s34.57,4.05,56.38,14Zm-20.24,20.25L126.78,95l-.31,9.34L96.3,149.21,63.23,99.13,49.84,120.32s-17.13,2.18-21.18,3.74L53.89,84.34,28.66,44.93s12.15,3.12,21.18,3.12L60.43,64.56v8.1L96.56,21.49l32.8,48.05,13.4-21.18s17.13-2.18,21.18-3.74L138.71,84.34l25.23,39.4s-12.15-3.11-21.18-3.11Z"
+          />
+          <path
+            d="M96.3,50.15l-24,35.2,24,33.33,23.34-33.31ZM84.69,85.37,96.3,69.7l10.93,15.67L96.3,99.32Z"
+          />
+          <g>
+            <polygon
+              points="88.49 181.11 98.22 181.11 86.67 197.37 98.22 213.63 88.7 213.63 81.75 204 74.8 213.63 65.6 213.63 77.05 197.37 65.6 181.11 74.58 181.11 81.91 190.74 88.49 181.11"
+            />
+            <polygon
+              points="123.31 181.11 133.04 181.11 121.49 197.37 133.04 213.63 123.52 213.63 116.57 204 109.62 213.63 100.42 213.63 111.86 197.37 100.42 181.11 109.4 181.11 116.73 190.74 123.31 181.11"
+            />
+            <path
+              d="M33.19,197.51s7.6-11-5.56-16.4h-22v32.51H27.52S40.79,209.31,33.19,197.51Zm-7.53,9H12.82v-5.72H26.08a2.69,2.69,0,0,1,2,1.45C29.56,206,25.66,206.51,25.66,206.51Zm0-12.57H12.82v-5.72H26.08a2.71,2.71,0,0,1,2,1.45C29.56,193.4,25.66,193.94,25.66,193.94Z"
+            />
+            <path
+              d="M53.91,181.08a16.33,16.33,0,1,0,16.31,16.33A16.32,16.32,0,0,0,53.91,181.08Zm0,25.06a8.73,8.73,0,1,1,8.73-8.73A8.73,8.73,0,0,1,53.91,206.14Z"
+            />
+            <polygon
+              points="134.27 181.11 134.27 213.63 161.66 213.63 161.66 206.25 141.55 206.25 141.55 200.9 156.95 200.9 156.95 194.16 141.55 194.16 141.55 188.28 161.66 188.28 161.66 181.08 134.27 181.11"
+            />
+            <path
+              d="M194,191.38c.17-9.71-7.94-10.27-7.94-10.27l-22.3,0v32.54h7.38V200.44l12.2,13.18H194L182.48,201.4S193.88,201.08,194,191.38Zm-22.75-2.89s11.62-.19,13.22,0a2.49,2.49,0,0,1,2.35,1.77c.18,3.66-2.57,3.41-2.57,3.41h-13Z"
+            />
+          </g>
+        </g>
+      </svg>
+    </a>
+    <nav class="main-menu-desktop" bxMainMenu></nav>
+    <div class="cart" *bxShellRender>
+      <fa-layers class="fa-fw fa-2x" size="2x">
+        <fa-icon class="icon" [icon]="['fal', 'shopping-cart']"></fa-icon>
+      </fa-layers>
+    </div>
+    <div class="cart" bx-cart-button *bxShellNoRender></div>
+  </div>
+</div>
+<ng-template #isCheckout>
+  <div class="fixed-bar checkout">
+    <bx-header-toolbar checkout="true"></bx-header-toolbar>
+    <div class="nav-bar">
+      <a class="logo" [routerLink]="['/']">
+        <img
+          src="https://cdn2.boxxerworld.com/assets/img/logo.svg?v5"
+          alt="Boxxerworld"
+        />
+      </a>
+    </div>
+  </div>
+</ng-template>
+<nav
+  class="main-menu"
+  [ngClass]="{ 'menu-open': menuOpen$ | async }"
+  *ngIf="!checkout && menuOpen$ | async"
+>
+  <bx-menunav></bx-menunav>
+</nav>

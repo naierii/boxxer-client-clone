@@ -1,0 +1,5 @@
+<td>{{item.title}}</td>
+<td class="fit text-center">{{item.published ? 'Yes' : 'No'}}</td>
+<td class="fit">
+  <bx-list-edit-btn [item]="item" (onDeleted)="delete($event)"></bx-list-edit-btn>
+</td>

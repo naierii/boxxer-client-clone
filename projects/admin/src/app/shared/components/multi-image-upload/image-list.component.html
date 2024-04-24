@@ -1,0 +1,6 @@
+<table class="table table-striped mt-3">
+  <tbody dragula="image-list" [(dragulaModel)]="images" #bag>
+    <tr bx-image-item *ngFor="let image of images; let i = index" [image]="image" [index]="i" [attr.data-id]="image._id"
+      [attr.data-index]="i"></tr>
+  </tbody>
+</table>

@@ -1,0 +1,12 @@
+<span *ngIf="!is_variable">
+  <span *ngIf="!on_sale; else salePrice">{{minPrice | currConvert:'GBP':(currency$ | async) | currency:(currency$ | async):'symbol'}}</span>
+  <ng-template #salePrice>
+    <span>Was {{minPrice | currConvert:'GBP':(currency$ | async) | currency:(currency$ | async):'symbol'}} - Now {{minSalePrice | currConvert:'GBP':(currency$ | async) | currency:(currency$ | async):'symbol'}}</span>
+  </ng-template>
+</span>
+<span *ngIf="is_variable">
+  <span *ngIf="!on_sale; else salePrice">From {{minPrice | currConvert:'GBP':(currency$ | async) | currency:(currency$ | async):'symbol'}}</span>
+  <ng-template #salePrice>
+    <span>Was from {{minPrice | currConvert:'GBP':(currency$ | async) | currency:(currency$ | async):'symbol'}} - Now from {{minSalePrice | currConvert:'GBP':(currency$ | async) | currency:(currency$ | async):'symbol'}}</span>
+  </ng-template>
+</span>

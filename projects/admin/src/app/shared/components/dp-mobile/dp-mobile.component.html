@@ -1,0 +1,21 @@
+<ng-container [formGroup]="form">
+  <div class="input-group" dropdown>
+    <input
+      class="form-control"
+      placeholder="Date"
+      bsDatepicker
+      #dp="bsDatepicker"
+      [formControlName]="controlName"
+      value="{{ form.controls[controlName].value | date: 'dd/MM/yyyy' }}"
+      [bsConfig]="bsConfig"
+      bosInputRef
+      (onShown)="onShowPicker($event)"
+      (bsValueChange)="valueChange($event)"
+    />
+    <span class="input-group-append calendar-point" (click)="dp.show()">
+      <span class="input-group-text">
+        <span class="icon-calendar"></span>
+      </span>
+    </span>
+  </div>
+</ng-container>

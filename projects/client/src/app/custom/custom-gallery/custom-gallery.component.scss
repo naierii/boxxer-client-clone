@@ -1,0 +1,57 @@
+@import 'product-layout';
+@import 'flickity-style';
+@import 'variables';
+@import 'mixins';
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints';
+@import 'node_modules/bootstrap/scss/mixins/_grid';
+
+.inspriation {
+  padding-bottom: 1rem;
+  background-color: $darkgrey;
+}
+
+.intro-header {
+  text-align: center;
+  padding: 10px 0 0;
+  h2,
+  p {
+    margin: 0;
+    color: white;
+  }
+}
+
+.view-more {
+  color: white;
+  text-align: center;
+  display: block;
+  h4 {
+    @include font-size(14, 14);
+    margin: 0;
+    color: white;
+  }
+}
+
+.gallery:not(.flickity-enabled) {
+  display: flex;
+}
+
+.view-more {
+  margin: 0.5rem 0;
+  width: auto;
+}
+
+.carousel-cell {
+  width: 100%;
+  padding: 0 5px;
+  @include media-breakpoint-up(sm) {
+    width: 50%;
+  }
+  @include media-breakpoint-up(md) {
+    width: 25%;
+  }
+  @include media-breakpoint-up(lg) {
+    width: 20%;
+  }
+}

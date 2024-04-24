@@ -1,0 +1,15 @@
+<div bxCard>
+  <div bxImageWrapper [aspect_ratio]="1.0183299389" *ngIf="item.image">
+    <img [bxLazysizes]="item.image.key" [crop_ratio]="1.0183299389" />
+  </div>
+  <div bxCardContent>
+    <h2 bxCardTitle>
+      {{ item.size }}
+      <span *ngIf="item.jean_size"> (Jean Size {{ item.jean_size }})</span>
+      <span *ngIf="item.child_size"> ({{ item.child_size }})</span>
+    </h2>
+  </div>
+  <div bxCardFooter *ngIf="item.style">
+    {{ item.style[0] }}
+  </div>
+</div>

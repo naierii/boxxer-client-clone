@@ -1,0 +1,3 @@
+<router-outlet (deactivate)="onDeactivate()"></router-outlet>
+<bx-loading *ngIf="isLoading$ | async"></bx-loading>
+<bx-cart *ngIf="cartOpen$ | async"></bx-cart>

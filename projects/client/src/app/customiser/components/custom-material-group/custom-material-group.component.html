@@ -1,0 +1,81 @@
+<ng-content></ng-content>
+<div class="material-group" *ngFor="let group of materialGroups">
+  <div class="header">
+    <h4>{{ group.title }}</h4>
+  </div>
+  <div class="material-colours">
+    <div
+      class="material"
+      [ngClass]="{
+        large: large,
+        selected: material._id === selectedMaterial?._id
+      }"
+      *ngFor="let material of group.materials"
+      (click)="colourSelected(material)"
+    >
+      <div class="image">
+        <svg
+          class="swatch"
+          *ngIf="material.hex; else imageSwatch"
+          viewBox="0 0 600 300"
+        >
+          <rect
+            width="100%"
+            height="100%"
+            class="swatch-colour"
+            [attr.fill]="material.hex"
+          />
+        </svg>
+        <ng-template #imageSwatch>
+          <img [bxLazysizes]="material.image.key" [crop_ratio]="2" />
+        </ng-template>
+      </div>
+      <div class="info">
+        <h4>
+          {{ material.title }}
+          <bx-price
+            [price]="getPrice(material.price)"
+            *ngIf="basePrice || (materialPrice && material.price > 0)"
+          >
+          </bx-price>
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="material-colours" *ngIf="materials">
+  <div
+    class="material"
+    [ngClass]="{ selected: material._id === selectedMaterial?._id }"
+    *ngFor="let material of materials"
+    (click)="colourSelected(material)"
+  >
+    <div class="image">
+      <svg
+        class="swatch"
+        *ngIf="material.hex; else imageSwatch"
+        viewBox="0 0 600 300"
+      >
+        <rect
+          width="100%"
+          height="100%"
+          class="swatch-colour"
+          [attr.fill]="material.hex"
+        />
+      </svg>
+      <ng-template #imageSwatch>
+        <img [bxLazysizes]="material.image.key" [crop_ratio]="2" />
+      </ng-template>
+    </div>
+    <div class="info">
+      <h4>
+        {{ material.title }}
+        <bx-price
+          [price]="getPrice(material.price)"
+          *ngIf="basePrice || (materialPrice && material.price > 0)"
+        >
+        </bx-price>
+      </h4>
+    </div>
+  </div>
+</div>

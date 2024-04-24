@@ -1,0 +1,19 @@
+@import '../../scss/swatch';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.graphic-sizes {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  .option {
+    margin: 5px 0;
+    flex: 0 1 50%;
+  }
+}

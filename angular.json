@@ -1,0 +1,438 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "client": {
+      "root": "projects/client/",
+      "sourceRoot": "projects/client/src",
+      "projectType": "application",
+      "prefix": "bx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/client",
+            "index": "projects/client/src/index.html",
+            "main": "projects/client/src/main.ts",
+            "polyfills": "projects/client/src/polyfills.ts",
+            "tsConfig": "projects/client/tsconfig.app.json",
+            "assets": [
+              "projects/client/src/favicon.ico",
+              "projects/client/src/robots.txt",
+              "projects/client/src/assets"
+            ],
+            "styles": [
+              "projects/client/src/styles.scss",
+              "node_modules/@fortawesome/fontawesome-svg-core/styles.css"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects/client/src/scss"]
+            },
+            "scripts": [
+              "node_modules/lazysizes/plugins/unveilhooks/ls.unveilhooks.min.js",
+              "node_modules/lazysizes/plugins/rias/ls.rias.min.js",
+              "node_modules/lazysizes/plugins/bgset/ls.bgset.min.js",
+              "node_modules/lazysizes/lazysizes.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/environments/environment.ts",
+                  "with": "projects/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "node_modules/moment/locale/",
+                  "with": "src/locale/"
+                }
+              ],
+              "index": "projects/client/src/index-pages/production/index.html",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": {
+                "hidden": true,
+                "scripts": true,
+                "styles": true
+              },
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "es5BrowserSupport": true
+            },
+            "testing": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/environments/environment.ts",
+                  "with": "projects/environments/environment.test.ts"
+                },
+                {
+                  "replace": "node_modules/moment/locale/",
+                  "with": "src/locale/"
+                }
+              ],
+              "index": "projects/client/src/index-pages/testing/index.html",
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "ios": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/environments/environment.ts",
+                  "with": "projects/environments/environment.ios.ts"
+                },
+                {
+                  "replace": "node_modules/moment/locale/",
+                  "with": "src/locale/"
+                }
+              ]
+            },
+            "geny": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/environments/environment.ts",
+                  "with": "projects/environments/environment.geny.ts"
+                },
+                {
+                  "replace": "node_modules/moment/locale/",
+                  "with": "src/locale/"
+                }
+              ]
+            },
+            "edge": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/environments/environment.ts",
+                  "with": "projects/environments/environment.edge.ts"
+                },
+                {
+                  "replace": "node_modules/moment/locale/",
+                  "with": "src/locale/"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "client:build",
+            "ssl": true,
+            "sslKey": "ssl/localhost.key.pem",
+            "sslCert": "ssl/localhost.cert.pem"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "client:build:production"
+            },
+            "ios": {
+              "browserTarget": "client:build:ios",
+              "ssl": false
+            },
+            "geny": {
+              "browserTarget": "client:build:geny",
+              "sslKey": "ssl/marcus.local.key.pem",
+              "sslCert": "ssl/marcus.local.cert.pem"
+            },
+            "edge": {
+              "browserTarget": "client:build:edge",
+              "ssl": false
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "client:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/client/src/test.ts",
+            "polyfills": "projects/client/src/polyfills.ts",
+            "tsConfig": "projects/client/tsconfig.spec.json",
+            "karmaConfig": "projects/client/karma.conf.js",
+            "styles": ["projects/client/src/styles.scss"],
+            "scripts": [
+              "node_modules/lazysizes/plugins/unveilhooks/ls.unveilhooks.min.js",
+              "node_modules/lazysizes/plugins/rias/ls.rias.min.js",
+              "node_modules/lazysizes/plugins/bgset/ls.bgset.min.js",
+              "node_modules/lazysizes/lazysizes.min.js"
+            ],
+            "assets": [
+              "projects/client/src/favicon.ico",
+              "projects/client/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/client/tsconfig.app.json",
+              "projects/client/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist-server",
+            "main": "projects/client/src/main.server.ts",
+            "tsConfig": "projects/client/tsconfig.server.json",
+            "stylePreprocessorOptions": {
+              "includePaths": ["projects/client/src/scss"]
+            }
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "sourceMap": false,
+              "fileReplacements": [
+                {
+                  "replace": "projects/environments/environment.ts",
+                  "with": "projects/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "node_modules/moment/locale/",
+                  "with": "src/locale/"
+                }
+              ]
+            },
+            "testing": {
+              "optimization": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "fileReplacements": [
+                {
+                  "replace": "projects/environments/environment.ts",
+                  "with": "projects/environments/environment.test.ts"
+                },
+                {
+                  "replace": "node_modules/moment/locale/",
+                  "with": "src/locale/"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "client-e2e": {
+      "root": "projects/client-e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/client-e2e/protractor.conf.js",
+            "devServerTarget": "client:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/client-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "admin": {
+      "root": "projects/admin/",
+      "sourceRoot": "projects/admin/src",
+      "projectType": "application",
+      "prefix": "bx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss",
+          "inlineStyle": true
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/admin",
+            "index": "projects/admin/src/index.html",
+            "main": "projects/admin/src/main.ts",
+            "polyfills": "projects/admin/src/polyfills.ts",
+            "tsConfig": "projects/admin/tsconfig.app.json",
+            "assets": [
+              "projects/admin/src/favicon.ico",
+              "projects/admin/src/assets",
+              "projects/admin/src/manifest.json"
+            ],
+            "styles": [
+              "node_modules/dragula/dist/dragula.css",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "node_modules/simple-line-icons/css/simple-line-icons.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "projects/admin/src/scss/style.scss",
+              "node_modules/tinymce/skins/lightgray/skin.min.css",
+              "node_modules/tinymce/skins/lightgray/content.min.css"
+            ],
+            "scripts": [
+              "node_modules/lazysizes/plugins/unveilhooks/ls.unveilhooks.min.js",
+              "node_modules/lazysizes/plugins/rias/ls.rias.min.js",
+              "node_modules/lazysizes/plugins/bgset/ls.bgset.min.js",
+              "node_modules/lazysizes/lazysizes.min.js",
+              "node_modules/tinymce/tinymce.js",
+              "node_modules/tinymce/themes/modern/theme.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/environments/environment.ts",
+                  "with": "projects/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": {
+                "hidden": true,
+                "scripts": true,
+                "styles": true
+              },
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "serviceWorker": true
+            },
+            "testing": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/environments/environment.ts",
+                  "with": "projects/environments/environment.test.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "serviceWorker": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "admin:build",
+            "ssl": true,
+            "sslKey": "ssl/localhost.key.pem",
+            "sslCert": "ssl/localhost.cert.pem"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "admin:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "admin:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/admin/src/test.ts",
+            "polyfills": "projects/admin/src/polyfills.ts",
+            "tsConfig": "projects/admin/tsconfig.spec.json",
+            "karmaConfig": "projects/admin/karma.conf.js",
+            "styles": ["projects/admin/src/styles.scss"],
+            "scripts": [
+              "node_modules/lazysizes/plugins/unveilhooks/ls.unveilhooks.min.js",
+              "node_modules/lazysizes/plugins/rias/ls.rias.min.js",
+              "node_modules/lazysizes/plugins/bgset/ls.bgset.min.js",
+              "node_modules/lazysizes/lazysizes.min.js"
+            ],
+            "assets": [
+              "projects/admin/src/favicon.ico",
+              "projects/admin/src/assets",
+              "projects/admin/src/manifest.json"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/admin/tsconfig.app.json",
+              "projects/admin/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "admin-e2e": {
+      "root": "projects/admin-e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/admin-e2e/protractor.conf.js",
+            "devServerTarget": "admin:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/admin-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "client",
+  "schematics": {
+    "@schematics/angular:component": {
+      "spec": false,
+      "prefix": "bx",
+      "styleext": "scss"
+    },
+    "@schematics/angular:guard": {
+      "spec": false
+    },
+    "@schematics/angular:service": {
+      "spec": false
+    },
+    "@schematics/angular:directive": {
+      "prefix": "bx"
+    }
+  }
+}

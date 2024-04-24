@@ -1,0 +1,35 @@
+<td class="fit">{{order.orderid}}</td>
+<td class="fit">{{order.status}}</td>
+<td class="fit">{{order.type}}</td>
+<td class="fit">
+  Created: {{order.checkoutDate | date:'dd/MM/yy HH:mm':'Z' }}
+  <br>Due Date: {{order.dueDate | date:'dd/MM/yy':'Z'}}
+  <ng-container *ngIf="order.sendByDate"><br> Send Date: {{order.sendByDate | date:'dd/MM/yy':'Z'}}</ng-container>
+  <ng-container *ngIf="order.jobCardIssuedDate"><br> Job Card Issued: {{order.jobCardIssuedDate | date:'dd/MM/yy HH:mm':'Z'}}</ng-container>
+  <ng-container *ngIf="order.shippedDate"><br> Shipped: {{order.shippedDate | date:'dd/MM/yy':'Z'}}</ng-container>
+</td>
+<td>{{order.shipping?.firstName}} {{order.shipping?.lastName}}
+  <br>
+  <span *ngIf="order.email">{{order.email}}</span>
+  <span *ngIf="!order.email && order.owner">{{order.owner.email}}</span>
+  <span *ngIf="order.survey"><br><br>Survey: {{order.survey}}</span>
+</td>
+<td>
+  <div *ngFor="let item of order.items">
+    <ng-container *ngIf="item.custom_product">
+      <strong>Custom: </strong>{{item.qty}} x {{item.custom_product.title}}</ng-container>
+    <ng-container *ngIf="item.product_variation">
+      <strong>Ready Made: </strong>{{item.qty}} x {{item.product_variation.title}}</ng-container>
+    <ng-container *ngIf="item.code === 'CUSTOM'">
+      <strong>Special: </strong>{{item.qty}} x {{item.title}}</ng-container>
+    <br><strong>Price:</strong> {{item.original_price | currency:'GBP':'symbol'}}
+    <ng-container *ngIf="item.sale_price && item.sale_price > 0">
+      <br><strong>Sale Price:</strong> {{item.sale_price | currency:'GBP':'symbol'}}
+    </ng-container>
+  </div>
+</td>
+<td class="fit">{{order.total | currency:'GBP':'symbol'}}</td>
+<td class="fit">{{order.balance | currency:'GBP':'symbol'}}</td>
+<td class="fit">
+  <button [routerLink]="[order.orderid]" type="button" class="btn btn-sm btn-success">View</button>
+</td>

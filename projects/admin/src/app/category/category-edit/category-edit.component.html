@@ -1,0 +1,23 @@
+<div class="animated fadeIn" *ngIf="!loading">
+  <form class="row" [formGroup]="editForm" (ngSubmit)="updateItem(editForm.value)">
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header">{{isNew ? 'New Category' : 'Edit ' + editForm.controls['title'].value}}</div>
+        <div class="card-block">
+          <bx-form-field label="Title">
+            <input type="text" class="form-control" placeholder="Title" formControlName="title" bosInputRef>
+          </bx-form-field>
+          <bx-form-field label="Description">
+            <angular-tinymce formControlName="body" [settings]="tinymce"></angular-tinymce>
+          </bx-form-field>
+        </div>
+      </div>
+      <bx-seo-form [parentForm]="editForm" [item]="item"></bx-seo-form>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!editForm.valid">{{isNew ? 'Create' : 'Update'}}</button>
+      </div>
+    </div>
+  </form>
+</div>

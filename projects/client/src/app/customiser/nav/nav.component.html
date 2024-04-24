@@ -1,0 +1,94 @@
+<button class="btn btn-success add-to-cart" [ngClass]="{'hide-mobile': designService.selectedObject}"
+  *ngIf="!designService.editOrder && !designService.editDesign" [disabled]="(complete$ | async) === false"
+  (click)="addToCart()" tourAnchor="add.cart">
+  <bx-price [price]="total$ | async"></bx-price> | {{(complete$ | async) ? 'Add to cart' : 'Design Unfinished'}}
+</button>
+<button class="btn btn-success add-to-cart" [ngClass]="{'hide-mobile': designService.selectedObject}"
+  *ngIf="!designService.editOrder && designService.editDesign" [disabled]="(complete$ | async) === false"
+  (click)="updateCart()">
+  <bx-price [price]="total$ | async"></bx-price> | Update Cart
+</button>
+<button class="btn btn-success add-to-cart" [ngClass]="{'hide-mobile': designService.selectedObject}"
+  *ngIf="designService.editOrder" [disabled]="(complete$ | async) === false" (click)="updateOrderAdmin()">
+  <bx-price [price]="total$ | async"></bx-price> | Update Order
+</button>
+<div class="scroll-container" [ngClass]="{'hide-mobile': designService.selectedObject, 'scrolled': hasScrolled}"
+  bxWindowHeight>
+  <a bxNavItem id="style-{{style.type}}" menuId="style-{{style.type}}" angulartics2On="click"
+    angularticsAction="MenuClick" [angularticsLabel]="style.title" angularticsCategory="Customiser"
+    [routerLink]="['../style', style._id]" skipLocationChange class="option" (click)="menuClicked($event)"
+    *ngFor="let style of styles$ | async">
+    <h4 [ngClass]="{'selected': getStyle(style.type)}">{{style.title}}</h4>
+    <p class="required" *ngIf="!getStyle(style.type); else styleOption">Required</p>
+    <ng-template #styleOption>
+      <p class="selected">{{getStyle(style.type).title}}</p>
+    </ng-template>
+  </a>
+  <a bxNavItem id="panel-{{setting.panel}}" menuId="panel-{{setting.panel}}" angulartics2On="click"
+    angularticsAction="MenuClick" [angularticsLabel]="setting.name" angularticsCategory="Customiser"
+    [routerLink]="['../panel', setting._id]" skipLocationChange class="option" (click)="menuClicked($event)"
+    *ngFor="let setting of panels$ | async; let i = index" tourAnchor="design.panels.{{i}}">
+    <h4 [ngClass]="{'selected': getPanel(setting.panel)}">{{setting.name}}</h4>
+    <p class="required" *ngIf="!getPanel(setting.panel) && !setting.area_size.optional; else panelOption">Required</p>
+    <p class="selected" *ngIf="!getPanel(setting.panel) && setting.area_size.optional">Optional</p>
+    <ng-template #panelOption>
+      <p class="selected" *ngIf="getPanel(setting.panel) as panel">{{panel.material.title}}
+        {{panel.material.materialType.title}}</p>
+    </ng-template>
+  </a>
+  <a bxNavItem id="muay_thai" menuId="muay_thai" angulartics2On="click" angularticsAction="MenuClick"
+    angularticsLabel="Muay Thai" angularticsCategory="Customiser" [routerLink]="['../muay-thai']" class="option"
+    skipLocationChange (click)="menuClicked($event)" *ngIf="(muay_thai$ | async).length">
+    <h4 [ngClass]="{'selected': getMuayThai()}">Muay Thai Wording</h4>
+    <p class="selected" *ngIf="getMuayThai() && getMuayThai().fill && getMuayThai().outline">
+      {{getMuayThai().fill.title}}
+      / {{getMuayThai()?.outline.title}}</p>
+    <p class="selected" *ngIf="!getMuayThai()">Optional</p>
+  </a>
+  <a bxNavItem id="name" menuId="name" angulartics2On="click" angularticsAction="MenuClick" angularticsLabel="Add Name"
+    angularticsCategory="Customiser" [routerLink]="['../name']" class="option" skipLocationChange
+    (click)="menuClicked($event)" tourAnchor="design.names">
+    <h4>Add name</h4>
+    <p class="selected">Optional</p>
+  </a>
+  <a bxNavItem id="flag" menuId="flag" angularticsAction="MenuClick" angularticsLabel="Add Flag"
+    angularticsCategory="Customiser" [routerLink]="['../flag']" class="option" skipLocationChange
+    (click)="menuClicked($event)" tourAnchor="design.flags">
+    <h4>Add flag</h4>
+    <p class="selected">Optional</p>
+  </a>
+  <a bxNavItem id="logo" menuId="logo" angularticsAction="MenuClick" angularticsLabel="Add Graphic"
+    angularticsCategory="Customiser" [routerLink]="['../logo']" class="option" skipLocationChange
+    (click)="menuClicked($event)" tourAnchor="design.graphics">
+    <h4>Add graphic</h4>
+    <p class="selected">Optional</p>
+  </a>
+  <a bxNavItem id="upload" menuId="upload" angularticsAction="MenuClick" angularticsLabel="Upload own graphic"
+    angularticsCategory="Customiser" [routerLink]="['../upload']" class="option" skipLocationChange
+    (click)="menuClicked($event)" tourAnchor="design.uploads">
+    <h4>Upload own graphic</h4>
+    <p class="selected">Optional</p>
+  </a>
+  <ng-container *ngIf="(sizes$ | async) as sizes">
+    <a bxNavItem id="size" [menuId]="'size'" angularticsAction="MenuClick"
+      angularticsLabel="Choose size & production options" angularticsCategory="Customiser" [routerLink]="['../size']"
+      class="option" skipLocationChange (click)="menuClicked($event)" tourAnchor="design.sizing" *ngIf="sizes.length">
+      <h4 [ngClass]="{'selected': getSize()}">Choose size &
+        <br> production options</h4>
+      <p class="required" *ngIf="!getSize() && sizes.length; else panelOption">Required</p>
+      <ng-template #panelOption>
+        <p class="selected">{{getSize().size}}
+          <span *ngIf="getProduction()">- {{getProduction().type}}</span>
+        </p>
+      </ng-template>
+    </a>
+    <a bxNavItem id="size" [menuId]="'size'" angularticsAction="MenuClick" angularticsLabel="Choose production options"
+      angularticsCategory="Customiser" [routerLink]="['../size']" class="option" skipLocationChange
+      (click)="menuClicked($event)" tourAnchor="design.sizing" *ngIf="!sizes.length">
+      <h4 [ngClass]="{'selected': getSize()}">Choose production options</h4>
+      <p class="selected">
+        <span *ngIf="getProduction()">{{getProduction().type}}</span>
+      </p>
+    </a>
+  </ng-container>
+</div>

@@ -1,0 +1,38 @@
+<header bx-header></header>
+<main>
+  <div class="message-banner">
+    <div class="message">
+      <h3>UP TO 25% DISCOUNT FOR KIDS SIZES,</h3>
+      <h4>FREE POSTAGE OPTION</h4>
+    </div>
+  </div>
+  <!-- <div class="message-banner red">
+    <div class="message">
+      <h3>SELF ISOLATION SPECIAL 20% OFF, USE CODE FIGHTBACK</h3>
+      <p>Horrible as it is to be stuck at home, now's the time to create the perfect boxing outfit for the new season
+        and keep supporting our fighting community. Plus we are offering our biggest discount ever. So let's keep this
+        show on the road! Our production and courier services continue as normal. Please send us any of your home
+        training tips and pictures or videos to share with the gang in these difficult times.</p>
+    </div>
+  </div> -->
+  <!-- <div class="message-banner red">
+    <div class="message">
+      <h3>FLASH SALE</h3>
+      <h4>10% OFF OUR MOST POPULAR DESIGNS*</h4>
+      <p>(ending Feb 28)</p>
+    </div>
+  </div> -->
+  <!-- <div class="message-banner-bf">
+    <div class="message">
+      <img
+      [bxLazysizes]="'img/xmas-2019.jpg'"
+      [crop_ratio]="2184/270"
+    />
+    </div>
+  </div> -->
+  <router-outlet></router-outlet>
+</main>
+<ng-container *bxShellNoRender>
+  <bx-mailchimp-banner *ngIf="showMailchimp"></bx-mailchimp-banner>
+</ng-container>
+<footer bx-footer></footer>

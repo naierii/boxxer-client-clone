@@ -1,0 +1,15 @@
+<a [routerLink]="[item.slug]" bxCard>
+  <div>
+    <div bxImageWrapper [aspect_ratio]="1.33333333" *ngIf="item.image">
+      <img
+        alt="Boxxerworld {{ item.title }}"
+        [bxLazysizes]="item.image.key"
+        [crop_ratio]="1.33333333"
+      />
+    </div>
+  </div>
+  <div bxCardContent>
+    <h2 bxCardTitle>{{ item.title }}</h2>
+  </div>
+  <div bxCardFooter>Posted {{ item.createdAt | date: 'dd/MM/yyyy':'Z' }}</div>
+</a>

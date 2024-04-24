@@ -1,0 +1,19 @@
+<button class="show-discount" (click)="showForm = !showForm" *ngIf="!showForm">
+  Have a discount or voucher code?
+  <br>Click here to enter your code</button>
+<form class="discount-form" [formGroup]="discountForm" *ngIf="showForm">
+  <h2>Discount / Voucher Code</h2>
+  <p class="small">
+    <strong>Please note discount codes will override any other offers on site.</strong>
+  </p>
+  <p class="small">
+    <strong>If you have multiple vouchers, enter each one individually.</strong>
+  </p>
+  <mat-form-field>
+    <input type="text" matInput placeholder="Discount / Voucher code" formControlName="code">
+  </mat-form-field>
+  <p class="error" *ngIf="discountForm.controls['code'].value && errorMessge">{{errorMessge}}</p>
+  <button class="btn btn-success" type="button" (click)="checkCode()" [disabled]="!discountForm.valid">
+    Apply code
+  </button>
+</form>

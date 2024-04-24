@@ -1,0 +1,640 @@
+<div class="row">
+  <div class="col-lg-9 print-full-width">
+    <div class="card" *ngIf="order$ | async as orderAsync">
+      <div class="card-header">
+        <a [routerLink]="['/orders', order.orderid]">
+          Order
+          <strong>#{{ order.orderid }}</strong>
+        </a>
+        <div class="card-actions">
+          <!-- <a [routerLink]="['../', order.links.prev]">
+            <i class="icon-arrow-left icons font-xl"></i>
+          </a>
+          <a [routerLink]="['../', order.links.next]">
+            <i class="icon-arrow-right icons font-xl"></i>
+          </a> -->
+          <button (click)="printNoLoad($event)">
+            <i class="icon-printer icons font-xl"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-6">
+            <div
+              *ngIf="
+                order.item.custom_design && order.item.custom_design.urgent
+              "
+            >
+              <h3 class="text-danger font-weight-bold">URGENT</h3>
+            </div>
+            <div><strong>Status:</strong> {{ order.status }}</div>
+            <div>
+              <strong>Order date:</strong>
+              {{ order.checkoutDate | date: 'dd/MM/yy':'Z' }}
+            </div>
+            <div *ngIf="order.shipping">
+              <div *ngIf="order.shipping.firstName">
+                <strong>Name:</strong> {{ order.shipping.firstName }}
+                {{ order.shipping.lastName }}
+              </div>
+              <div>
+                <strong>Shipping Address:</strong>
+                {{ order.shipping.address1 }},
+                <span *ngIf="order.shipping.address2"
+                  >{{ order.shipping.address2 }},</span
+                >
+                {{ order.shipping.city }}, {{ order.shipping.region }},
+                {{ order.shipping.country }}, {{ order.shipping.postcode }}
+              </div>
+              <div>
+                <strong>Shipping Method:</strong> {{ order.shippingmethod }}
+              </div>
+              <div><strong>Phone:</strong> {{ order.shipping.phone }}</div>
+            </div>
+            <div *ngIf="order.comments">
+              <h3>Customer Comments</h3>
+              <span [innerHTML]="order.comments"></span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card text-white bg-danger">
+              <div class="card-body">
+                <div class="h1 text-uppercase">
+                  <strong>Due date:</strong>
+                  {{ order.dueDate | date: 'dd/MM/yy':'Z' }}
+                </div>
+                <div class="h1 text-uppercase">
+                  <strong>Qty:</strong> {{ order.item.qty }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-md-6">
+            <div *ngIf="order.item.code === 'CUSTOM'">
+              <h6>CUSTOM: {{ order.item.title }}</h6>
+            </div>
+            <div *ngIf="order.item.custom_product; else listingImage">
+              <h6>{{ order.item.custom_product.title }}</h6>
+              <img
+                [bxLazysizes]="order.item.custom_design.image.key"
+                *ngIf="order | hasKey: 'item.custom_design.image.key'"
+              />
+              <div>
+                <a [attr.href]="editLink">Edit design</a>
+              </div>
+            </div>
+            <ng-template #listingImage>
+              <div *ngIf="order.item.product_variation">
+                <h6>
+                  {{ order.item.product_variation.product_display.title }}
+                </h6>
+                <img
+                  [bxLazysizes]="
+                    getReadyMadeImage(order.item.product_variation)
+                  "
+                  *ngIf="getReadyMadeImage(order.item.product_variation)"
+                />
+              </div>
+            </ng-template>
+            <table class="table table-bordered mt-3 show-print">
+              <tr>
+                <td class="fit">1</td>
+                <td colspan="3"></td>
+              </tr>
+              <tr>
+                <td class="fit">2</td>
+                <td colspan="3"></td>
+              </tr>
+              <tr>
+                <td class="fit">3</td>
+                <td colspan="3"></td>
+              </tr>
+              <tr>
+                <td class="fit">4</td>
+                <td colspan="3"></td>
+              </tr>
+              <tr>
+                <td class="fit">5</td>
+                <td colspan="3"></td>
+              </tr>
+              <tr>
+                <td class="fit">Send by:</td>
+                <td class=""></td>
+                <td class="fit">Before date:</td>
+                <td class=""></td>
+              </tr>
+              <tr class="table-secondary">
+                <td class="fit">Instagram</td>
+                <td colspan="3"></td>
+              </tr>
+              <tr>
+                <td class="fit">Final Check</td>
+                <td colspan="3"></td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-6">
+            <ul
+              class="list-unstyled"
+              *ngIf="order.item.product_customisation as product_customisation"
+            >
+              <li
+                class="media mb-3"
+                *ngIf="product_customisation && product_customisation.height"
+              >
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Sizing</h5>
+                  <div>
+                    <strong>Height:</strong> {{ product_customisation.height }}
+                  </div>
+                  <div>
+                    <strong>Weight:</strong> {{ product_customisation.weight }}
+                  </div>
+                </div>
+                <div class="show-print">
+                  <table class="table table-bordered mt-3">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              <li
+                class="media mb-3"
+                *ngFor="let name of product_customisation.names"
+              >
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Name</h5>
+                  <div><strong>Position:</strong> {{ name.title }}</div>
+                  <div><strong>Text:</strong> {{ name.text }}</div>
+                  <div>
+                    <strong>Font:</strong> {{ product_customisation.name_font }}
+                  </div>
+                  <div>
+                    <strong>Colour:</strong>
+                    {{ product_customisation.name_colour }}
+                  </div>
+                </div>
+                <div class="show-print">
+                  <table class="table table-bordered mt-3">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              <li
+                class="media mb-3"
+                *ngFor="let flag of product_customisation.flags"
+              >
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Flag</h5>
+                  <div><strong>Position:</strong> {{ flag.title }}</div>
+                  <div><strong>Country:</strong> {{ flag.country }}</div>
+                </div>
+                <div class="show-print">
+                  <table class="table table-bordered mt-3">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+            </ul>
+            <ul
+              class="list-unstyled"
+              *ngIf="order.item.custom_design as custom_design"
+            >
+              <li class="media mb-3" *ngIf="custom_design.production">
+                <img
+                  class="mr-3"
+                  src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16262c7ebcb%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16262c7ebcb%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.84375%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                  alt="Generic placeholder image"
+                />
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Production</h5>
+                  {{ custom_design.production.type }}
+                  <div *ngIf="custom_design.production.instructions">
+                    <h6>Instructions</h6>
+                    <span
+                      [innerText]="custom_design.production.instructions"
+                    ></span>
+                  </div>
+                  <div>
+                    {{
+                      custom_design.production.price
+                        | decimalPrice
+                        | currency: 'GBP':'symbol'
+                    }}
+                  </div>
+                  <div *ngIf="custom_design.boxxer_logo">
+                    <h6>
+                      Remove logo
+                      <strong>{{
+                        custom_design.boxxer_logo.remove_logo ? 'Yes' : 'No'
+                      }}</strong>
+                    </h6>
+                  </div>
+                </div>
+                <div class="show-print">
+                  <table class="table table-bordered mt-3">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              <li class="media mb-3" *ngIf="custom_design.style">
+                <img
+                  class="mr-3"
+                  src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16262c7ebcb%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16262c7ebcb%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.84375%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                  alt="Generic placeholder image"
+                />
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Style</h5>
+                  {{ custom_design.style.title }}
+                  {{ custom_design.style.subtitle }}
+                  <div>
+                    {{
+                      custom_design.style.price
+                        | decimalPrice
+                        | currency: 'GBP':'symbol'
+                    }}
+                  </div>
+                </div>
+                <div class="show-print">
+                  <table class="table table-bordered mt-3">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              <li class="media" *ngIf="custom_design.cut">
+                <img
+                  class="mr-3 mb-3"
+                  src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16262c7ebcb%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16262c7ebcb%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.84375%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                  alt="Generic placeholder image"
+                />
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Cut</h5>
+                  {{ custom_design.cut.title }}
+                  <div>
+                    {{
+                      custom_design.cut.price
+                        | decimalPrice
+                        | currency: 'GBP':'symbol'
+                    }}
+                  </div>
+                </div>
+                <div class="show-print">
+                  <table class="table table-bordered mt-3">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              <li class="media" *ngFor="let panel of custom_design.panels">
+                <ng-container *ngIf="panel.material">
+                <div *ngIf="panel.material.hex; else materialImage">
+                  <svg
+                    class="mr-3 mb-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 64 64"
+                    width="64"
+                    height="64"
+                  >
+                    <rect
+                      [attr.fill]="panel.material.hex"
+                      width="100%"
+                      height="100%"
+                      x="0"
+                      y="0"
+                    />
+                  </svg>
+                </div>
+                <ng-template #materialImage>
+                  <bx-image-thumb
+                    class="mr-3 mb-3"
+                    [public_id]="panel.material.image.key"
+                    [size]="64"
+                  ></bx-image-thumb>
+                </ng-template>
+              </ng-container>
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">
+                    {{ panel.title }}
+                    <span
+                      *ngIf="
+                        panel.product_setting && panel.product_setting.thai_name
+                      "
+                    >
+                      - {{ panel.product_setting.thai_name }}</span
+                    >
+                  </h5>
+                  <ng-container *ngIf="panel.material">
+                  {{ panel.material.title }}
+                  {{ panel.material.materialType.title }}
+                </ng-container>
+                  <span *ngIf="panel.material && panel.material.thai_name">
+                    - {{ panel.material.thai_name }}</span
+                  >
+                  <div>
+                    {{ panel.price | decimalPrice | currency: 'GBP':'symbol' }}
+                  </div>
+                </div>
+                <div class="show-print">
+                  <table class="table table-bordered mt-3">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              <li
+                class="media"
+                *ngIf="custom_design.muay_thai && custom_design.muay_thai.fill"
+              >
+                <div
+                  *ngIf="custom_design.muay_thai.fill.hex; else materialImage"
+                >
+                  <svg
+                    class="mr-3 mb-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 64 64"
+                    width="64"
+                    height="64"
+                  >
+                    <rect
+                      [attr.fill]="custom_design.muay_thai.fill.hex"
+                      width="100%"
+                      height="100%"
+                      x="0"
+                      y="0"
+                    />
+                  </svg>
+                </div>
+                <ng-template #materialImage>
+                  <bx-image-thumb
+                    class="mr-3 mb-3"
+                    [public_id]="custom_design.muay_thai.fill.image.key"
+                    [size]="64"
+                  ></bx-image-thumb>
+                </ng-template>
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Muay Thai</h5>
+                  <div>
+                    <strong>Fill:</strong>
+                    {{ custom_design.muay_thai.fill.title }}
+                    {{ custom_design.muay_thai.fill.materialType.title }}
+                  </div>
+                  <div>
+                    <strong>Outline:</strong>
+                    {{ custom_design.muay_thai.outline.title }}
+                    {{ custom_design.muay_thai.outline.materialType.title }}
+                  </div>
+                  <div>
+                    {{
+                      custom_design.muay_thai.price
+                        | decimalPrice
+                        | currency: 'GBP':'symbol'
+                    }}
+                  </div>
+                </div>
+                <div class="show-print">
+                  <table class="table table-bordered mt-3">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              <li class="media mb-2" *ngFor="let name of custom_design.names">
+                <div *ngIf="name.fill?.hex; else materialImage">
+                  <svg
+                    class="mr-3 mb-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 64 64"
+                    width="64"
+                    height="64"
+                  >
+                    <rect
+                      [attr.fill]="name.fill.hex"
+                      width="100%"
+                      height="100%"
+                      x="0"
+                      y="0"
+                    />
+                  </svg>
+                </div>
+                <ng-template #materialImage>
+                  <bx-image-thumb
+                    class="mr-3 mb-3"
+                    [public_id]="name.fill?.image.key"
+                    [size]="64"
+                  ></bx-image-thumb>
+                </ng-template>
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Name - {{ name.name_type.title }}</h5>
+                  <div><strong>Text:</strong> {{ name.text }}</div>
+                  <div><strong>Font:</strong> {{ name.font }}</div>
+                  <div *ngIf="name.finish && name.finish.title">
+                    <strong>Finish:</strong> {{ name.finish.title }}
+                  </div>
+                  <div>
+                    <strong>Fill:</strong> {{ name.fill?.title }}
+                    {{ name.fill?.materialType.title }}
+                  </div>
+                  <div *ngIf="name.outline">
+                    <strong>Outline:</strong> {{ name.outline.title }}
+                    {{ name.outline.materialType.title }}
+                  </div>
+                  <div *ngIf="name.patch">
+                    <strong>Patch:</strong> {{ name.patch.title }}
+                    {{ name.patch.materialType.title }}
+                  </div>
+                  <div *ngIf="name.crystal">
+                    <strong>Crystal:</strong> {{ name.crystal.title }}
+                    {{ name.crystal.materialType.title }}
+                  </div>
+                  <div>{{ name.price | currency: 'GBP':'symbol' }}</div>
+                </div>
+                <div class="show-print">
+                  <table class="table table-bordered mt-3">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              <li class="media" *ngFor="let flag of custom_design.flags">
+                <bx-image-thumb
+                  class="mr-3 mb-3"
+                  [public_id]="flag.flag.image.key"
+                  [size]="64"
+                  *ngIf="flag.flag.image"
+                ></bx-image-thumb>
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Flag</h5>
+                  {{ flag.flag.title }}
+                  <div *ngIf="flag.size">{{ flag.size }}</div>
+                  <div *ngIf="flag.size_info">{{ flag.size_info }}</div>
+                  <div>{{ flag.price | currency: 'GBP':'symbol' }}</div>
+                </div>
+                <div class="show-print">
+                  <table class="table table-bordered mt-3">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              <li class="media" *ngFor="let logo of custom_design.logos">
+                <bx-image-thumb
+                  class="mr-3 mb-3"
+                  [public_id]="logo.image.image.key"
+                  [size]="64"
+                  *ngIf="logo.image"
+                ></bx-image-thumb>
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Logo</h5>
+                  {{ logo.image?.title }}
+                  <div *ngIf="logo.size">{{ logo.size }}</div>
+                  <div *ngIf="logo.size_info">{{ logo.size_info }}</div>
+                  <div *ngIf="logo.instructions">
+                    <h6>Instructions</h6>
+                    <span [innerText]="logo.instructions"></span>
+                  </div>
+                  <div>{{ logo.price | currency: 'GBP':'symbol' }}</div>
+                </div>
+                <div class="show-print">
+                  <table class="table table-bordered mt-3">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              <li class="media" *ngFor="let upload of custom_design.uploads">
+                <bx-image-thumb
+                  class="mr-3 mb-3"
+                  [public_id]="upload.image.key"
+                  [size]="64"
+                  *ngIf="upload.image"
+                ></bx-image-thumb>
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Upload</h5>
+                  <div *ngIf="upload.size">{{ upload.size }}</div>
+                  <div *ngIf="upload.size_info">{{ upload.size_info }}</div>
+                  <a
+                    target="_blank"
+                    href="https://boxxer-images.ams3.digitaloceanspaces.com/{{
+                      upload.image.key
+                    }}"
+                    download="{{ order.orderid }}"
+                    *ngIf="upload.image"
+                    >Download</a
+                  >
+                  <div *ngIf="upload.instructions">
+                    <h6>Instructions</h6>
+                    <span [innerText]="upload.instructions"></span>
+                  </div>
+                  <div>
+                    <h6>
+                      Remove background
+                      <strong>{{
+                        upload.remove_background ? 'Yes' : 'No'
+                      }}</strong>
+                    </h6>
+                  </div>
+                  <div>{{ upload.price | currency: 'GBP':'symbol' }}</div>
+                </div>
+                <div class="show-print">
+                  <table class="table table-bordered mt-3">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              <li class="media" *ngIf="custom_design.sizing as sizing">
+                <img
+                  class="mr-3 mb-3"
+                  src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2264%22%20height%3D%2264%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_16262c7ebcb%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A10pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_16262c7ebcb%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2213.84375%22%20y%3D%2236.5%22%3E64x64%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
+                  alt="Generic placeholder image"
+                />
+                <div class="media-body">
+                  <h5 class="mt-0 mb-1">Sizing</h5>
+                  <div *ngIf="sizing.height">
+                    <strong>Height:</strong> {{ sizing.height }}
+                    {{ sizing.unit_height }}
+                  </div>
+                  <div *ngIf="sizing.weight">
+                    <strong>Weight:</strong> {{ sizing.weight }}
+                    {{ sizing.unit }}
+                  </div>
+                  <div><strong>Selected size:</strong> {{ sizing.size }}</div>
+                  <div>
+                    {{
+                      customSizePrice(custom_design) | currency: 'GBP':'symbol'
+                    }}
+                  </div>
+                </div>
+                <div class="show-print">
+                  <table class="table table-bordered mt-3">
+                    <tr>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="order">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">Comments</div>
+            <div class="card-block no-print">
+              <bx-order-comments
+                [order]="order"
+                [line_item]="order.item._id"
+              ></bx-order-comments>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 no-print">
+    <div class="card">
+      <div class="card-header">Order update</div>
+      <div class="card-block">
+        <bx-order-actions
+          [order]="order"
+          *ngIf="order"
+          (onUpdate)="orderUpdated($event)"
+        ></bx-order-actions>
+      </div>
+    </div>
+  </div>
+</div>

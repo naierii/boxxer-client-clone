@@ -1,0 +1,19 @@
+<ng-container *bxShellNoRender>
+  <button class="btn-link btn-chat" (click)="openChat()" *ngIf="tawk.loaded">
+    <fa-icon class="icon" [icon]="['fal', 'comment']" [fixedWidth]="true" size="1x"></fa-icon>
+    Chat
+  </button>
+  <div class="help-menu">
+    <h4 [matMenuTriggerFor]="menu">Currency: {{ currency$ | async }}</h4>
+    <h4>
+      <a [routerLink]="['/account']">{{
+      authService.loggedIn() ? 'Account' : 'Login / Register'
+    }}</a>
+    </h4>
+  </div>
+  <mat-menu #menu="matMenu" yPosition="below">
+    <button *ngFor="let currency of currencies" mat-menu-item (click)="setCurrency(currency)">
+      <span>{{ currency }}</span>
+    </button>
+  </mat-menu>
+</ng-container>

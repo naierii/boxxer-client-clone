@@ -1,0 +1,8 @@
+User-Agent: *
+
+Disallow: /login
+Disallow: /basket
+Disallow: /admin/
+Disallow: /account/
+
+Sitemap: https://www.boxxerworld.com/sitemap.xml

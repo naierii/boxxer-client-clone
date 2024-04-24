@@ -1,0 +1,48 @@
+name: Deploy Develop
+
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  GITHUB_SHA: ${{ github.sha }}
+  DO_REGISTRY: ${{ secrets.DO_REGISTRY_NEW }}
+  DEPLOYMENT: boxxer-client-testing
+  IMAGE: boxxer-client-testing
+
+jobs:
+  build:
+    name: Build, push, and deploy to testing
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout develop
+        uses: actions/checkout@master
+        with:
+          ref: develop
+
+      # Build the Docker image
+      - name: Build
+        run: |
+          docker build --memory=8000M -t $DO_REGISTRY/$IMAGE:$GITHUB_SHA -t $DO_REGISTRY/$IMAGE:latest -f Dockerfile.test .
+
+      # Install doctl
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN_NEW }}
+
+      # Push the Docker image to DO Registry
+      - name: Publish
+        run: |
+          doctl registry login --expiry-seconds 1000
+          docker push $DO_REGISTRY/$IMAGE -a
+      - name: Save DigitalOcean kubeconfig
+        run: doctl kubernetes cluster kubeconfig save boxxer-web-apps
+
+      - name: Deploy to DigitalOcean Kubernetes
+        run: kubectl set image deployments/$DEPLOYMENT $DEPLOYMENT=$DO_REGISTRY/$IMAGE:$GITHUB_SHA --record -n default
+
+      - name: Verify deployment
+        run: kubectl rollout status deployment/$DEPLOYMENT

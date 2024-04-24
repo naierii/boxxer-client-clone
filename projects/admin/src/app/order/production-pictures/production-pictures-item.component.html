@@ -1,0 +1,12 @@
+<td [ngStyle]="{ 'min-width': '200px' }">
+  <figure class="figure" *ngFor="let image of production.images">
+    <img class="figure-img img-fluid" [bxLazysizes]="image.key" />
+    <figcaption class="figure-caption text-center h3">
+      {{ production.type }}
+    </figcaption>
+  </figure>
+</td>
+<td>
+  <span [innerHTML]="production.description"></span>
+</td>
+<td class="fit">{{ production.createdAt | date: 'dd/MM/yyyy HH:mm':'Z' }}</td>

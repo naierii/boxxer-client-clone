@@ -1,0 +1,67 @@
+<div class="animated fadeIn" *ngIf="!loading">
+  <form class="row" [formGroup]="editForm" (ngSubmit)="updateItem(editForm.value)">
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header">{{isNew ? 'New Graphic Price' : 'Edit ' + editForm.controls['title'].value}}</div>
+        <div class="card-block">
+          <bx-form-field label="Title">
+            <input type="text" class="form-control" placeholder="Title" formControlName="title" bxInputRef>
+          </bx-form-field>
+          <bx-form-field label="Type">
+            <select class="form-control" formControlName="type">
+              <option value="Logo">Logo</option>
+              <option value="Upload">Upload</option>
+              <option value="Flag">Flag</option>
+            </select>
+          </bx-form-field>
+          <bx-form-field label="Categories">
+            <bx-ng-select-api #apiSearch endpoint="term" [query]="{'category': '58ac1318dc142c612ab61fad', parent: {
+              $ne: null,
+              $nin: ['58ac133edc142c612ab61fb0']
+            }}">
+              <ng-select [items]="apiSearch.dropDownItems" [clearable]="true" [multiple]="true" bindLabel="title"
+                [typeahead]="apiSearch.itemTypeahead" [hideSelected]="true" [loading]="apiSearch.itemLoading"
+                placeholder="No categories selected" formControlName="categories">
+                <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                  <span class="ng-value-icon left" (click)="clear(item)" aria-hidden="true">×</span>
+                  <span class="ng-value-label">{{item.title}} - {{item.parent?.title}}</span>
+                </ng-template>
+                <ng-template ng-option-tmp let-item="item">
+                  {{item.title}} - {{item.parent?.title}}
+                </ng-template>
+              </ng-select>
+            </bx-ng-select-api>
+          </bx-form-field>
+        </div>
+      </div>
+      <div class="card" formArrayName="sizes">
+        <div class="card-header">Sizes
+          <div class="card-actions">
+            <a (click)="addSize()">
+              <i class="icon-plus icons font-xl"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card-block">
+          <div *ngFor="let size of editForm.get('sizes')['controls']; let i=index" [attr.data-index]="i" #group
+            [formGroupName]="i">
+            <bx-form-field label="Title">
+              <input type="text" class="form-control" placeholder="Title" formControlName="title">
+            </bx-form-field>
+            <bx-form-field label="Description">
+              <input type="text" class="form-control" placeholder="Description" formControlName="description">
+            </bx-form-field>
+            <bx-form-field label="Price">
+              <input type="text" class="form-control" placeholder="Price" formControlName="price">
+            </bx-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!editForm.valid">{{isNew ? 'Create' : 'Update'}}</button>
+      </div>
+    </div>
+  </form>
+</div>

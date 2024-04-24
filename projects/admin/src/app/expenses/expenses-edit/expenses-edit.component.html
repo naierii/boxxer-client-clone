@@ -1,0 +1,87 @@
+<div class="animated fadeIn" *ngIf="!loading">
+  <form class="row" [formGroup]="editForm" (ngSubmit)="updateItem(editForm.value)">
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header">{{isNew ? 'New Expense' : 'Edit'}}</div>
+        <div class="card-block">
+          <bx-form-field label="Date">
+            <bx-dp-mobile [form]="editForm" controlName="date" [bsConfig]="bsConfig"></bx-dp-mobile>
+          </bx-form-field>
+          <bx-form-field label="Property" *ngIf="properties && properties.length">
+            <select formControlName="property" class="form-control">
+              <option [value]="property" *ngFor="let property of properties">{{property}}</option>
+            </select>
+          </bx-form-field>
+          <bx-form-field label="Expense type">
+            <bx-category-select [category]="parentCategory" [parentForm]="editForm" field="category" [grouped]="false">
+            </bx-category-select>
+          </bx-form-field>
+          <bx-form-field label="Expense sub type" *ngIf="editForm.get('category').value">
+            <bx-category-select [category]="parentCategory" [parentForm]="editForm"
+              [parent]="editForm.get('category').value" field="term" [nested]="false"></bx-category-select>
+          </bx-form-field>
+          <bx-form-field label="Details">
+            <angular-tinymce formControlName="details" [settings]="tinymce"></angular-tinymce>
+          </bx-form-field>
+          <bx-form-field label="Receipt">
+            <select formControlName="receipt" class="form-control">
+              <option value="Entered">Entered</option>
+              <option value="N/A">N/A</option>
+              <option value="Mixed Type">Mixed Type</option>
+              <option value="Apportioned">Apportioned</option>
+            </select>
+          </bx-form-field>
+          <bx-form-field label="% Claimed">
+            <input type="text" class="form-control" placeholder="% Claimed" formControlName="claimed">
+          </bx-form-field>
+          <bx-form-field label="Payer">
+            <select formControlName="payer" class="form-control">
+              <option [value]="payer" *ngFor="let payer of payers">{{payer}}</option>
+            </select>
+          </bx-form-field>
+          <bx-form-field label="Source">
+            <select formControlName="source" class="form-control">
+              <option [value]="source" *ngFor="let source of sources">{{source}}</option>
+            </select>
+          </bx-form-field>
+          <bx-form-field label="Currency" *ngIf="company === 'Boxxerworld'">
+            <select formControlName="currency" class="form-control">
+              <option value="THB">THB</option>
+              <option value="GBP">GBP</option>
+            </select>
+          </bx-form-field>
+          <bx-form-field label="Amount">
+            <input type="number" class="form-control" placeholder="Amount" formControlName="amount">
+          </bx-form-field>
+          <bx-form-field label="Country expenses paid out of" *ngIf="company === 'Boxxerworld'">
+            <select formControlName="country" class="form-control">
+              <option value="UK">UK</option>
+              <option value="Thailand">Thailand</option>
+            </select>
+          </bx-form-field>
+        </div>
+      </div>
+      <bx-multi-image-upload title="Images" [config]="dropzone_config" [images]="item.images"></bx-multi-image-upload>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!editForm.valid">{{isNew ? 'Create' : 'Update'}}</button>
+      </div>
+      <div class="card" *ngIf="!isNew">
+        <div class="card-header">
+          Duplicate entry
+        </div>
+        <div class="card-body" [formGroup]="duplicateForm">
+          <bx-form-field label="Date">
+            <bx-dp-mobile [form]="duplicateForm" controlName="date" [bsConfig]="bsConfig"></bx-dp-mobile>
+          </bx-form-field>
+          <bx-form-field label="Amount">
+            <input type="number" class="form-control" placeholder="Amount" formControlName="amount">
+          </bx-form-field>
+          <button type="button" class="btn btn-primary" [disabled]="!duplicateForm.valid"
+            (click)="duplicateExpense(duplicateForm.value)">Duplicate</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

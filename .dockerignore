@@ -1,0 +1,13 @@
+node_modules
+.dockerignore
+Dockerfile
+npm-debug.log
+.hg
+.svn
+.cache
+.vscode
+.env
+deploy
+dist
+dist-server
+ssl
