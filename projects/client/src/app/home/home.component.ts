@@ -22,12 +22,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private api: ApiService, private seo: SeoService) {}
 
   ngOnInit() {
-    this.home$ = this.api.get('page', 'home').pipe(
-      untilComponentDestroyed(this),
-      tap((resp: Page) => {
-        this.seo.setMetaAndLinks(resp.title, resp.seo);
-      })
-    );
+    // this.home$ = this.api.get('page', 'home').pipe(
+    //   untilComponentDestroyed(this),
+    //   tap((resp: Page) => {
+    //     this.seo.setMetaAndLinks(resp.title, resp.seo);
+    //   })
+    // );
   }
 
   videoOptions(key) {

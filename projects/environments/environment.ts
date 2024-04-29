@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  host: 'https://localhost:3030',
+  host: 'http://localhost:8080',
   api_url: 'https://localhost:3030/',
   site: 'https://localhost:4200',
   image_cdn: 'https://img.boxxerworld.com',
