@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { mainNav } from './../../../_menu-main';
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Directive, ViewEncapsulation } from '@angular/core';
+import { MenuService } from '../../../../core/services/menu.service';
 
 @Component({
   selector: 'bx-main-menu, [bxMainMenu]',
@@ -10,7 +11,10 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
         class="nav-item"
         *ngFor="let navitem of mainNav"
         [item]="navitem"
+        [hoverMenu]="hoverMenu"
         bxMainMenuNavItem
+        (mouseover)="onHover(navitem)"
+        (mouseleave)="onLeave(navitem)"
       ></li>
     </ul>
   `,
@@ -19,7 +23,22 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 })
 export class MainMenuComponent {
   public mainNav = mainNav;
-  constructor() { }
+  public hoverMenu : any;
+  constructor(private hoverMenuService: MenuService) { }
+
+  onHover(navitem: any) {
+    if (navitem.name === 'INSPIRE') {
+      this.hoverMenu = navitem; // Set hoverMenu data
+      this.hoverMenuService.setHoverMenuData(navitem.name);
+    }
+  }
+
+  onLeave(navitem: any) {
+    if (navitem.name === 'INSPIRE') {
+      this.hoverMenu = null; // Clear hoverMenu data
+      this.hoverMenuService.setHoverMenuData('');
+    }
+  }
 }
 
 @Component({
@@ -61,6 +80,7 @@ export class MainMenuComponent {
 export class MainMenuNavItemComponent {
   @Input()
   item: any;
+  @Input() hoverMenu: any;
 
   public hasClass() {
     return this.item.class ? true : false;
@@ -98,6 +118,11 @@ export class MainMenuNavItemComponent {
     >
       {{ link.name }}
     </a>
+   <a>
+<span *ngIf ="link.parentName == 'INSPIRE'">
+ <img src="{{link.image}}">
+</span>
+   </a>
     <ng-template #external>
       <a
         [ngClass]="
@@ -112,7 +137,7 @@ export class MainMenuNavItemComponent {
 })
 export class MainMenuLinkComponent {
   @Input()
-  link: any;
+  link: any; 
 
   public hasVariant() {
     return this.link.variant ? true : false;
@@ -121,7 +146,11 @@ export class MainMenuLinkComponent {
   public isExternalLink() {
     return this.link.url.substring(0, 4) === 'http' ? true : false;
   }
-  constructor() { }
+  constructor(private hoverMenuService: MenuService) {}
+
+  get hoverMenu() {
+    return this.hoverMenuService.getHoverMenuData();
+  }
 }
 
 @Component({
@@ -153,7 +182,12 @@ export class MainMenuDropdownComponent {
       <div class="row mx-auto justify-content-center">
         <div class="col-md" *ngFor="let child of link.children">
           <h4>{{ child.name }}</h4>
-          <ul>
+          <ul *ngIf="child.name == ''" class="inspire-list">
+            <ng-template ngFor let-child [ngForOf]="child.children">
+              <li [item]="child" bxMainMenuNavItem></li>
+            </ng-template>
+          </ul>
+          <ul *ngIf="child.name != ''">
             <ng-template ngFor let-child [ngForOf]="child.children">
               <li [item]="child" bxMainMenuNavItem></li>
             </ng-template>

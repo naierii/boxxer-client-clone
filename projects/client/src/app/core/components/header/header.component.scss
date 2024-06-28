@@ -13,11 +13,11 @@
 }
 
 .nav-bar {
-  background-color: white;
+  background-color: rgb(0, 0, 0);
   height: 60px;
   padding: 0 15px;
   display: flex;
-  border-bottom: 1px solid lighten($midgrey, 33);
+  // border-bottom: 1px solid lighten($midgrey, 33);
 }
 
 .checkout {
@@ -112,4 +112,176 @@
     text-align: left;
     flex: 0 0 45px;
   }
+}
+
+
+// new style
+/* Header */
+.search-cart-icon i {
+  color: #fff;
+  margin-right: 14px;
+  font-size: 18px;
+}
+.nav-menu {
+  font-size: 14px;
+}
+.nav-container {
+  padding: 0 75px !important;
+}
+.bg-nav{
+  background-color: #141414;
+}
+video#myVideo {
+  width: 100%;
+}
+.bg-nav-dark {
+  background: #010101;
+}
+.bg-hero-img {
+  background: #0a0a0b;
+}
+/* ************************************************************** */
+.custom-navbar {
+  overflow: hidden;
+  background-color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.custom-navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.custom-dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.custom-dropdown .custom-dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 7px 16px;
+  background-color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.custom-navbar a:hover, .custom-dropdown:hover .custom-dropbtn {
+  color: red;
+}
+.text-center-menu  a {
+  text-align: center !important;
+}   
+.custom-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #000;
+  opacity: 0.9;
+  width: 100%;
+  left: 0;
+  padding: 32px 0;
+  top: 49px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.custom-row {
+  display: flex;
+  justify-content: center;
+}
+.custom-dropdown:hover .custom-dropdown-content {
+  display: block;
+}
+
+.after-vertical-line:after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 76%;
+  background: #4a4a4a;
+  left: 34%;
+  top: 11%;
+  position: absolute;
+}
+.after-vertical-line2:after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 76%;
+  background: #4a4a4a;
+  left: 47%;
+  top: 11%;
+  position: absolute;
+}
+.after-vertical-menu2:after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 76%;
+  background: #4a4a4a;
+  left: 55%;
+  top: 11%;
+  position: absolute;
+}
+.after-vertical-menu2:before {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 76%;
+  background: #4a4a4a;
+  left: 45%;
+  top: 11%;
+  position: absolute;
+}
+.custom-column h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 17px;
+}
+.explore-nav-menu {
+  left: 10rem;
+  top: 10rem;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+}
+/* Create three equal columns that floats next to each other */
+.custom-column {
+  float: left;
+  width: 13.33%;
+  padding: 10px;   
+}
+.custom-column h3, a {
+  color: #fff;
+  opacity: 1;
+}
+.custom-column h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 17px;
+}
+.custom-column a {
+  float: none;
+  color: #fff;
+  padding: 3px 16px 4px 0;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.custom-column a:hover {
+  color: #ddd;
+}
+
+/* Clear floats after the columns */
+.custom-row:after {
+  content: "";
+  display: table;
+  clear: both;
 }

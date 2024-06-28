@@ -4,7 +4,7 @@ export const shopMenu = [
     description: 'Fully customisable range',
     children: [
       {
-        name: 'Boxing Shorts & Trunks',
+        name: 'Boxing Shorts',
         url: '/custom-fightwear/shorts-trunks',
       },
       {

@@ -10,11 +10,12 @@ $container-max-widths: (
   sm: 100%,
   md: 100%,
   lg: 100%,
-  xl: 1400px
+  xl: 100%
 );
 
 :host {
-  background-color: $black;
+  // background-color: $black;
+  background-color: #000;
   padding: 1.5rem 1rem;
   display: block;
 }
@@ -72,7 +73,7 @@ ul {
   .help {
     margin-left: 0;
     @include media-breakpoint-up(md) {
-      margin-left: auto;
+      // margin-left: auto;
     }
   }
   .contact {
@@ -95,4 +96,47 @@ ul {
       color: white;
     }
   }
+}
+
+
+/* Footer */
+.social i {
+  color: #fff;
+  margin: 0 10px;
+}
+hr.hr-footer {
+  color: #464646;
+ 
+}
+.terms span {
+  margin: 0px 5px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #606060 !important;
+}
+.footer-list li a {
+  color: #7a7a7a;
+  font-size: 12px;
+}   
+.footer-list li {
+  padding-bottom: 5px;
+}
+.text-right.social svg {
+  width: 22px;
+  color: #fff;
+  margin-left: 10px;
+}
+li.footer-menu-list {
+  margin-top: 10px;
+}
+li.footer-menu-list a{
+  color: #7a7a7a;
+}
+.horizontal-line-footer{
+  width:100%;
+  margin: 20px 0;
+}
+.footer-foot-menu span {
+  margin-right: 30px;
+  color: #6a6a6a;
 }

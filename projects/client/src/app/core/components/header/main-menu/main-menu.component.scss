@@ -1,6 +1,11 @@
 @import 'variables';
 @import 'mixins';
 
+ul.inspire-list {
+  display: flex;
+  gap: 20px;
+}
+
 .nav-dropdown {
   display: inline-block;
   .nav-dropdown-items {
@@ -24,13 +29,14 @@
   .nav-mega-dropdown-items {
     visibility: hidden;
     position: absolute;
-    background-color: white;
+    background-color: #000;
+    opacity: 0.9;
     padding: 30px 0;
     margin: 1px 0 0;
     right: 0;
     left: 0;
     width: 100%;
-    top: 100%;
+    top: 69%;
     text-align: left;
     border-bottom: 1px solid lighten($midgrey, 33);
     .row {
@@ -38,19 +44,24 @@
     }
     h4 {
       margin: 0 0 1rem;
-      color: $midgrey;
+      // color: $midgrey;
+      color: #fff;
       @include font-size(16, 16);
     }
     ul {
+   
       list-style: none;
       padding: 0;
       margin: 0;
       li {
         padding: 0;
         a {
-          color: $black;
+          // color: $black;
+          color: #fff;
+          margin-top: 8px;
           text-transform: uppercase;
-          font-family: $displayFont;
+          // font-family: $displayFont;
+          font-family: "Poppins", sans-serif;
           @include font-size(14, 14);
           padding: 0.2rem 0;
           display: block;
@@ -74,11 +85,14 @@ ul.nav {
     span,
     span a,
     a {
-      font-family: $displayFont;
+      color:#fff;
+      // font-family: $displayFont;
+      font-family: "Poppins", sans-serif;
       text-transform: uppercase;
       cursor: pointer;
       &:hover {
-        color: $green;
+        // color: $green;
+        color:#ff3a3a;
       }
     }
     > .nav-parent {
@@ -86,7 +100,9 @@ ul.nav {
       line-height: 60px;
     }
     a.active {
-      color: $green;
+      // color: $green;
+      color:#ff3a3a;
     }
   }
 }
+

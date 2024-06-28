@@ -1,48 +1,770 @@
-@import 'node_modules/bootstrap/scss/functions';
-@import 'node_modules/bootstrap/scss/variables';
-@import 'node_modules/bootstrap/scss/mixins/_breakpoints';
-@import 'node_modules/bootstrap/scss/mixins/_grid';
-
-.big-box {
-  margin-bottom: 5px;
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
 }
-.small-box {
-  display: flex;
-  flex-wrap: wrap;
-  .box {
-    flex: 0 0 100%;
-    max-width: calc(100% - 10px);
-    margin: 0 5px 5px 5px;
-    display: block;
-    &.double {
-      flex: 0 0 100%;
-      max-width: calc(100% - 10px);
-      ::ng-deep img {
-        height: auto;
-      }
-    }
-  }
-  @include media-breakpoint-up(sm) {
-    .box {
-      flex: 0 0 50%;
-      max-width: calc(50% - 10px);
-    }
-  }
-  @include media-breakpoint-up(lg) {
-    .box {
-      flex: 0 0 25%;
-      max-width: calc(25% - 10px);
-      &.double {
-        flex: 0 0 50%;
-        max-width: calc(50% - 10px);
-      }
-    }
-  }
+h1,h2,h3,h4,h5,h5,h6,p,a{
+  font-family: "Poppins", sans-serif;
 }
 
-.home-info {
-  max-width: 1200px;
-  padding: 3rem 15px;
+// hero section
+
+.bg-hero-img {
+  background: #09090a;
+}
+video#myVideo{
+  width: 100%;
+}
+
+/* ************************************************************** */
+
+.single-product-section{
+  background-image: url(/assets/img/BG-2.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+button.get-started {
+  margin-top: 14px;
+  background: #fff;
+  height: 50px;
+}
+.minutes {
+  font-weight: 100 !important;
+}
+.custm-product p {
+  font-weight: 200;
+  width: 72%;
+}
+/* About us section */
+.bg-aboutus{
+
+  position: relative;
+}
+.aboutus-section{
+  padding: 150px 100px 0 0;
+}
+.aboutus-text-container {
+  position: absolute;
+  right: 90px;
+  top: 4px;
+}
+.bg-aboutus img {
+  width: 97%;
+}
+.aboutus-text-container img{
+  width: 100%;
+}
+.story-text {
+  position: absolute;
+  top: 33rem;
+  left: 11rem;
+  width: 58%;
+}
+.story-text h3 {
+  color: #fff;
+  font-weight: bold;
+}
+.story-text p {
+  color: #fff;
+  font-weight: 200;
+  margin-top: 16px;
+  line-height: 2;
+}
+
+/*Trending Now sec css*/
+section.trending-section {
+  width: 92%;
   margin: 0 auto;
+}
+.slider {
+  position: relative;
+  
+  margin: auto;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 33.33%;
+  box-sizing: border-box;
+  background: #efefef;
+  margin: 0 10px;
   text-align: center;
+  padding: 75px;
+}
+.slide img {
+  width: 100%;
+  vertical-align: middle;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slide p {
+  font-weight: bold;
+  font-size: 34px;
+}
+.btn-nect-prev {
+  background: #e5e5e5;
+  border-radius: 50%;
+  padding: 4px 12px;
+  color: #000;
+}
+.btn-prev-contain {
+  position: absolute;
+  right: 7rem;
+  top: 12rem;
+}
+.btn-next-contain {
+  position: absolute;
+  right: 2rem;
+  top: 12rem;
+}
+
+/* Why us section css */
+.whystory-text2 p {
+  margin-bottom: 57px;
+}
+.whyus-bg-img{
+  width: 100%;
+}
+.why-us {
+  padding: 200px 0 0 200px;
+}
+
+.whyus-text-container {
+  position: absolute;
+  top: 60px;
+  left: 18px;
+}
+
+.whystory-text {
+  position: absolute;
+  top: 43rem;
+  left: 17rem;
+  width: 22%;
+  line-height: 2;
+  font-weight: 200;
+  font-size: 14px;
+}
+.whystory-text2 {
+  position: absolute;
+  top: 23rem;
+  left: 55rem;
+  width: 31%;
+  line-height: 2;
+  font-weight: 200;
+  font-size: 14px;
+}
+img.img-del-gloves {
+  width: 58px;
+}
+.column-info-container {
+  position: absolute;
+  bottom: 0;
+  width: 88%;
+}
+.column-info {
+  text-align: center;
+  /* padding: 74px 0; */
+  height: 32vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.col-lg-4.pr-0 {
+  padding-right: 0;
+}
+.col-lg-4.pl-0 {
+  padding-left: 0;
+}
+.bg-pink {
+  background: #b50a2e;
+}
+/* Why us section css */
+
+.bg-pink {
+  position: relative;
+  overflow: hidden;
+  /* height: 150px; */
+}
+
+.showed-text, .hidden-text {
+  transition: all 0.9s ease;
+  opacity: 0.7;
+}
+
+.showed-text {
+  position: relative;
+  z-index: 1;
+}
+
+.hidden-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  padding: 10px;
+  box-sizing: border-box;
+  background: none; /* Ensure the background matches the container */
+  transform: translateY(-100%);
+  z-index: 0;
+}
+
+.column-info:hover .showed-text {
+  opacity: 0;
+}
+
+.column-info:hover .hidden-text {
+  transform: translateY(50%);
+  opacity: 1;
+  z-index: 1;
+}
+.grey-bg {
+  background: #ebebeb;
+}   
+
+
+/* Boxer World */
+.trending-heading {
+  padding: 50px 0 50px 0px;
+}
+.head-sm {
+  font-weight: bolder;
+  font-size: 100px;
+}
+.grid-img-container img {
+  width: 90%;
+}
+section.boxerworld-section {
+  padding: 0 0 0 138px;
+}
+.boxerworld-heading h1 {
+  padding: 67px 0;
+}
+.boxerworld-bg {
+  padding: 36px 100px 0 100px;
+}
+img.bx-world-img {
+  width: 96%;
+}
+.description {
+  width: 77%;
+  margin: 0 auto;
+  padding-top: 21px;
+}
+.bf-top-description.text-center {
+  padding-bottom: 50px;
+}
+
+/* shorts css */
+section.boxer-section {
+  margin: 180px 0 25px 0;
+}
+.bg-shorts {
+  background-image: url(/assets/img/fight-bg.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding: 100px;
+}
+img.shorts-img {
+  width: 70%;
+}
+.boxer-prod P {
+  font-size: 34px;
+  font-weight: 100;
+}   
+.shop-btn {
+  padding: 5px 30px;
+  font-size: 46px;
+  font-weight: bold;
+  border-radius: 0;
+  background: #fff;
+  margin-top: 30px;
+}
+
+
+/* Background Gradient */
+.bg-gradients {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 100vh;  
+
+}
+.container-3d .box-3d {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  // margin: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  opacity: 0.9;
+  border-radius: 10px;
+  transform-style: preserve-3d; /* Ensures child elements are rendered in 3D */
+  transform: rotateY(0deg); /* Apply a 3D transformation to the box-3d */
+}
+.container-3d .box-3d .name-3d {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  transform: translateZ(75px); /* Use translateZ to move the element in 3D space */
+  transform-style:preserve-3d;
+  color: #fff;
+  opacity: 0;
+  z-index: 0;
+  transition: 0.5s;
+}
+.container-3d .box-3d:hover .name-3d {
+  top: 40px;
+  opacity: 1;
+  transform-style:preserve-3d;
+}
+.container-3d .box-3d .buy {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translatey(-16px) translateX(-49%);
+  transform-style: preserve-3d;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  padding: 20px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: 0.5s;
+  width: 150px;
+  font-weight: 600;
+  text-align: center;
+  z-index: 10;
+}
+.container-3d .box-3d .product {
+  position: absolute;
+  top: 46%;
+  left: 63%;
+  transform: translateZ(0) translate(-50%, -50%);
+  transform-style: preserve-3d;
+  max-width: 354px;
+  transition: 0.5s;
+}   
+.container-3d .box-3d:hover .product {
+  transform: translateZ(100px) translate(-50%, -50%); /* Use translateZ to move the element in 3D space */
+  transform-style:preserve-3d;
+}
+
+
+
+
+/* Card Styles */
+.card {
+  display: grid;
+  place-items: center;
+  // width: 600px;
+  height: 400px;
+  // padding: 2rem;
+  // background-color: transparent !important;
+  border-radius: 1.5rem;
+  border:0 !important ;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+}
+
+
+
+/* Card Content Styles */
+.card-content {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.card-image {
+  width: 4rem;
+  border-radius: 0.75rem;
+  aspect-ratio: 1 / 1;
+}
+
+.card-text {
+  margin-top: 3rem;
+}
+
+.card-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.card-description {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  color: #4b5563;
+}
+.custm-product h2 {
+  color: #fff;
+  font-weight: bold;
+  font-size: 52px;
+  width: 78%;
+}
+.custm-product p {
+  color: #fff;
+  width: 78%;
+}
+.custm-product button {
+  padding: 10px;
+  border: 0;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.fw-lighter {
+  font-weight: lighter!important;
+}
+.row.row-align-center {
+  align-items: center;
+  width: 100%;
+}
+img.shorts-img{
+  transition: transform 2s ease;
+}
+
+img.shorts-img:hover {
+  transform: rotateY(-360deg);
+}
+
+
+/* slider sec */
+
+/* **************************************************************************  */
+/* Mobile (Portrait) */
+@media only screen and (max-width: 480px) {
+  /* Styles */
+}
+
+/* Mobile (Landscape) */
+@media only screen and (max-width: 768px) {
+  .nav-container {
+      padding: 0 10px !important;
+  }
+  video#myVideo {
+      width: 100%;
+  }
+  .bg-gradients {
+      min-height: 40vh;
+  }
+  .card{
+      flex-direction: row !important;
+      width: 100%;
+}
+.custm-product h2 {
+  font-size: 25px;
+  width: 100%;
+}
+.custm-product p {
+  width: 100%;
+}
+.custm-product {
+  padding: 10px;
+}
+.why-us {
+  padding: 0;
+}
+.whyus-text-container {
+  position: inherit;
+}
+.column-info-container {
+position: inherit;
+}
+.column-info-containers  {
+position: inherit;
+}
+.whyus-text-container img {
+  width: 33%;
+}
+.whyus-text-container {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+}
+.whystory-text {
+  top: 8rem;
+  left: 1rem;
+  width: 60%;
+  line-height: 1.5;
+  font-size: 8px;
+}   
+.column-info {
+  height: 18vh;
+  position: relative;
+}
+.why-us {
+  padding: 30px 0;
+}   
+.aboutus-section {
+  padding: 30px 0;
+}
+.aboutus-text-container {
+  left: 12px;
+  top: 6px;
+}   
+.aboutus-text-container img {
+  width: 50%;
+}
+.story-text p {
+  line-height: 1.5;
+  font-size: 8px;
+}
+.story-text {
+  position: absolute;
+  top: 8rem;
+  left: 1rem;
+  width: 58%;
+}
+.story-text p:nth-child(3) {
+display: none;
+}
+.story-text p:nth-child(4) {
+display: none;
+}
+.trending-heading {
+  padding: 2px 0 0px 0px;
+}
+.head-sm {
+  font-size: 20px;
+}
+section.boxerworld-section {
+  padding: 0;
+}
+.slide {    
+  padding: 5px;
+}
+.slide p {
+  font-weight: bold;
+  font-size: 14px;
+}
+.btn-next-contain {
+  top: 0;
+}
+.btn-prev-contain {
+  top: 0      ;
+}
+.boxerworld-heading h1 {
+  padding: 24px 0 0 0;
+}
+.boxerworld-bg {
+  padding: 10px 20px;
+}
+.bf-top-description.text-center {
+  padding-bottom: 10px;
+}
+img.bx-world-img {
+  margin-top: 10px;
+}
+section.boxer-section {
+  margin: 18px 0 25px 0;
+}
+.bg-shorts {
+  background-image: url(/assets/img/fight-bg.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding: 0;
+}
+.boxer-prod P {
+  font-size: 14px;
+  font-weight: 100;
+}
+img.shorts-img {
+  display: none;
+}
+.shop-btn {
+  border-radius: 0;
+}
+.shop-btn {
+  font-size: 20px;
+}
+.position-relative.hero {
+  padding: 10px 0;
+}   
+.whystory-text2 {
+  display: none;
+}
+.container-3d .box-3d .product {
+  max-width: 100%;
+}
+.container-3d .box-3d {
+  margin: 0px;
+}
+.bg-aboutus img {
+  width: 100%;
+}
+.col-lg-4.footer-cols {
+  width: 40%;
+}
+.row.autoplay.slider-row.slick-initialized.slick-slider {
+  width: 100%;
+}
+.custom-row {
+  gap: 39px;
+}
+.after-vertical-line:after,.after-vertical-line2:after,.after-vertical-menu2:before,.after-vertical-menu2:after,.custom-column.position-relative{
+display: none;
+}
+.column-info:hover .hidden-text {
+  transform: translateY(0%);
+  font-size: 12px;
+}
+.container-3d[_ngcontent-serverApp-c11]   .box-3d[_ngcontent-serverApp-c11] {
+  width: 245px;
+  height: 307px;
+}
+.single-product-section[_ngcontent-serverApp-c11] {
+  background-size: unset;
+}
+}
+
+@media only screen and (min-width: 769px) and (max-width: 921px) {
+  .column-info-containers,.column-info-container  {
+      position: inherit;
+  }
+  .whyus-text-container img {
+      width: 30%;
+  }
+  .why-us {
+      padding: 0px;
+  }   
+  .whyus-text-container {
+      position: absolute;
+      top: 0;
+      left: 18px;
+  }
+  .whystory-text {
+      position: absolute;
+      top: 12rem;
+      left: 2rem;
+      width: 56%;
+  }
+  .card {
+      width: -webkit-fill-available;
+  }
+  .custm-product h2 {
+      font-size: 24px;
+  }
+  .whystory-text2 {
+      display: none;
+  }
+  .aboutus-text-container {
+      top: 21px;
+  }
+  .aboutus-section {
+      padding: 150px 0px 0 0;
+  }
+  section.boxerworld-section {
+      padding: 0;
+  }
+  .boxerworld-heading h1 {
+      padding: 32px 14px;
+  }
+  .head-sm {
+      font-size: 55px;
+  }
+  img.shorts-img {
+      width: 24%;
+      position: absolute;
+      top: 0;
+      right: 0;
+  }
+  img.description-img {
+      width: 74%;
+  }
+  .slide {
+      padding: 30px;
+  }
+  .story-text p:nth-child(3) {
+      display: none;
+        }
+      .story-text p:nth-child(4) {
+      display: none;
+        }
+        .story-text {
+          top: 27rem;
+          left: 2rem;
+      }
+      .btn-next-contain,.btn-prev-contain{
+          top: 8rem;
+      }
+      section.boxer-section {
+          margin: 25px 0 25px 0;
+      }
+}
+
+/* Tablet (Landscape) */
+@media only screen and (max-width: 1280px) {
+  .whystory-text {
+      top: 28rem !important   ;
+      left: 11rem;
+      width: 36%;
+  }
+}
+
+/* Desktop (Small) */
+@media only screen and (max-width: 1366px) {
+  /* Styles */
+}
+
+/* Desktop (Medium) */
+@media only screen and (max-width: 1440px) {
+  .column-info-containers {
+      position: absolute;
+      bottom: 0;
+      left: 41.7rem;
+  }
+  .aboutus-text-container {
+      right: 75px;
+  }
+  .column-info {
+      height: 20vh;
+  }
+  .column-info:hover .hidden-text {
+      transform: translateY(18%);
+      padding: 0 30px;
+  }
+  .whystory-text {
+      top: 37rem;
+      width: 36%;
+  }
+  .whystory-text2 {
+      line-height: 1.5;
+  }
+}
+
+/* Desktop (Large) */
+@media only screen and (max-width: 1920px) {
+  /* Styles */
 }
