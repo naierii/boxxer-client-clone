@@ -461,7 +461,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       name: 'Custom Fightwear',
       description: 'Fully customisable range',
       children: [{
-        name: 'Boxing Shorts & Trunks',
+        name: 'Boxing Shorts',
         url: '/custom-fightwear/shorts-trunks'
       }, {
         name: 'Muay Thai Shorts',
