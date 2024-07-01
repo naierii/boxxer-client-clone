@@ -1,6 +1,0 @@
-<ng-content></ng-content>
-<div class="action-buttons">
-    <button type="button" class="btn btn-warning" (click)="cancel()">Cancel</button>
-    <button type="button" class="btn btn-danger" (click)="delete()" *ngIf="canDelete">Delete</button>
-    <button type="submit" class="btn btn-success" (click)="save()" [disabled]="!validated">Save</button>
-</div>

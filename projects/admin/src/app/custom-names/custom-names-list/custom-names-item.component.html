@@ -1,7 +1,0 @@
-<td>{{item.title}}</td>
-<td class="fit">{{item.type}}</td>
-<td class="fit">{{item.category?.title}}</td>
-<td>{{item.price | currency:'GBP':'symbol'}}</td>
-<td class="fit">
-  <bx-list-edit-btn [item]="item" (onDeleted)="delete($event)"></bx-list-edit-btn>
-</td>

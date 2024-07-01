@@ -1,4 +1,0 @@
-<span *ngIf="samePrice && isFree">Free</span>
-<span *ngIf="samePrice && !isFree">{{firstPrice | currConvert:'GBP':(currency$ | async) | currency:(currency$ | async):'symbol'}}</span>
-<span *ngIf="!samePrice && !isFree">{{firstPrice | currConvert:'GBP':(currency$ | async) | currency:(currency$ | async):'symbol'}} one item, {{secondPrice | currConvert:'GBP':(currency$ | async) | currency:(currency$ | async):'symbol'}}
-  more than one item.</span>

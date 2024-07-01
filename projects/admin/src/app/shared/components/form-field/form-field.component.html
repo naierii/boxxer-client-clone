@@ -1,7 +1,0 @@
-<div class="form-group">
-  <label for="for">{{label}}</label>
-  <ng-content></ng-content>
-  <div *ngIf="state && !state.valid" class="invalid-feedback">
-    <span *ngIf="state.errors && state.errors['required']">This field is required</span>
-  </div>
-</div>
