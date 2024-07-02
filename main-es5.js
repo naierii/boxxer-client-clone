@@ -978,14 +978,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
     var environment = {
-      production: false,
-      host: 'http://localhost:8080',
-      api_url: 'https://localhost:3030/',
-      site: 'https://localhost:4200',
+      production: true,
+      host: 'https://api.boxxerworld.com',
+      api_url: 'https://api.boxxerworld.com/',
+      site: 'https://www.boxxerworld.com',
       image_cdn: 'https://img.boxxerworld.com',
-      stripe_key: 'pk_test_gm5ngDkM9un8t17TjhnvqhLh',
-      admin: 'https://localhost:4201',
-      domain: 'localhost'
+      stripe_key: 'pk_live_S3Xp4BXTis0goqlMzE9kXPn1',
+      admin: 'https://admin.boxxerworld.com',
+      domain: '.boxxerworld.com'
     };
     /***/
   },
