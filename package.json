@@ -111,6 +111,7 @@
     "simple-line-icons": "^2.4.1",
     "tinymce": "^4.8.1",
     "tslib": "^1.9.0",
+    "vanilla-tilt": "^1.8.1",
     "vhost": "^3.0.2",
     "zone.js": "^0.10.1"
   },
