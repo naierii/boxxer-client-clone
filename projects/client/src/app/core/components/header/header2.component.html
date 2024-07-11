@@ -1,0 +1,54 @@
+<div class="fixed-bar" *ngIf="!checkout; else isCheckout">
+  <bx-header-toolbar></bx-header-toolbar>
+  <div class="nav-bar">
+    <div class="menu-icon">
+      <button
+        class="btn-menu"
+        [ngClass]="{ 'menu-open': menuOpen$ | async }"
+        (click)="toggleMenu(menuOpen$)"
+      >
+        <span class="btn__hamburger__line"></span>
+        <span class="btn__hamburger__line"></span>
+        <span class="btn__hamburger__line"></span>
+      </button>
+    </div>
+    <a class="logo" [routerLink]="['/']">
+      <img src="assets/img/logo.png" alt="logo">
+    </a>
+    <nav class="main-menu-desktop" bxMainMenu></nav>
+    <div class="cart" *bxShellRender>
+      <fa-layers class="fa-fw fa-2x" size="2x">
+        <fa-icon class="icon" [icon]="['fal', 'shopping-cart']"></fa-icon>
+      </fa-layers>
+    </div>
+    <div class="cart" bx-cart-button *bxShellNoRender></div>
+
+    <!-- <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+      <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+    </svg>
+    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10V6a3 3 0 0 1 3-3v0a3 3 0 0 1 3 3v4m3-2 .917 11.923A1 1 0 0 1 17.92 21H6.08a1 1 0 0 1-.997-1.077L6 8h12Z"/>
+    </svg> -->
+    
+  </div>
+</div>
+<ng-template #isCheckout>
+  <div class="fixed-bar checkout">
+    <bx-header-toolbar checkout="true"></bx-header-toolbar>
+    <div class="nav-bar">
+      <a class="logo" [routerLink]="['/']">
+        <img
+          src="https://cdn2.boxxerworld.com/assets/img/logo.svg?v5"
+          alt="Boxxerworld"
+        />
+      </a>
+    </div>
+  </div>
+</ng-template>
+<nav
+  class="main-menu"
+  [ngClass]="{ 'menu-open': menuOpen$ | async }"
+  *ngIf="!checkout && menuOpen$ | async"
+>
+  <bx-menunav></bx-menunav>
+</nav>

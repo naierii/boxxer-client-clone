@@ -11,7 +11,7 @@ import {
   ChangeDetectionStrategy,  ElementRef, AfterViewInit
 } from '@angular/core';
 import { ApiService } from '@app/core/services/api.service';
-
+import { OwlOptions } from 'ngx-owl-carousel-o';
 @Component({
   selector: 'bx-home',
   templateUrl: './home.component.html',
@@ -22,8 +22,41 @@ export class HomeComponent implements OnInit, OnDestroy {
   home$: Observable<Page>;
   slideIndex = 0;
   constructor(private api: ApiService, private seo: SeoService, private el: ElementRef) {}
-  
-
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    items: 5,
+    center: true,
+    navSpeed: 700,
+    navText: ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>  ← </title><path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" /></svg>', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title> → </title><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 5
+      },
+      940: {
+        items: 5
+      }
+    },
+    nav: true
+  }
+  slidesStore=[
+    {id:0,text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
+    {id:1,text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
+    {id:2,text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
+    {id:3,text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
+    {id:4,text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
+    {id:5,text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
+    {id:6,text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
+  ]
   ngOnInit() {
     this.home$ = this.api.get('page', 'home').pipe(
       untilComponentDestroyed(this),
@@ -117,5 +150,6 @@ ngAfterViewInit(): void {
     mouseHover = true;
   };
 }
+
   ngOnDestroy() {}
 }
