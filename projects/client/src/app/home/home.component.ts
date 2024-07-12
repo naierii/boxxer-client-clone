@@ -3,7 +3,7 @@ import { tap } from 'rxjs/operators';
 import { untilComponentDestroyed } from '@global/untilDestroy';
 import { Page } from '@global/models/page';
 import { Observable } from 'rxjs';
-import VanillaTilt from 'vanilla-tilt';
+// import VanillaTilt from 'vanilla-tilt';
 import {
   Component,
   OnInit,
@@ -102,12 +102,12 @@ ngAfterViewInit(): void {
   const card = this.el.nativeElement.querySelector('#card');
 
   // Initialize VanillaTilt
-  VanillaTilt.init(card, {
-    max: 25,
-    speed: 400,
-    glare: true,
-    'max-glare': 0.5
-  });
+  // VanillaTilt.init(card, {
+  //   max: 25,
+  //   speed: 400,
+  //   glare: true,
+  //   'max-glare': 0.5
+  // });
 
   // Add custom hover effect
   let mouseHover = false;

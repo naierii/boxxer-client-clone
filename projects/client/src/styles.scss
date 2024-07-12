@@ -18,7 +18,8 @@
 @import './scss/dropzone';
 @import './scss/ng-select';
 @import './scss/toastr';
-
+@import '../../../node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '../../../node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 * {
   box-sizing: border-box;
   outline: none;
