@@ -30,6 +30,8 @@ jobs:
         SSH_PRIVATE_KEY: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDaYG0ESO5pvkKSUWNgOi5KkDjq2QYzcT2tK4bHNokEv9joyVgxro+6EzRwj+MQ5dmhbrQ9hajiGYdpnEiBK81ESvn683wTngYuuAbkp7XV4Ai/ZI8IKLTNc2Pg0DKLk/Y5oi1fJgPbVrQqpmAyLd4HGSCzxRNnWidoaF46IqQyfaiVCFtPsWc26mFZXsZM4VD0zSu3C7eNMGPcCBeh4FRI8BKs+CFKjKfonniK9X+JDRw0OB1SU1N4cEovaAak95NRfsywt445PphMRbMQSe0Uq33nBehxlFveyZfYwEkS5gtt9zooOcJN0CPm/P23ZaxHI/2Bm4oLG9AJIM+xJvxQajxSfZY+Vuk5Ebgfd/KExv4WPgWFZWja5OUVy+W/wlizKtC3E45E6V62sBmBHM5r86aiDwkwPqaSo3/C240TXDEuU+HVOV2oRuFR3BAzKpoz/nD+ICJ71Q7QyPWI28CgO+ZoMy4aNGZmvACtqDEIGq1SGWVrt6bB18VpiAOwDFU= prince parbhakar@DESKTOP-M41QCCA
         REMOTE_HOST: 206.189.118.244
         REMOTE_USER: root
+        ARGS: "-avzr --delete"
+        SOURCE: dist/client/
         TARGET: /var/www/client
-      with:
-        args: "rsync -r --delete-after --exclude='*.map' dist/client/* /var/www/client"
+      # with:
+      #   args: "rsync -r --delete-after --exclude='*.map' dist/client/* /var/www/client"
