@@ -67,7 +67,7 @@ jobs:
           RxCj5dlEYPAeHhAAAAIHByaW5jZSBwYXJiaGFrYXJAREVTS1RPUC1NNDFRQ0NBAQI=
           -----END OPENSSH PRIVATE KEY-----
 
-        REMOTE_HOST: 104.248.57.20
+        REMOTE_HOST: 138.68.169.177
         REMOTE_USER: root
         ARGS: "-avzr --delete"
         SOURCE: dist/client/
