@@ -70,7 +70,7 @@ jobs:
         REMOTE_HOST: 209.97.134.81
         REMOTE_USER: root
         ARGS: "-avzr --delete"
-        SOURCE: dist/client/
+        SOURCE: dist/admin/
         TARGET: /var/www/admin
       # with:
       #   args: "rsync -r --delete-after --exclude='*.map' dist/client/* /var/www/client"
