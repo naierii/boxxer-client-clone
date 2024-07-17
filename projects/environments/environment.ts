@@ -4,12 +4,13 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
-  host: 'http://localhost:8080',
-  api_url: 'http://localhost:3030/',
-  site: 'https://localhost:4200',
+  production: true,
+  host: 'http://167.172.60.145:3030',
+  api_url: 'http://167.172.60.145:3030/',
+  site: 'https://206.189.118.244',
   image_cdn: 'https://img.boxxerworld.com',
   stripe_key: 'pk_test_gm5ngDkM9un8t17TjhnvqhLh',
   admin: 'https://localhost:4201',
   domain: 'localhost',
 };
+
