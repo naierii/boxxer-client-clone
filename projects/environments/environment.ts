@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   host: 'http://localhost:8080',
-  api_url: 'https://localhost:3030/',
+  api_url: 'http://localhost:3030/',
   site: 'https://localhost:4200',
   image_cdn: 'https://img.boxxerworld.com',
   stripe_key: 'pk_test_gm5ngDkM9un8t17TjhnvqhLh',
