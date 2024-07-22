@@ -1,5 +1,7 @@
 <header bx-header></header>
-<router-outlet></router-outlet>
+<main>
+  <router-outlet></router-outlet>
+  </main>
 <ng-container *bxShellNoRender>
   <bx-mailchimp-banner *ngIf="showMailchimp"></bx-mailchimp-banner>
 </ng-container>
