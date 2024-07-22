@@ -45,10 +45,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         items: 2
       },
       740: {
-        items: 5
+        items: 3
       },
-      940: {
-        items: 5
+      1200: {
+        items:4
       }
     },
     nav: true
@@ -81,13 +81,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     nav: false
   }
   slidesStore=[
-    {id:"0",text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
-    {id:"1",text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
-    {id:"2",text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
-    {id:"3",text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
-    {id:"4",text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
-    {id:"5",text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
-    {id:"6",text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
+    {id:"0",text:`Amazing communication, beautiful shorts,super fast shipping. If you need some custom shotrs these are the people to use. I’ll be back for more!`,name:"Daniel Brauch", location:"US"},
+    {id:"1",text:`Great communication on the specifics of my order. And the design came out really good. Exactly how I wanted it.`,name:"Damien Gonsalez", location:"US"},
+    {id:"2",text:`Everything about the service is amazing I was updated on everything via email with pictures asking is everything okay ect and was emailed with a final outcome amazing work from the team at boxxerworld.`,name:"Charlie French", location:"GB"},
+    {id:"3",text:`I order all my gear from Boxxerworld for 3 years and their so quick and accurate. They keep in touch with you along the whole process. Very outstanding service and product`,name:"Shad Kennedy", location:"US"},
+    {id:"4",text:`The shorts looked great on the website while creating them, but even better when they were created physically! I don’t think I’ll go anywhere else for custom boxing apparel. Excellent job!`,name:"Carpe Vitae", location:"US"},
+    {id:"5",text:`Absolutely beautiful honestly, from service to production absolute 10/10 shorts look beautiful and cannot be any more impressed`,name:"Slxp", location:"GB"},
+    {id:"6",text:`You guys are amazing you were in contact with me every step off the way and made sure everything was perfect. Thank you so much. And delivery time is sooner than expected`,name:"Paul Valdez", location:"US"},
   ]
   slidesArray: any=[];
   ngOnInit() {
