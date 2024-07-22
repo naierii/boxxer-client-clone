@@ -1,5 +1,5 @@
 import { SeoService } from './../core/services/seo.service';
-import { tap } from 'rxjs/operators';
+import { map,  tap } from 'rxjs/operators';
 import { untilComponentDestroyed } from '@global/untilDestroy';
 import { Page } from '@global/models/page';
 import { Observable } from 'rxjs';
@@ -59,59 +59,24 @@ export class HomeComponent implements OnInit, OnDestroy {
     {id:"5",text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
     {id:"6",text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
   ]
+  slidesArray: any=[];
   ngOnInit() {
-    this.home$ = this.api.get('page', 'home').pipe(
-      untilComponentDestroyed(this),
-      tap((resp: Page) => {
-        this.seo.setMetaAndLinks(resp.title, resp.seo);
-      })
-    );
+    // this.home$ = this.api.get('page', 'home').pipe(
+    //   untilComponentDestroyed(this),
+    //   tap((resp: Page) => {
+        // this.seo.setMetaAndLinks(resp.title, resp.seo);
+    //   })
+    // );
+    this.getProduct()
   }
 
 
- slides = document.querySelector('.slides');
- totalSlides = document.querySelectorAll('.slide').length;
- visibleSlides = 3; // Number of slides visible at once
+  visibleSlides = [];
+  currentIndex = 0;
+  slidesToShow = 3;
 
- showSlides() {
-    if (this.slideIndex >= this.totalSlides / this.visibleSlides) {
-      this.slideIndex = 0;
-    } else if (this.slideIndex < 0) {
-      this.slideIndex = Math.ceil(this.totalSlides / this.visibleSlides) - 1;
-    }
-    console.log(this.slideIndex)
-    // this.slides.style.transform = `translateX(${-this.slideIndex * 100 /this.visibleSlides}%)`;
-}
-
- moveSlides(n) {
-  console.log(n)
-    this.slideIndex += n;
-    this.showSlides();
-} 
-
-
-// Optional: Auto-slide every 3 seconds
-// setInterval(() => {
-//     slideIndex++;
-// }, 3000);
-
-//   videoOptions(key) {
-//     return {
-//       // tslint:disable-next-line:max-line-length
-//       mp4: `https://boxxer-images.ams3.cdn.digitaloceanspaces.com/${key}.mp4`,
-//     };
-//   }
 ngAfterViewInit(): void {
   const card = this.el.nativeElement.querySelector('#card');
-
-  // Initialize VanillaTilt
-  // VanillaTilt.init(card, {
-  //   max: 25,
-  //   speed: 400,
-  //   glare: true,
-  //   'max-glare': 0.5
-  // });
-
   // Add custom hover effect
   let mouseHover = false;
   let mousePosition = { x: 0, y: 0 };
@@ -154,5 +119,51 @@ ngAfterViewInit(): void {
   };
 }
 
+getProduct(){
+  this.api
+      .find('custom-product', {
+        "$category": "custom-fightwear/shorts-trunks",
+        "published": true,
+        "$limit": 10,
+        "$skip": 0,
+        "$sort": {
+            "sold_count": -1
+        },
+        "$select": [
+            "category",
+            "code",
+            "title",
+            "image",
+            "price",
+            "sale_amount",
+            "sale_percent",
+            "sale_start_date",
+            "sale_end_date",
+            "slug",
+            "sold_count"
+        ]
+    }).subscribe((data)=>{
+      if(data && data.data){
+        this.slidesArray = data.data
+        this.updateVisibleSlides();
+      }
+    })
+}
+updateVisibleSlides() {
+  this.visibleSlides = this.slidesArray.slice(this.currentIndex, this.currentIndex + this.slidesToShow);
+}
+next() {
+  if (this.currentIndex + this.slidesToShow < this.slidesArray.length) {
+    this.currentIndex += this.slidesToShow;
+    this.updateVisibleSlides();
+  }
+}
+
+prev() {
+  if (this.currentIndex - this.slidesToShow >= 0) {
+    this.currentIndex -= this.slidesToShow;
+    this.updateVisibleSlides();
+  }
+}
   ngOnDestroy() {}
 }

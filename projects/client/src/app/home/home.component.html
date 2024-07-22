@@ -188,23 +188,17 @@
               <h1 class="head-sm">TRENDING NOW</h1>
           </div>
           <div class="btn-prev-contain">
-            <button class="prev single-prod-prev btn-nect-prev" onclick="moveSlides(-1)">&#10094;</button>
+            <button class="prev single-prod-prev btn-nect-prev" (click)="prev()" [disabled]="currentIndex === 0">&#10094;</button>
           </div>
           <div class="btn-next-contain">
-            <button class="next single-prod-next btn-nect-prev" onclick="moveSlides(1)">&#10095;</button>
+            <button class="next single-prod-next btn-nect-prev" (click)="next()" [disabled]="currentIndex + slidesToShow >= slidesArray.length">&#10095;</button>
           </div>
           <div class="slider">
-            <div class="slides">
-                <div class="slide"><img src="assets/img/gloves-yellow.png" alt="Image 1"><p>Gloves</p></div>
-                <div class="slide"><img src="assets/img/long-coat.png" alt="Image 2"><p>Robes</p></div>
-                <div class="slide"><img src="assets/img/gloves-yellow.png" alt="Image 3"><p>Gloves</p></div>
-                <div class="slide"><img src="assets/img/long-coat.png" alt="Image 4"><p>Robes</p></div>
-                <div class="slide"><img src="assets/img/gloves-yellow.png" alt="Image 5"><p>Gloves</p></div>
-                <div class="slide"><img src="assets/img/long-coat.png" alt="Image 6"><p>Robes</p></div>
-                <div class="slide"><img src="assets/img/gloves-yellow.png" alt="Image 6"><p>Gloves</p></div>
-                <div class="slide"><img src="assets/img/long-coat.png" alt="Image 6"><p>Robes</p></div>
-                <div class="slide"><img src="assets/img/gloves-yellow.png" alt="Image 6"><p>Gloves</p></div>
-                <div class="slide"><img src="assets/img/long-coat.png" alt="Image 6"><p>Robes</p></div>
+            <div class="slides" >
+              <div *ngFor = "let slide of visibleSlides; let i=index;" class="slide"><img src="https://img.boxxerworld.com/{{
+                        slide.image.key
+                      }}?crop=smart&width=286.33&height=286.33" alt="Image {{i}}"><p>{{slide?.title}}</p></div>
+                
             </div>
         </div>
           </section>
@@ -282,39 +276,9 @@
         </section>
  		
  <!-- script.js -->
- <script src="assets/js/script.js"></script>
+ <!-- <script src="assets/js/script.js"></script> -->
 
  
 
-<script>
-let slideIndex = 0;
-const slides = document.querySelector('.slides');
-const totalSlides = document.querySelectorAll('.slide').length;
-const visibleSlides = 3; // Number of slides visible at once
 
-function showSlides() {
-    if (slideIndex >= totalSlides / visibleSlides) {
-        slideIndex = 0;
-    } else if (slideIndex < 0) {
-        slideIndex = Math.ceil(totalSlides / visibleSlides) - 1;
-    }
-    slides.style.transform = `translateX(${-slideIndex * 100 / visibleSlides}%)`;
-}
-
-function moveSlides(n) {
-    slideIndex += n;
-    showSlides();
-} 
-
-// Initialize the slider
-showSlides();
-
-// Optional: Auto-slide every 3 seconds
-setInterval(() => {
-    slideIndex++;
-    showSlides();
-}, 3000);
-
-  
-   </script>
 
