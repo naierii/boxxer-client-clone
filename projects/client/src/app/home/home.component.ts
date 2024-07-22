@@ -8,7 +8,7 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  ChangeDetectionStrategy,  ElementRef, AfterViewInit,
+  ChangeDetectionStrategy,  ElementRef, AfterViewInit,Renderer2 ,
   ViewChild
 } from '@angular/core';
 import { ApiService } from '@app/core/services/api.service';
@@ -22,10 +22,11 @@ import { CarouselComponent } from 'ngx-owl-carousel-o';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('owlElement',{static:false}) owlElement: CarouselComponent;
+  @ViewChild("videoPlayer", { static: false }) videoplayer: ElementRef;
   host=window.location.origin
   home$: Observable<Page>;
   slideIndex = 0;
-  constructor(private api: ApiService, private seo: SeoService, private el: ElementRef) {}
+  constructor(private api: ApiService, private seo: SeoService, private el: ElementRef,private renderer: Renderer2) {}
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: false,
@@ -178,7 +179,26 @@ getProduct(){
       }
     })
 }
+toggleVideo(event: any) {
+  this.simulateClick()
+}
+simulateClick() {
+  if (this.videoplayer && this.videoplayer.nativeElement) {
+    this.renderer.listen(this.videoplayer.nativeElement, 'click', () => {
+      this.autoplayVideo();
+    });
+    this.videoplayer.nativeElement.click();
+  }
+}
 
+autoplayVideo() {
+  if (this.videoplayer && this.videoplayer.nativeElement) {
+    this.videoplayer.nativeElement.muted = true; // Mute the video for autoplay
+    this.videoplayer.nativeElement.play().catch(error => {
+      console.error('Error trying to autoplay video:', error);
+    });
+  }
+}
 next() {
   this.owlElement.next(); // The number here represents the speed in milliseconds
 }

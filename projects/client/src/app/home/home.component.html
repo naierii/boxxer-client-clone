@@ -2,8 +2,8 @@
        <section class="hero-section">
         <div class="bg-hero-img">
            <!-- <img src="assets/img/hero img.png" alt=""> -->
-           <video autoplay muted loop id="myVideo">
-            <source src="assets/video/boxer-hero.mp4" type="video/mp4">
+           <video autoplay muted loop id="myVideo" #videoPlayer (canplay)="toggleVideo($event)">
+            <source src="https://boxxer-images.ams3.cdn.digitaloceanspaces.com/video/boxer-hero.mp4" type="video/mp4">
           </video>
           
         </div>
