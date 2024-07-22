@@ -193,11 +193,18 @@
           <div class="btn-next-contain">
             <button class="next single-prod-next btn-nect-prev" (click)="next()" [disabled]="currentIndex + slidesToShow >= slidesArray.length">&#10095;</button>
           </div>
-          <div class="slider">
-            <div class="slides" >
-              <div *ngFor = "let slide of visibleSlides; let i=index;" class="slide"><img src="https://img.boxxerworld.com/{{
-                        slide.image.key
-                      }}?crop=smart&width=286.33&height=286.33" alt="Image {{i}}"><p>{{slide?.title}}</p></div>
+          <div class="">
+            <div class="" >
+              <owl-carousel-o [options]="customOptions1"  #owlElement >
+                <ng-container  *ngFor = "let slide of slidesArray; let i=index;">
+                  <ng-template carouselSlide id="{{i}}">
+                    <div class="slide"><img src="https://img.boxxerworld.com/{{
+                      slide.image.key
+                    }}?crop=smart&width=286.33&height=286.33" alt="Image {{i}}"><p>{{slide?.title}}</p></div>
+                  </ng-template>
+                </ng-container>
+              </owl-carousel-o>
+             
                 
             </div>
         </div>
@@ -258,7 +265,7 @@
             </div>
           </div>
           <!-- Testiomonials -->
-          <owl-carousel-o [options]="customOptions" >
+          <owl-carousel-o [options]="customOptions" id="reviewSlider">
             <ng-container *ngFor="let slide of slidesStore">
               <ng-template carouselSlide [id]="slide.id">
                 <div class="stars-container">

@@ -8,10 +8,12 @@ import {
   Component,
   OnInit,
   OnDestroy,
-  ChangeDetectionStrategy,  ElementRef, AfterViewInit
+  ChangeDetectionStrategy,  ElementRef, AfterViewInit,
+  ViewChild
 } from '@angular/core';
 import { ApiService } from '@app/core/services/api.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { CarouselComponent } from 'ngx-owl-carousel-o';
 @Component({
   selector: 'bx-home',
   templateUrl: './home.component.html',
@@ -19,6 +21,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  @ViewChild('owlElement',{static:false}) owlElement: CarouselComponent;
   host=window.location.origin
   home$: Observable<Page>;
   slideIndex = 0;
@@ -49,6 +52,33 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     },
     nav: true
+  }
+  customOptions1: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    items: 5,
+    center: true,
+    navSpeed: 700,
+    autoplay: true,
+    // navText: ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>  ← </title><path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" /></svg>', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title> → </title><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 3
+      }
+    },
+    nav: false
   }
   slidesStore=[
     {id:"0",text:`orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,`},
@@ -145,25 +175,16 @@ getProduct(){
     }).subscribe((data)=>{
       if(data && data.data){
         this.slidesArray = data.data
-        this.updateVisibleSlides();
       }
     })
 }
-updateVisibleSlides() {
-  this.visibleSlides = this.slidesArray.slice(this.currentIndex, this.currentIndex + this.slidesToShow);
-}
+
 next() {
-  if (this.currentIndex + this.slidesToShow < this.slidesArray.length) {
-    this.currentIndex += this.slidesToShow;
-    this.updateVisibleSlides();
-  }
+  this.owlElement.next(); // The number here represents the speed in milliseconds
 }
 
 prev() {
-  if (this.currentIndex - this.slidesToShow >= 0) {
-    this.currentIndex -= this.slidesToShow;
-    this.updateVisibleSlides();
-  }
+  this.owlElement.prev();
 }
   ngOnDestroy() {}
 }
