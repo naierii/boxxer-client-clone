@@ -188,14 +188,14 @@
               <h1 class="head-sm">TRENDING NOW</h1>
           </div>
           <div class="btn-prev-contain">
-            <button class="prev single-prod-prev btn-nect-prev" (click)="prev()" [disabled]="currentIndex === 0">&#10094;</button>
+            <button class="prev single-prod-prev btn-nect-prev" (click)="prev()" >&#10094;</button>
           </div>
           <div class="btn-next-contain">
-            <button class="next single-prod-next btn-nect-prev" (click)="next()" [disabled]="currentIndex + slidesToShow >= slidesArray.length">&#10095;</button>
+            <button class="next single-prod-next btn-nect-prev" (click)="next()" >&#10095;</button>
           </div>
           <div class="">
             <div class="" >
-              <owl-carousel-o [options]="customOptions1"  #owlElement >
+              <owl-carousel-o [options]="customOptions1"  #owlElement id="owlElement">
                 <ng-container  *ngFor = "let slide of slidesArray; let i=index;">
                   <ng-template carouselSlide id="{{i}}">
                     <div class="slide"  [routerLink]="[slide?.category?.slug,slide?.slug]"><img src="https://img.boxxerworld.com/{{
@@ -251,12 +251,46 @@
               </div>
               <div class="col-lg-6">
                 <div class="rating-riews">
-                  <div class="border-circle">
-                    <p class="m-0  count-no">233</p>
+                  <div>
+                    <circle-progress
+                    [percent]="233"
+                    [maxPercent]="1000"
+                    [radius]="95"
+                    [outerStrokeWidth]="5"
+                    [innerStrokeWidth]="0"
+                    [outerStrokeColor]="'#48f4d0'"
+                    [innerStrokeColor]="'transparent'"
+                    [animation]="true"
+                    [animationDuration]="500"
+                    [showUnits]="false"
+                    [titleFontSize]="45"
+                    [titleColor]="'#ffffff'"
+                    [showSubtitle]="false"
+                    [animateTitle]="true"
+                  ></circle-progress>
                     <p class="caption-count">Reviews</p>
                   </div>
-                  <div class="border-circle">
-                    <p class="m-0  count-no">4.9</p>
+                
+                  <div >
+                    <circle-progress
+                    [percent]="95"
+                    [maxPercent]="100"
+                    [radius]="95"
+                    [outerStrokeWidth]="5"
+                    [innerStrokeWidth]="0"
+                    [outerStrokeColor]="'#48f4d0'"
+                    [innerStrokeColor]="'transparent'"
+                    [animation]="true"
+                    [animationDuration]="500"
+                    [showUnits]="false"
+                    [subtitle]="['4.9']"
+                    [subtitleFontSize]="45"
+                    [subtitleColor]="'#ffffff'"
+                    [showTitle]="false"
+                    [showSubtitle]="true"
+                    [animateTitle]="false"
+                    [startFromZero]="true"
+                  ></circle-progress>
                     <p class="caption-count">Rating</p>
                   </div>
                 </div>

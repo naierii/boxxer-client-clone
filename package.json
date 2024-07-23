@@ -93,6 +93,7 @@
     "lodash.intersection": "^4.4.0",
     "moment": "^2.23.0",
     "ms": "^2.1.1",
+    "ng-circle-progress": "^1.5.1",
     "ng-inline-svg": "^9.1.0",
     "ng2-charts": "^1.6.0",
     "ng2-dragula": "^2.1.1",
