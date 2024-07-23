@@ -1,0 +1,143 @@
+[{
+    "name": "CREATE",
+    "mega": true,
+    "children": [
+      {
+        "name": "Apparel",
+        "description": "Fully customisable range",
+        "children": [
+          {
+            "name": "Boxing Shorts",
+            "url": "/custom-fightwear/shorts-trunks"
+          },
+          {
+            "name": "Muay Thai Shorts",
+            "url": "/custom-fightwear/thai-shorts"
+          },
+          {
+            "name": "Gadiator and Skirts",
+            "url": "/custom-fightwear/gladiator-shorts"
+          },
+          {
+            "name": "MMA Shorts",
+            "url": "/custom-fightwear/mma-shorts"
+          },
+          {
+            "name": "Jackets",
+            "url": "/custom-fightwear/jackets-vests"
+          },
+          {
+            "name": "Vests / Tops",
+            "url": "/custom-fightwear/vests"
+          },
+          {
+            "name": "Robes",
+            "url": "/custom-fightwear/robes"
+          },
+          {
+            "name": "Kickboxing Pants",
+            "url": "/custom-fightwear/kickboxing-trousers"
+          },
+          {
+            "name": "Tshirts",
+            "url": "/custom-fightwear/t-shirts"
+          },
+          {
+            "name": "Sports Bras",
+            "url": "/custom-fightwear/sports-bra"
+          }
+        ]
+      },
+      {
+        "name": "Equipment",
+        "description": "Fully customisable range",
+        "children": [
+          {
+            "name": "Gloves and Pads",
+            "url": "/custom-equipment/gloves"
+          },
+          {
+            "name": "Protection",
+            "url": "/custom-equipment/head-guards"
+          }
+        ]
+      },
+      {
+        "name": "Teamwear",
+        "description": "Get Inspired",
+        "children": [
+          {
+            "name": "Boxing Shorts",
+            "url": "/gallery/shorts-trunks"
+          },
+          {
+            "name": "Muay Thai Shorts",
+            "url": "/gallery/thai-shorts"
+          },
+          {
+            "name": "Gadiator and Skirts",
+            "url": "/gallery/gladiator-shorts"
+          },
+          {
+            "name": "MMA Shorts",
+            "url": "/gallery/mma-shorts"
+          },
+          {
+            "name": "Head Wear",
+            "url": "/gallery/head-guards"
+          }
+        ]
+      }
+    ]
+
+  },
+  {
+    "name": "SHOP",
+    "mega": true,
+    "children": [
+      {
+        "name": "SHOP",
+        "description": "Fully customisable range",
+        "children": [
+          {
+            "name": "Fight Shorts",
+            "url": "/custom-fightwear/shorts-trunks"
+          },
+          {
+            "name": "Jackets and Robes",
+            "url": "/gallery/jackets-vests"
+          },
+          {
+          "name": "Vests / Tops",
+          "url": "/custom-fightwear/vests"
+        }
+     
+        ]
+      }
+     
+    ]
+  },
+  {
+    "name": "INSPIRE",
+    "mega": true,
+    "children": [
+      {
+        "name": "",
+        "description": "Fully customisable range",
+        "children": [
+          { 
+            "name": "Feel the look",
+            "url": "/custom-fightwear/shorts-trunks",
+            "image": "assets/img/left.png",
+            "parentName" : "INSPIRE"
+          },
+          {
+            "name": "Design Mirror",
+            "url": "/gallery/jackets-vests",
+            "image": "assets/img/right.png",
+            "parentName" : "INSPIRE"
+          }
+        ]
+      }
+    ]
+  }]
