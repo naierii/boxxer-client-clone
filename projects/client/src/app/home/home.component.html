@@ -251,46 +251,12 @@
               </div>
               <div class="col-lg-6">
                 <div class="rating-riews">
-                  <div>
-                    <circle-progress
-                    [percent]="233"
-                    [maxPercent]="1000"
-                    [radius]="95"
-                    [outerStrokeWidth]="5"
-                    [innerStrokeWidth]="0"
-                    [outerStrokeColor]="'#48f4d0'"
-                    [innerStrokeColor]="'transparent'"
-                    [animation]="true"
-                    [animationDuration]="500"
-                    [showUnits]="false"
-                    [titleFontSize]="45"
-                    [titleColor]="'#ffffff'"
-                    [showSubtitle]="false"
-                    [animateTitle]="true"
-                  ></circle-progress>
+                  <div class="border-circle">
+                    <p class="m-0  count-no" id="counterReview">{{counter}}</p>
                     <p class="caption-count">Reviews</p>
                   </div>
-                
-                  <div >
-                    <circle-progress
-                    [percent]="95"
-                    [maxPercent]="100"
-                    [radius]="95"
-                    [outerStrokeWidth]="5"
-                    [innerStrokeWidth]="0"
-                    [outerStrokeColor]="'#48f4d0'"
-                    [innerStrokeColor]="'transparent'"
-                    [animation]="true"
-                    [animationDuration]="500"
-                    [showUnits]="false"
-                    [subtitle]="['4.9']"
-                    [subtitleFontSize]="45"
-                    [subtitleColor]="'#ffffff'"
-                    [showTitle]="false"
-                    [showSubtitle]="true"
-                    [animateTitle]="false"
-                    [startFromZero]="true"
-                  ></circle-progress>
+                  <div class="border-circle">
+                    <p class="m-0  count-no">4.9</p>
                     <p class="caption-count">Rating</p>
                   </div>
                 </div>
