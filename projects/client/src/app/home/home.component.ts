@@ -91,6 +91,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     {id:"6",text:`You guys are amazing you were in contact with me every step off the way and made sure everything was perfect. Thank you so much. And delivery time is sooner than expected`,name:"Paul Valdez", location:"US"},
   ]
   slidesArray: any=[];
+  counter: number = 0;
   ngOnInit() {
     // this.home$ = this.api.get('page', 'home').pipe(
     //   untilComponentDestroyed(this),
@@ -148,8 +149,24 @@ ngAfterViewInit(): void {
   card.onmouseover = () => {
     mouseHover = true;
   };
+  this.increaseCounter(233)
 }
+increaseCounter(targetValue: number) {
+  const startValue = this.counter;
+  const increment = 1; 
+  let currentValue = startValue;
 
+  const interval = setInterval(() => {
+    currentValue += increment;
+    if (currentValue >= targetValue) {
+      currentValue = targetValue;
+      clearInterval(interval);
+    }
+    this.counter = Math.floor(currentValue); // Update counter with the new value
+    if(document.getElementById("counterReview")){
+    document.getElementById("counterReview").innerHTML = this.counter.toString()}
+  }, 10); // Update every 10 milliseconds
+}
 getProduct(){
   this.api
       .find('custom-product', {

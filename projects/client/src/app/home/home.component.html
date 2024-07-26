@@ -1,5 +1,5 @@
       <!-- Hero section -->
-       <section class="hero-section">
+      <section class="hero-section">
         <div class="bg-hero-img">
            <!-- <img src="assets/img/hero img.png" alt=""> -->
            <video autoplay muted loop id="myVideo" #videoPlayer (canplay)="toggleVideo($event)">
@@ -188,17 +188,17 @@
               <h1 class="head-sm">TRENDING NOW</h1>
           </div>
           <div class="btn-prev-contain">
-            <button class="prev single-prod-prev btn-nect-prev" (click)="prev()" [disabled]="currentIndex === 0">&#10094;</button>
+            <button class="prev single-prod-prev btn-nect-prev" (click)="prev()" >&#10094;</button>
           </div>
           <div class="btn-next-contain">
-            <button class="next single-prod-next btn-nect-prev" (click)="next()" [disabled]="currentIndex + slidesToShow >= slidesArray.length">&#10095;</button>
+            <button class="next single-prod-next btn-nect-prev" (click)="next()" >&#10095;</button>
           </div>
           <div class="">
             <div class="" >
-              <owl-carousel-o [options]="customOptions1"  #owlElement >
+              <owl-carousel-o [options]="customOptions1"  #owlElement id="owlElement">
                 <ng-container  *ngFor = "let slide of slidesArray; let i=index;">
                   <ng-template carouselSlide id="{{i}}">
-                    <div class="slide"><img src="https://img.boxxerworld.com/{{
+                    <div class="slide"  [routerLink]="[slide?.category?.slug,slide?.slug]"><img src="https://img.boxxerworld.com/{{
                       slide.image.key
                     }}?crop=smart&width=286.33&height=286.33" alt="Image {{i}}"><p>{{slide?.title}}</p></div>
                   </ng-template>
@@ -252,11 +252,11 @@
               <div class="col-lg-6">
                 <div class="rating-riews">
                   <div class="border-circle">
-                    <p class="m-0  count-no">693</p>
+                    <p class="m-0  count-no" id="counterReview">{{counter}}</p>
                     <p class="caption-count">Reviews</p>
                   </div>
                   <div class="border-circle">
-                    <p class="m-0  count-no">5.0</p>
+                    <p class="m-0  count-no">4.9</p>
                     <p class="caption-count">Rating</p>
                   </div>
                 </div>
