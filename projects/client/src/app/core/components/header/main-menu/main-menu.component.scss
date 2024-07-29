@@ -5,7 +5,12 @@ ul.inspire-list {
   display: flex;
   gap: 20px;
 }
+@media only screen and (max-width: 768px) {
+  .logo img {
+    width: 30% !important;
+}
 
+}
 .nav-dropdown {
   display: inline-block;
   .nav-dropdown-items {
@@ -90,6 +95,7 @@ ul.nav {
       font-family: "Poppins", sans-serif;
       text-transform: uppercase;
       cursor: pointer;
+      font-weight:500;
       &:hover {
         // color: $green;
         color:#ff3a3a;

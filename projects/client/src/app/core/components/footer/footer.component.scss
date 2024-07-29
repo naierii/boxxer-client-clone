@@ -140,3 +140,18 @@ li.footer-menu-list a{
   margin-right: 30px;
   color: #6a6a6a;
 }
+
+@media only screen and (max-width: 768px){
+  li.footer-menu-list{
+    font-size: 10px;
+  }
+  .fmenu h3 {
+    font-size: 12px;
+}
+.text-right.social {
+  margin-top: 20px;
+}
+.footer-foot-menu span {
+  font-size: 10px;
+}
+}
