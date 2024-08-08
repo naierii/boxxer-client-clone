@@ -15,7 +15,7 @@ $container-max-widths: (
 
 :host {
   // background-color: $black;
-  background-color: #000;
+  background-color: #08070b;
   padding: 1.5rem 1rem;
   display: block;
 }
@@ -139,4 +139,19 @@ li.footer-menu-list a{
 .footer-foot-menu span {
   margin-right: 30px;
   color: #6a6a6a;
+}
+
+@media only screen and (max-width: 768px){
+  li.footer-menu-list{
+    font-size: 10px;
+  }
+  .fmenu h3 {
+    font-size: 12px;
+}
+.text-right.social {
+  margin-top: 20px;
+}
+.footer-foot-menu span {
+  font-size: 10px;
+}
 }
