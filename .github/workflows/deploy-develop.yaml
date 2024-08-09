@@ -22,7 +22,7 @@ jobs:
       run: npm install
 
     - name: Build project
-      run: npm run build client --prod
+      run: npm run build admin --prod
 
     - name: Deploy to DigitalOcean
       uses: easingthemes/ssh-deploy@v2.1.5
@@ -70,7 +70,7 @@ jobs:
         REMOTE_HOST: 206.189.118.244
         REMOTE_USER: root
         ARGS: "-avzr --delete"
-        SOURCE: dist/client/
-        TARGET: /var/www/client
+        SOURCE: dist/admin/
+        TARGET: /var/www/admin
       # with:
-      #   args: "rsync -r --delete-after --exclude='*.map' dist/client/* /var/www/client"
+      #   args: "rsync -r --delete-after --exclude='*.map' dist/admin/* /var/www/admin"
