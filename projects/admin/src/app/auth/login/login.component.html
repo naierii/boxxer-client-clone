@@ -29,7 +29,7 @@
                     <button class="btn btn-primary px-4" [disabled]="!form.valid || loading">{{label}}</button>
                   </div>
                   <div class="col-6 text-right">
-                    <a href="https://www.boxxerworld.com/login/forgot" target="_blank" type="button" class="btn btn-link px-0">Forgot password?</a>
+                    <a   [routerLink]="['/auth/forgot']" target="_blank"  class="btn btn-link px-0">Forgot password?</a>
                   </div>
                 </div>
               </form>

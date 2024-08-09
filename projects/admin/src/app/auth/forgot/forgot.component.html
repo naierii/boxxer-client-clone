@@ -1,3 +1,30 @@
-<p>
-  forgot works!
-</p>
+<div class="app flex-row align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card-group mb-4">
+          <div class="card p-4">
+            <div class="card-body">
+              <h1>Forget Password</h1>
+              <form [formGroup]="forgotForm" (ngSubmit)="reset(forgotForm.value)">
+                <div class="input-group mb-3">
+                  <span class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="icon-user"></i>
+                    </span>
+                  </span>
+                  <input type="email" class="form-control" placeholder="Email" formControlName="email" autocomplete="email">
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <button class="btn btn-primary px-4" type="submit" [disabled]="!forgotForm.valid || loading">{{label}}</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

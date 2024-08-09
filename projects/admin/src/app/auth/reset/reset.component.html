@@ -1,0 +1,40 @@
+<div class="app flex-row align-items-center">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card-group mb-4">
+					<div class="card p-4">
+						<div class="card-body">
+							<h1>Reset Password</h1>
+							<form [formGroup]="resetForm" (ngSubmit)="reset(resetForm.value)">
+								<div>
+									<input type="password" class="form-control" placeholder="New Password" formControlName="password" 
+										required>
+										<p class="mb-0 text-danger" *ngIf="resetForm.get('password').hasError('required') && resetForm.get('password').touched ">
+											This field is required
+										</p>
+								</div>
+								<div class="mt-2">
+										<input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirmPassword"
+											required>
+										<p class="m-0 text-danger" *ngIf="resetForm.get('confirmPassword').hasError('required') && resetForm.get('confirmPassword').touched">
+											This field is required
+										</p>
+										<p class="m-0 text-danger" *ngIf="resetForm.get('confirmPassword').hasError('MatchPassword')">
+											Passwords must match
+										</p>
+					      </div>
+              <div class="row">
+                <div class="col-6">
+                  <button class="btn btn-primary px-4 mt-2" type="submit" [disabled]="!resetForm.valid">Update password</button>
+                </div>
+              </div>
+              </form>
+            </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- [disabled]="!resetForm.valid" -->
