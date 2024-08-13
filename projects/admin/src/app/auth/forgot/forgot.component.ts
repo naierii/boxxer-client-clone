@@ -30,9 +30,9 @@ export class ForgotComponent implements OnInit {
   reset(data: any) {
     const reset = {
       action: 'sendResetPwd',
-      value: data
+      value: data,
+      type:'admin'
     };
-    console.log(reset)
     this.api
       .create('authManagement', reset, true, 'Requesting password reset')
       .subscribe(() => {

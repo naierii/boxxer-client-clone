@@ -7,13 +7,13 @@ export const navigation = [
       attributes: {}
     },
     class: 'text-center',
-    roles: ['admin']
+    roles: ['admin','order_commenter']
   },
   {
     name: 'Order List',
     url: '/orders',
     icon: 'icon-handbag',
-    roles: ['admin']
+    roles: ['admin','order_commenter']
   },
   {
     name: 'Job Cards',

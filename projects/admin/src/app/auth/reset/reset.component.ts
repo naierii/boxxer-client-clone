@@ -35,9 +35,8 @@ export class ResetComponent implements OnDestroy {
       value: {
         token: this.route.snapshot.params.token,
         password: data.password
-      }
+      },
     };
-    console.log(reset)
     this.api
       .create('authManagement', reset, true, 'Updating password')
       .subscribe(() => {

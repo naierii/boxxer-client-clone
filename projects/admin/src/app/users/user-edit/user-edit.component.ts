@@ -26,7 +26,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
     { value: 'Accounts', key: 'accounts' },
     { value: 'Admin', key: 'admin' },
     { value: 'Club', key: 'club' },
-    { value: 'Seo', key: 'seo' }
+    { value: 'Seo', key: 'seo' },
+    { value: 'Order Commenter', key: 'order_commenter' }
   ];
   constructor(
     private fb: FormBuilder,
@@ -87,6 +88,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
         checked: this.fb.control(hasRole)
       });
     });
+    console.log(arr)
     return this.fb.array(arr);
   }
 

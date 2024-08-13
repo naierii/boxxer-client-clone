@@ -84,6 +84,14 @@ export class OrderCommentsComponent implements OnInit, OnDestroy {
         if (!this.line_item) {
           this.commentForm.get('line_item').setValue(null);
         }
+        const query: any = {
+          order: this.order._id,
+          $sort: { createdAt: -1 },
+          $limit: 25
+        };
+        this.comments$ = this.commentService
+      .find(query)
+      .pipe(map((c: any) => c.data));
       });
   }
 

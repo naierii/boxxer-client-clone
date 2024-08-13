@@ -15,7 +15,7 @@ const routes: Routes = [
     canActivate: [RoleGuard],
     data: {
       title: 'Orders',
-      roles: ['admin']
+      roles: ['admin','order_commenter']
     }
   },
   {
@@ -24,7 +24,7 @@ const routes: Routes = [
     canActivate: [RoleGuard],
     data: {
       title: 'Orders',
-      roles: ['admin']
+      roles: ['admin','order_commenter']
     }
   },
   {
@@ -33,7 +33,7 @@ const routes: Routes = [
     canActivate: [RoleGuard],
     data: {
       title: 'Orders',
-      roles: ['admin']
+      roles: ['admin','order_commenter']
     }
   },
   {
@@ -51,7 +51,7 @@ const routes: Routes = [
     canActivate: [RoleGuard],
     data: {
       title: 'Orders',
-      roles: ['admin']
+      roles: ['order_commenter','admin']
     }
   },
   {

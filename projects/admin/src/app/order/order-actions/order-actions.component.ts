@@ -20,6 +20,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { enGbLocale } from 'ngx-bootstrap/locale';
 import { fromEvent } from 'rxjs';
+import { AuthService } from '@admin/core/services/auth.service';
 
 @Component({
   selector: 'bx-order-actions',
@@ -56,6 +57,7 @@ export class OrderActionsComponent implements OnInit, OnDestroy {
     @Inject('OrderService') private orderService: SocketService,
     @Inject('ActionService') private actionService: SocketService,
     private editService: OrderEditService,
+    private auth: AuthService,
     private toast: ToastService
   ) {
     orderService.setup('order');
@@ -77,6 +79,9 @@ export class OrderActionsComponent implements OnInit, OnDestroy {
         this.formSetup();
       }
     });
+  }
+  get isOrderCommenter() {
+    return this.auth.checkRoles(['order_commenter']);
   }
 
   ngOnInit() {
