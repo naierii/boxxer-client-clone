@@ -36,10 +36,12 @@ export class FeathersSocketService extends FeathersService {
   private _socket: any;
   constructor(@Inject(AppStorage) private appStorage: Storage) {
     super();
+    console.log(environment.host)
     this._socket = io(environment.host, {
       transports: ['websocket'],
       upgrade: false
     });
+    console.log(this._socket)
     this._feathers = feathers();
     this._feathers
       .configure(feathers.socketio(this._socket, { timeout: 60000 }))
@@ -51,5 +53,6 @@ export class FeathersSocketService extends FeathersService {
         })
       )
       .configure(feathersRx());
+      console.log(this._feathers)
   }
 }
