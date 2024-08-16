@@ -19,7 +19,7 @@ export const navigation = [
     name: 'Job Cards',
     url: '/orders/job-card',
     icon: 'icon-handbag',
-    roles: ['admin']
+    roles: ['admin','order_commenter']
   },
   {
     title: true,
