@@ -1,7 +1,7 @@
-<div class="customiser">
-  <bx-toolbar [product]="product" (onClearDesign)="template.setUpTemplate()" (designSaved)="template.saveToAccount()"
+<div class="customiser overflow-auto cs-customizerr">
+  <bx-toolbar class="stickytop" [product]="product" (onClearDesign)="template.setUpTemplate()" (designSaved)="template.saveToAccount()"
     #toolbar></bx-toolbar>
-  <bx-template [product]="product" #template></bx-template>
+  <bx-template [product]="product" [onEmptySide]="onEmptySide" #template class="customDesignTemplate position-relative" (click)="templateEvent($event)" (touchstart)="templateEvent($event)"></bx-template>
 </div>
 <div class="customiser-options">
   <div class="touch-help" *ngIf="optionsService.showTouchHelp" (click)="optionsService.setTouchHelp()" (touchstart)="optionsService.setTouchHelp()">

@@ -20,6 +20,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
   private routeSub: Subscription;
   loading = true;
   isNew = false;
+  public passwordType = 'password';
+  public confirmPasswordType = 'password';
   roleOptions: Array<any> = [
     { value: 'Registered', key: 'registered' },
     { value: 'Staff', key: 'staff' },
@@ -88,7 +90,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
         checked: this.fb.control(hasRole)
       });
     });
-    console.log(arr)
     return this.fb.array(arr);
   }
 
@@ -114,6 +115,20 @@ export class UserEditComponent implements OnInit, OnDestroy {
           this.router.navigate(['./users']);
         }
       });
+    }
+  }
+  showHidePassword(){
+    if(this.passwordType == 'password'){
+      this.passwordType = 'text'
+    }else{
+      this.passwordType = 'password'
+    }
+  }
+  showHideConfirmPassword(){
+    if(this.confirmPasswordType == 'password'){
+      this.confirmPasswordType = 'text'
+    }else{
+      this.confirmPasswordType = 'password'
     }
   }
 

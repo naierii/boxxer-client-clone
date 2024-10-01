@@ -76,6 +76,9 @@ export class CustomiserOptionsService {
     if (font && font === 'ballantines') {
       fontSize = fontSize * 1.8;
     }
+    if (font && font === 'BERRYBOLD') {
+      fontSize = fontSize * 1.5;
+    }
 
     return fontSize;
   }

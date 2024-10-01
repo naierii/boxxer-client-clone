@@ -78,7 +78,10 @@ export const getUploadSizes = createSelector(
   getOptionsEntitiesState,
   fromOptions.getUploadSizes
 );
-
+export const getUploadEmbroiderySizes = createSelector(
+  getOptionsEntitiesState,
+  fromOptions.getUploadEmbroiderySizes
+);
 export const getSizes = createSelector(
   getOptionsEntitiesState,
   fromOptions.getSizes

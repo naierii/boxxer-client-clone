@@ -1,0 +1,586 @@
+apiVersion: v1
+items:
+- apiVersion: cert-manager.io/v1
+  kind: ClusterIssuer
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"cert-manager.io/v1alpha2","kind":"ClusterIssuer","metadata":{"annotations":{},"name":"letsencrypt-prod"},"spec":{"acme":{"email":"marcus@dottodotdesign.co.uk","privateKeySecretRef":{"name":"letsencrypt-prod"},"server":"https://acme-v02.api.letsencrypt.org/directory","solvers":[{"dns01":{"digitalocean":{"tokenSecretRef":{"key":"access-token","name":"digitalocean-dns"}}}}]}}}
+    creationTimestamp: "2020-09-07T18:49:24Z"
+    generation: 1
+    managedFields:
+    - apiVersion: cert-manager.io/v1alpha2
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          .: {}
+          f:acme:
+            .: {}
+            f:email: {}
+            f:privateKeySecretRef:
+              .: {}
+              f:name: {}
+            f:server: {}
+            f:solvers: {}
+      manager: kubectl
+      operation: Update
+      time: "2020-09-07T18:49:24Z"
+    - apiVersion: cert-manager.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:acme:
+            .: {}
+            f:lastRegisteredEmail: {}
+            f:uri: {}
+          f:conditions: {}
+      manager: controller
+      operation: Update
+      time: "2020-09-07T18:49:25Z"
+    name: letsencrypt-prod
+    resourceVersion: "3289"
+    uid: 9e2c780e-5bb8-4a5a-89a3-518557dc3876
+  spec:
+    acme:
+      email: marcus@dottodotdesign.co.uk
+      preferredChain: ""
+      privateKeySecretRef:
+        name: letsencrypt-prod
+      server: https://acme-v02.api.letsencrypt.org/directory
+      solvers:
+      - dns01:
+          digitalocean:
+            tokenSecretRef:
+              key: access-token
+              name: digitalocean-dns
+  status:
+    acme:
+      lastRegisteredEmail: marcus@dottodotdesign.co.uk
+      uri: https://acme-v02.api.letsencrypt.org/acme/acct/96043763
+    conditions:
+    - lastTransitionTime: "2020-09-07T18:49:25Z"
+      message: The ACME account was registered with the ACME server
+      reason: ACMEAccountRegistered
+      status: "True"
+      type: Ready
+- apiVersion: cert-manager.io/v1
+  kind: ClusterIssuer
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"cert-manager.io/v1alpha2","kind":"ClusterIssuer","metadata":{"annotations":{},"name":"letsencrypt-prod-dns"},"spec":{"acme":{"email":"marcus@dottodotdesign.co.uk","privateKeySecretRef":{"name":"letsencrypt-prod-dns"},"server":"https://acme-v02.api.letsencrypt.org/directory","solvers":[{"dns01":{"digitalocean":{"tokenSecretRef":{"key":"access-token","name":"digitalocean-dns"}}}}]}}}
+    creationTimestamp: "2021-03-09T18:42:44Z"
+    generation: 3
+    managedFields:
+    - apiVersion: cert-manager.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:acme:
+            .: {}
+            f:lastRegisteredEmail: {}
+            f:uri: {}
+          f:conditions: {}
+      manager: controller
+      operation: Update
+      time: "2021-03-09T18:42:45Z"
+    - apiVersion: cert-manager.io/v1alpha2
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          .: {}
+          f:acme:
+            .: {}
+            f:email: {}
+            f:privateKeySecretRef:
+              .: {}
+              f:name: {}
+            f:server: {}
+            f:solvers: {}
+      manager: kubectl
+      operation: Update
+      time: "2021-05-19T17:00:50Z"
+    name: letsencrypt-prod-dns
+    resourceVersion: "48911318"
+    uid: add356d9-fad3-4ebe-b1ea-bad029e33cf5
+  spec:
+    acme:
+      email: marcus@dottodotdesign.co.uk
+      preferredChain: ""
+      privateKeySecretRef:
+        name: letsencrypt-prod-dns
+      server: https://acme-v02.api.letsencrypt.org/directory
+      solvers:
+      - dns01:
+          digitalocean:
+            tokenSecretRef:
+              key: access-token
+              name: digitalocean-dns
+  status:
+    acme:
+      lastRegisteredEmail: marcus@dottodotdesign.co.uk
+      uri: https://acme-v02.api.letsencrypt.org/acme/acct/115160285
+    conditions:
+    - lastTransitionTime: "2021-03-09T18:42:45Z"
+      message: The ACME account was registered with the ACME server
+      reason: ACMEAccountRegistered
+      status: "True"
+      type: Ready
+- apiVersion: cert-manager.io/v1
+  kind: ClusterIssuer
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"cert-manager.io/v1alpha2","kind":"ClusterIssuer","metadata":{"annotations":{},"name":"letsencrypt-staging"},"spec":{"acme":{"email":"marcus@dottodotdesign.co.uk","privateKeySecretRef":{"name":"letsencrypt-staging"},"server":"https://acme-staging-v02.api.letsencrypt.org/directory","solvers":[{"dns01":{"digitalocean":{"tokenSecretRef":{"key":"access-token","name":"digitalocean-dns"}}}}]}}}
+    creationTimestamp: "2020-09-07T18:49:24Z"
+    generation: 1
+    managedFields:
+    - apiVersion: cert-manager.io/v1alpha2
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:spec:
+          .: {}
+          f:acme:
+            .: {}
+            f:email: {}
+            f:privateKeySecretRef:
+              .: {}
+              f:name: {}
+            f:server: {}
+            f:solvers: {}
+      manager: kubectl
+      operation: Update
+      time: "2020-09-07T18:49:24Z"
+    - apiVersion: cert-manager.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:acme:
+            .: {}
+            f:lastRegisteredEmail: {}
+            f:uri: {}
+          f:conditions: {}
+      manager: controller
+      operation: Update
+      time: "2020-09-07T18:49:25Z"
+    name: letsencrypt-staging
+    resourceVersion: "3288"
+    uid: 70ff4ac7-0958-4e7e-ae1b-6543d790a75f
+  spec:
+    acme:
+      email: marcus@dottodotdesign.co.uk
+      preferredChain: ""
+      privateKeySecretRef:
+        name: letsencrypt-staging
+      server: https://acme-staging-v02.api.letsencrypt.org/directory
+      solvers:
+      - dns01:
+          digitalocean:
+            tokenSecretRef:
+              key: access-token
+              name: digitalocean-dns
+  status:
+    acme:
+      lastRegisteredEmail: marcus@dottodotdesign.co.uk
+      uri: https://acme-staging-v02.api.letsencrypt.org/acme/acct/15527913
+    conditions:
+    - lastTransitionTime: "2020-09-07T18:49:25Z"
+      message: The ACME account was registered with the ACME server
+      reason: ACMEAccountRegistered
+      status: "True"
+      type: Ready
+- apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    creationTimestamp: "2020-09-09T07:11:36Z"
+    generation: 2
+    managedFields:
+    - apiVersion: cert-manager.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"601c339d-38cb-4449-b286-2d9e278bcaba"}: {}
+        f:spec:
+          .: {}
+          f:dnsNames: {}
+          f:issuerRef:
+            .: {}
+            f:group: {}
+            f:kind: {}
+            f:name: {}
+          f:privateKey: {}
+          f:secretName: {}
+        f:status:
+          .: {}
+          f:conditions: {}
+          f:notAfter: {}
+          f:notBefore: {}
+          f:renewalTime: {}
+          f:revision: {}
+      manager: controller
+      operation: Update
+      time: "2022-09-11T11:24:51Z"
+    name: boxxer-admin-prod-tls
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Ingress
+      name: boxxer-admin-prod-ingress
+      uid: 601c339d-38cb-4449-b286-2d9e278bcaba
+    resourceVersion: "157875150"
+    uid: 2a166789-1ecf-4537-85b5-289c1c7713ad
+  spec:
+    dnsNames:
+    - admin.boxxerworld.com
+    issuerRef:
+      group: cert-manager.io
+      kind: ClusterIssuer
+      name: letsencrypt-prod-dns
+    secretName: boxxer-admin-prod-tls
+  status:
+    conditions:
+    - lastTransitionTime: "2021-05-19T19:17:07Z"
+      message: Certificate is up to date and has not expired
+      reason: Ready
+      status: "True"
+      type: Ready
+    notAfter: "2022-12-10T10:25:56Z"
+    notBefore: "2022-09-11T10:25:57Z"
+    renewalTime: "2022-11-10T10:25:56Z"
+    revision: 16
+- apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    creationTimestamp: "2021-08-14T09:17:54Z"
+    generation: 1
+    managedFields:
+    - apiVersion: cert-manager.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"21a9a96d-b668-4c23-9f46-f0660c004dd7"}: {}
+        f:spec:
+          .: {}
+          f:dnsNames: {}
+          f:issuerRef:
+            .: {}
+            f:group: {}
+            f:kind: {}
+            f:name: {}
+          f:privateKey: {}
+          f:secretName: {}
+        f:status:
+          .: {}
+          f:conditions: {}
+          f:notAfter: {}
+          f:notBefore: {}
+          f:renewalTime: {}
+          f:revision: {}
+      manager: controller
+      operation: Update
+      time: "2022-10-08T02:25:37Z"
+    name: boxxer-admin-testing-tls
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Ingress
+      name: boxxer-admin-testing-ingress
+      uid: 21a9a96d-b668-4c23-9f46-f0660c004dd7
+    resourceVersion: "157875148"
+    uid: 2cd99eec-623c-49fe-8602-9cfcc71a223d
+  spec:
+    dnsNames:
+    - staging-admin.boxxerworld.com
+    issuerRef:
+      group: cert-manager.io
+      kind: ClusterIssuer
+      name: letsencrypt-prod-dns
+    secretName: boxxer-admin-testing-tls
+  status:
+    conditions:
+    - lastTransitionTime: "2021-08-14T09:19:01Z"
+      message: Certificate is up to date and has not expired
+      reason: Ready
+      status: "True"
+      type: Ready
+    notAfter: "2023-01-06T01:26:43Z"
+    notBefore: "2022-10-08T01:26:44Z"
+    renewalTime: "2022-12-07T01:26:43Z"
+    revision: 12
+- apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    creationTimestamp: "2020-09-10T06:50:43Z"
+    generation: 2
+    managedFields:
+    - apiVersion: cert-manager.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"18d30192-3fd2-4b9b-9da2-94e1392c9bbb"}: {}
+        f:spec:
+          .: {}
+          f:dnsNames: {}
+          f:issuerRef:
+            .: {}
+            f:group: {}
+            f:kind: {}
+            f:name: {}
+          f:privateKey: {}
+          f:secretName: {}
+        f:status:
+          .: {}
+          f:conditions: {}
+          f:notAfter: {}
+          f:notBefore: {}
+          f:renewalTime: {}
+          f:revision: {}
+      manager: controller
+      operation: Update
+      time: "2022-09-11T10:26:44Z"
+    name: boxxer-api-prod-tls
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Ingress
+      name: boxxer-api-prod-ingress
+      uid: 18d30192-3fd2-4b9b-9da2-94e1392c9bbb
+    resourceVersion: "157875149"
+    uid: 3a2eaf5a-8004-43b7-a2bc-a6b0e6033a5a
+  spec:
+    dnsNames:
+    - api.boxxerworld.com
+    issuerRef:
+      group: cert-manager.io
+      kind: ClusterIssuer
+      name: letsencrypt-prod-dns
+    secretName: boxxer-api-prod-tls
+  status:
+    conditions:
+    - lastTransitionTime: "2021-05-19T18:19:00Z"
+      message: Certificate is up to date and has not expired
+      reason: Ready
+      status: "True"
+      type: Ready
+    notAfter: "2022-12-10T09:27:49Z"
+    notBefore: "2022-09-11T09:27:50Z"
+    renewalTime: "2022-11-10T09:27:49Z"
+    revision: 18
+- apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    creationTimestamp: "2020-09-07T19:03:22Z"
+    generation: 4
+    managedFields:
+    - apiVersion: cert-manager.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"b572062d-f032-4014-be76-6de7a1033ff1"}: {}
+        f:spec:
+          .: {}
+          f:dnsNames: {}
+          f:issuerRef:
+            .: {}
+            f:group: {}
+            f:kind: {}
+            f:name: {}
+          f:privateKey: {}
+          f:secretName: {}
+        f:status:
+          .: {}
+          f:conditions: {}
+          f:notAfter: {}
+          f:notBefore: {}
+          f:renewalTime: {}
+          f:revision: {}
+      manager: controller
+      operation: Update
+      time: "2022-09-11T09:26:03Z"
+    name: boxxer-api-testing-tls
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Ingress
+      name: boxxer-api-testing-ingress
+      uid: b572062d-f032-4014-be76-6de7a1033ff1
+    resourceVersion: "157875151"
+    uid: 7867cb4f-0df9-4750-8d5f-92b11bf8ef32
+  spec:
+    dnsNames:
+    - staging-api.boxxerworld.com
+    issuerRef:
+      group: cert-manager.io
+      kind: ClusterIssuer
+      name: letsencrypt-prod-dns
+    secretName: boxxer-api-testing-tls
+  status:
+    conditions:
+    - lastTransitionTime: "2021-05-19T17:18:13Z"
+      message: Certificate is up to date and has not expired
+      reason: Ready
+      status: "True"
+      type: Ready
+    notAfter: "2022-12-10T08:27:18Z"
+    notBefore: "2022-09-11T08:27:19Z"
+    renewalTime: "2022-11-10T08:27:18Z"
+    revision: 16
+- apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    creationTimestamp: "2020-09-09T07:11:36Z"
+    generation: 2
+    managedFields:
+    - apiVersion: cert-manager.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"23feab14-8e63-438f-bb7c-affc24f67704"}: {}
+        f:spec:
+          .: {}
+          f:dnsNames: {}
+          f:issuerRef:
+            .: {}
+            f:group: {}
+            f:kind: {}
+            f:name: {}
+          f:privateKey: {}
+          f:secretName: {}
+        f:status:
+          .: {}
+          f:conditions: {}
+          f:notAfter: {}
+          f:notBefore: {}
+          f:renewalTime: {}
+          f:revision: {}
+      manager: controller
+      operation: Update
+      time: "2022-09-11T10:23:30Z"
+    name: boxxer-client-prod-tls
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Ingress
+      name: boxxer-client-prod-ingress
+      uid: 23feab14-8e63-438f-bb7c-affc24f67704
+    resourceVersion: "157875147"
+    uid: ef09b31c-3e27-49df-af0b-f3865ea5a117
+  spec:
+    dnsNames:
+    - boxxerworld.com
+    - www.boxxerworld.com
+    issuerRef:
+      group: cert-manager.io
+      kind: ClusterIssuer
+      name: letsencrypt-prod-dns
+    secretName: boxxer-client-prod-tls
+  status:
+    conditions:
+    - lastTransitionTime: "2021-05-19T19:14:31Z"
+      message: Certificate is up to date and has not expired
+      reason: Ready
+      status: "True"
+      type: Ready
+    notAfter: "2022-12-10T09:24:35Z"
+    notBefore: "2022-09-11T09:24:36Z"
+    renewalTime: "2022-11-10T09:24:35Z"
+    revision: 15
+- apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    creationTimestamp: "2021-05-19T18:10:13Z"
+    generation: 1
+    managedFields:
+    - apiVersion: cert-manager.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"ae445b38-ea31-42bb-81a1-736a20c467fc"}: {}
+        f:spec:
+          .: {}
+          f:dnsNames: {}
+          f:issuerRef:
+            .: {}
+            f:group: {}
+            f:kind: {}
+            f:name: {}
+          f:privateKey: {}
+          f:secretName: {}
+        f:status:
+          .: {}
+          f:conditions: {}
+          f:notAfter: {}
+          f:notBefore: {}
+          f:renewalTime: {}
+          f:revision: {}
+      manager: controller
+      operation: Update
+      time: "2022-09-11T10:19:00Z"
+    name: boxxer-client-testing-tls
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Ingress
+      name: boxxer-client-testing-ingress
+      uid: ae445b38-ea31-42bb-81a1-736a20c467fc
+    resourceVersion: "157875153"
+    uid: a045efc0-b58c-4a34-a0fe-14614eac9054
+  spec:
+    dnsNames:
+    - staging.boxxerworld.com
+    issuerRef:
+      group: cert-manager.io
+      kind: ClusterIssuer
+      name: letsencrypt-prod-dns
+    secretName: boxxer-client-testing-tls
+  status:
+    conditions:
+    - lastTransitionTime: "2021-05-19T18:10:13Z"
+      message: Certificate is up to date and has not expired
+      reason: Ready
+      status: "True"
+      type: Ready
+    notAfter: "2022-12-10T09:20:06Z"
+    notBefore: "2022-09-11T09:20:07Z"
+    renewalTime: "2022-11-10T09:20:06Z"
+    revision: 12
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

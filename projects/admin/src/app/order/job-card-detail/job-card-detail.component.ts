@@ -2,14 +2,14 @@ import { CustomDesign } from '@global/models/custom-design';
 import { Order } from '@global/models/order';
 import { WindowRefService } from './../../window-ref.service';
 import { environment } from '@env/environment';
-import { Component, OnInit, Inject, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, NgZone,TemplateRef  } from '@angular/core';
 import { SocketService } from '@admin/shared/services/socket.service';
 import { ActivatedRoute } from '@angular/router';
 import { untilComponentDestroyed } from '@global/untilDestroy';
 import { switchMap, tap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { Product } from '@global/models/product';
-
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'bx-job-card-detail',
   templateUrl: './job-card-detail.component.html',
@@ -26,7 +26,11 @@ export class JobCardDetailComponent implements OnInit, OnDestroy {
   order$: Observable<any>;
   update$: Subject<boolean> = new Subject<boolean>();
   print: boolean;
+  modalRef?: BsModalRef;
+  imagelink?: string;
+  scaleValue=100
   constructor(
+    private modalService: BsModalService,
     private route: ActivatedRoute,
     @Inject('JobCardService') protected service: SocketService,
     private winRef: WindowRefService,
@@ -130,6 +134,37 @@ export class JobCardDetailComponent implements OnInit, OnDestroy {
     this.update$.next(true);
   }
 
+  openModal(template: TemplateRef<void>,link:string) {
+    this.scaleValue=100    
+    this.imagelink = `https://img.boxxerworld.com/${link}`;
+    this.modalRef = this.modalService.show(template,Object.assign({}, { class: 'modal-lg' }));
+  }
+  zoomIn() {
+    if (this.scaleValue < 250) {
+      this.scaleValue += 1; // Increase scale
+    }
+  }
+
+  zoomOut() {
+    if (this.scaleValue > 80) {
+      this.scaleValue -= 1;
+    }
+  }
+  onScroll(event: WheelEvent): void {
+    event.preventDefault(); // Prevent default scrolling behavior
+    if (event.deltaY < 0) {
+      // Zoom in
+      this.zoomIn()
+    } else {
+      // Zoom out
+      this.zoomOut()
+    }
+  }
+  getScaleStyle() {
+    return {
+      transform: `scale(${this.scaleValue}%)`,
+    };
+  }
   ngOnDestroy() {
     this.order = null;
   }

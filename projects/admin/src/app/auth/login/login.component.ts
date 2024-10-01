@@ -18,6 +18,7 @@ interface Credentials {
 export class LoginComponent {
   public form: FormGroup;
   public loading = false;
+  public passwordType = 'password';
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
@@ -50,5 +51,12 @@ export class LoginComponent {
           }
         });
       });
+  }
+  showHidePassword(){
+    if(this.passwordType == 'password'){
+      this.passwordType = 'text'
+    }else{
+      this.passwordType = 'password'
+    }
   }
 }

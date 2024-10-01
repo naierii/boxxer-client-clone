@@ -1,5 +1,8 @@
+<td class="fit align-middle">
+  <i class="icon-cursor-move icons font-2xl d-block"></i>
+</td>
 <td>{{item.title}}</td>
-<td>{{item.type}}</td>
+<td>{{obj[item.type]}}</td>
 <td>
   <span *ngFor="let category of item.categories">{{category.title}}
     <br>

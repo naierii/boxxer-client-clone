@@ -133,3 +133,26 @@ p.danger {
     margin: 0;
   }
 }
+.resize-controls {
+  width: 190px;
+  padding: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0px;
+}
+.zoom-valuee {
+  max-width: calc(100% - 98px);
+  width: 100%;
+  background: #a9a9a957;
+  border-radius: 5px;
+}
+.resize-controls button {
+  cursor: pointer;
+  transition: background-color 0.3s;
+  outline: none;
+  font-size: 15px;
+}
+
+.active {
+  color: #63b20b;
+}

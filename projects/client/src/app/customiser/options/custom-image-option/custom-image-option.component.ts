@@ -84,6 +84,11 @@ export class CustomImageOptionComponent implements OnInit, OnDestroy {
                 ? this.selectedLogo.instructions
                 : null,
             ],
+            color: [
+              this.selectedLogo && this.selectedLogo.color
+                ? this.selectedLogo.color
+                : null,
+            ],
             size: [
               this.selectedLogo && this.selectedLogo.size
                 ? this.selectedLogo.size
@@ -165,11 +170,13 @@ export class CustomImageOptionComponent implements OnInit, OnDestroy {
           'logos.$.image': this.selectedLogo.image,
           'logos.$.size': this.logoForm.get('size').value,
           'logos.$.instructions': this.logoForm.get('instructions').value,
+          'logos.$.color': this.logoForm.get('color').value,
         },
         { 'logos._id': this.selectedLogo._id }
       );
     } else {
       this.selectedLogo.instructions = this.logoForm.get('instructions').value;
+      this.selectedLogo.color = this.logoForm.get('color').value;
       this.selectedLogo.size = this.logoForm.get('size').value;
       const data = {
         logos: this.selectedLogo,

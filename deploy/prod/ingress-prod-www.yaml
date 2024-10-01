@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: boxxer-client-prod-www-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    cert-manager.io/cluster-issuer: letsencrypt-prod-dns
+    cert-manager.io/issue-temporary-certificate: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - www.boxxerworld.com
+      secretName: boxxer-client-prod-www-cert
+  rules:
+    - host: www.boxxerworld.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service: 
+                name: boxxer-client
+                port: 
+                  number: 8080

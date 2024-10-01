@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: boxxer-admin-prod-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: letsencrypt-prod-dns
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - admin.boxxerworld.com
+      secretName: boxxer-admin-prod-cert
+  rules:
+    - host: admin.boxxerworld.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service: 
+                name: boxxer-client
+                port: 
+                  number: 8080

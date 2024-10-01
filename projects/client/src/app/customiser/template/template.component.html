@@ -1,181 +1,240 @@
-<div class="template-controls" *ngIf="product">
-  <div class="bubble" bxSvgBubble *ngIf="hasDraggable && templateLoaded">
-    <h3>Move your name/graphic to the right location by dragging</h3>
-    <i class="arrow-after"></i>
-  </div>
-  <div class="template-col">
-    <div class="template-wrapper" tourAnchor="your.design">
-      <div class="template-label" *ngIf="showLabels()  && templateLoaded">
-        <div class="label">
-          <h4>Front</h4>
-        </div>
-        <div class="label">
-          <h4>Back</h4>
-        </div>
-      </div>
-      <svg id="template" [attr.viewBox]="alignedViewBox" [prepend]="true" [inlineSVG]="product.template.key"
-        [replaceContents]="false" (onSVGInserted)="svgData($event)" #customDesign preserveAspectRatio="xMidYMin meet"
-        tourAnchor="start.tour">
-        <svg:defs>
-          <style type="text/css">
-            /* <![CDATA[ */
-            @font-face {
-              font-family: 'Arial';
-              src: url('https://cdn2.boxxerworld.com/assets/fonts/arial-bold-webfont.woff2') format('woff2'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/arial-bold-webfont.woff') format('woff');
-              font-weight: normal;
-              font-style: normal;
-            }
-
-            /* ]]> */
-            /* <![CDATA[ */
-            @font-face {
-              font-family: 'oswaldcustom';
-              src: url('https://cdn2.boxxerworld.com/assets/fonts/oswald-semibold.woff2') format('woff2'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/oswald-semibold.woff') format('woff');
-              font-weight: normal;
-              font-style: normal;
-            }
-
-            /* ]]> */
-            /* <![CDATA[ */
-            @font-face {
-              font-family: 'monte';
-              src: url('https://cdn2.boxxerworld.com/assets/fonts/diamante-serial-bold-webfont.eot');
-              src: url('https://cdn2.boxxerworld.com/assets/fonts/diamante-serial-bold-webfont.eot?#iefix') format('embedded-opentype'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/diamante-serial-bold-webfont.woff2') format('woff2'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/diamante-serial-bold-webfont.woff') format('woff'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/diamante-serial-bold-webfont.ttf') format('truetype'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/diamante-serial-bold-webfont.svg#diamante-serialbold') format('svg');
-              font-weight: normal;
-              font-style: normal;
-            }
-
-            /* ]]> */
-            /* <![CDATA[ */
-            @font-face {
-              font-family: 'college';
-              src: url('https://cdn2.boxxerworld.com/assets/fonts/college_block-webfont.eot');
-              src: url('https://cdn2.boxxerworld.com/assets/fonts/college_block-webfont.eot?#iefix') format('embedded-opentype'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/college_block-webfont.woff2') format('woff2'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/college_block-webfont.woff') format('woff'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/college_block-webfont.ttf') format('truetype'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/college_block-webfont.svg#college_blockregular') format('svg');
-              font-weight: normal;
-              font-style: normal;
-            }
-
-            /* ]]> */
-            /* <![CDATA[ */
-            @font-face {
-              font-family: 'ballantines';
-              src: url('https://cdn2.boxxerworld.com/assets/fonts/ballantines-bold-webfont.eot');
-              src: url('https://cdn2.boxxerworld.com/assets/fonts/ballantines-bold-webfont.eot?#iefix') format('embedded-opentype'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/ballantines-bold-webfont.woff2') format('woff2'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/ballantines-bold-webfont.woff') format('woff'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/ballantines-bold-webfont.ttf') format('truetype'),
-                url('https://cdn2.boxxerworld.com/assets/fonts/ballantines-bold-webfont.svg#ballantinesbold') format('svg');
-              font-weight: normal;
-              font-style: normal;
-            }
-
-            /* ]]> */
-          </style>
-          <svg:filter [id]="filter.id" height="100%" *ngFor="let filter of svgService.nameFilters">
-            <svg:feImage width="4" height="4" [attr.xlink:href]="filter.crystal" *ngIf="filter.crystal" />
-            <svg:feTile result="dots" *ngIf="filter.crystal" />
-            <svg:feComposite in="dots" in2="SourceGraphic" operator="in" result="comp" *ngIf="filter.crystal">
-            </svg:feComposite>
-            <feOffset in="SourceAlpha" dx="0.3333333333333333" dy="1.6666666666666667" result="15"></feOffset>
-            <feGaussianBlur stdDeviation="1" in="15" result="16"></feGaussianBlur>
-            <feSpecularLighting surfaceScale="2" specularConstant="0.8" specularExponent="15" in="16" result="17">
-              <fePointLight x="-1000" y="-5000" z="300"></fePointLight>
-            </feSpecularLighting>
-            <feComposite in="17" in2="SourceAlpha" operator="in" result="18"></feComposite>
-            <feOffset in="SourceAlpha" dx="-0.3333333333333333" dy="-1.6666666666666667" result="19"></feOffset>
-            <feGaussianBlur stdDeviation="1" in="19" result="20"></feGaussianBlur>
-            <feSpecularLighting surfaceScale="2" specularConstant="1.8" specularExponent="6" in="20" result="21">
-              <fePointLight x="1000" y="5000" z="300"></fePointLight>
-            </feSpecularLighting>
-            <feComposite in="21" in2="SourceAlpha" operator="in" result="22"></feComposite>
-            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" in="22" result="23"></feColorMatrix>
-            <feComposite k1="0" k2="0.8" k3="0.5" k4="0" in="18" in2="23" operator="arithmetic" result="24">
-            </feComposite>
-            <feOffset result="offOut" in="SourceGraphic" dx="1" dy="1" />
-            <feColorMatrix result="matrixOut" in="offOut" type="matrix"
-              values="0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.5 0" />
-            <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="3" />
-            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" result="shadow" />
-            <svg:feMerge>
-              <svg:feMergeNode in="shadow" />
-              <svg:feMergeNode in="SourceGraphic" />
-              <svg:feMergeNode in="comp" *ngIf="filter.crystal" />
-              <feMergeNode in="24" *ngIf="filter.text3d"></feMergeNode>
-            </svg:feMerge>
-          </svg:filter>
-          <svg:pattern *ngFor="let pattern of svgService.patterns" x="0" y="0" [attr.width]="width"
-            [attr.height]="height" [attr.viewBox]="alignedViewBox" patternUnits="userSpaceOnUse" [id]="pattern.id"
-            externalResourcesRequired="true">
-            <svg:rect [attr.width]="width" [attr.height]="height" [attr.fill]="pattern.hex" *ngIf="pattern.hex">
-            </svg:rect>
-            <svg:image [attr.xlink:href]="pattern.image" preserveAspectRatio="xMidYMid slice" x="0" y="0"
-              [attr.width]="width" [attr.height]="height" *ngIf="pattern.image"></svg:image>
-          </svg:pattern>
-          <svg:pattern *ngFor="let pattern of svgService.nameFillPatterns" x="0" y="0" [attr.width]="width"
-            [attr.height]="height" [attr.viewBox]="alignedViewBox" patternUnits="userSpaceOnUse" [id]="pattern.id"
-            externalResourcesRequired="true">
-            <svg:rect [attr.width]="width" [attr.height]="height" [attr.fill]="pattern.hex" *ngIf="pattern.hex">
-            </svg:rect>
-            <svg:image [attr.xlink:href]="pattern.image" preserveAspectRatio="none" x="0" y="0" width="100%"
-              height="100%" *ngIf="pattern.image"></svg:image>
-          </svg:pattern>
-          <svg:pattern *ngFor="let pattern of svgService.nameOutlinePatterns" x="0" y="0" [attr.width]="width"
-            [attr.height]="height" patternUnits="userSpaceOnUse" [id]="pattern.id" [attr.viewBox]="alignedViewBox"
-            externalResourcesRequired="true">
-            <svg:rect [attr.width]="width" [attr.height]="height" [attr.fill]="pattern.hex" *ngIf="pattern.hex">
-            </svg:rect>
-            <svg:image [attr.xlink:href]="pattern.image" preserveAspectRatio="none" x="0" y="0" width="100%"
-              height="100%" *ngIf="pattern.image"></svg:image>
-          </svg:pattern>
-        </svg:defs>
-        <svg:g *ngIf="templateLoaded && (designService.design$ | async).boxxer_logo as logo">
-          <svg:g *ngIf="!logo.remove_logo">
-            <svg:g bx-svg-waist-label [position]="optionsService.getWaistBadge()[0]"></svg:g>
-            <svg:g bx-svg-waist-label [position]="optionsService.getWaistBadge()[1]"></svg:g>
-          </svg:g>
-          <svg:g class="draggable" bx-svg-logo [width]="width" [height]="height" [logo]="logo"
-            *ngIf="logo.position && !logo.remove_logo" [bxBoxxerLogo]="logo" tourAnchor="boxxer.logo"></svg:g>
-        </svg:g>
-        <svg:g class="draggable" bx-svg-text *ngFor="let name of (designService.design$ | async).names" [name]="name"
-          [width]="width" [height]="height" [bxSvgMove]="name" [isText]="true"></svg:g>
-        <svg:g class="draggable" bx-svg-image *ngFor="let flag of (designService.design$ | async).flags"
-          [image]="flag.flag ? flag.flag.image : null" [object]="flag" [width]="width" [height]="height"
-          [bxSvgMove]="flag"></svg:g>
-        <svg:g class="draggable" bx-svg-image *ngFor="let logo of (designService.design$ | async).logos"
-          [image]="logo.image ? logo.image.image : null" [object]="logo" [width]="width" [height]="height"
-          [bxSvgMove]="logo"></svg:g>
-        <svg:g class="draggable" bx-svg-image *ngFor="let upload of (designService.design$ | async).uploads"
-          [image]="upload.image" [object]="upload" [width]="width" [height]="height" [bxSvgMove]="upload"></svg:g>
-      </svg>
-      <div class="template-rotator">
-        <div *ngIf="designService.selectedObject && (designService.dragObject | async) as object">
-          <mat-slider [min]="-180" [max]="180" [step]="10" [tickInterval]="2" [value]="object.position.rotate"
-            (input)="rotateObject($event)" [thumbLabel]="true"></mat-slider>
-          <h4>Rotate</h4>
-        </div>
-      </div>
-    </div>
-    <div class="template-scale">
-      <mat-slider [min]="1" [max]="4" [step]="0.1" [thumbLabel]="true" [value]="object.position.scale" [vertical]="true"
-        (input)="scaleObject($event)"
-        *ngIf="designService.selectedObject && (designService.dragObject | async) as object"></mat-slider>
-      <h4 *ngIf="designService.selectedObject">Enlarge</h4>
-    </div>
+<div class="resize-controls d-block position-absolute" *ngIf="product">
+  <div class="d-flex justify-content-between align-items-center">
+    <button (click)="zoomOut()" class="px-2"> <fa-icon [icon]="['fal', 'minus']" size="2x"></fa-icon></button>
+    <span class="zoom-valuee d-block p-2 mx-2">
+      <button mat-button [matMenuTriggerFor]="menu">
+      {{activeZoom}}%
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngFor="let zoomValue of zoomSize" [ngClass]="{'active':zoomValue.value == activeZoom}" (click)="updateZoom(zoomValue.value)">
+        {{zoomValue.name}}
+      </button>
+    </mat-menu>
+  </span>
+    <button (click)="zoomIn()" class="px-2"><fa-icon [icon]="['fal', 'plus']" size="2x" ></fa-icon></button>
   </div>
 </div>
-<ng-container *ngIf="designService.selectedObject && (designService.dragObject | async) as object">
-  <bx-editbar [flag]="object" *ngIf="object.type === 'flag'"></bx-editbar>
-  <bx-editbar [logo]="object" *ngIf="object.type === 'logo'"></bx-editbar>
-  <bx-editbar [name]="object" *ngIf="object.type === 'name'"></bx-editbar>
-  <bx-editbar [upload]="object" *ngIf="object.type === 'upload'"></bx-editbar>
-</ng-container>
+<div  class="w-100" (click)="onTemplateControlsClick($event)" (touchstart)="onTemplateControlsClick($event)">
+  <div class="template-controls" *ngIf="product" (wheel)="onScroll($event)">
+    <div class="bubble" bxSvgBubble *ngIf="hasDraggable && templateLoaded" [ngStyle]="getPopupTransformStyle()">
+      <h3>Move your name/graphic to the right location by dragging</h3>
+      <i class="arrow-after"></i>
+    </div>
+    <div class="template-col" style="transform-origin: top"  [ngStyle]="getScaleStyle()">
+      <div class="template-wrapper" tourAnchor="your.design">
+        <div class="template-label" *ngIf="showLabels()  && templateLoaded" >
+          <div class="label">
+            <h4>Front</h4>
+          </div>
+          <div class="label">
+            <h4>Back</h4>
+          </div>
+        </div>
+        <svg  id="template" [attr.viewBox]="alignedViewBox" [prepend]="true" [inlineSVG]="product.template.key"
+          [replaceContents]="false" (onSVGInserted)="svgData($event)" #customDesign preserveAspectRatio="xMidYMin meet"
+          tourAnchor="start.tour">
+          <svg:defs>
+            <style type="text/css">
+              /* <![CDATA[ */
+              @font-face {
+                font-family: 'Arial';
+                src: url('https://cdn2.boxxerworld.com/assets/fonts/arial-bold-webfont.woff2') format('woff2'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/arial-bold-webfont.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+              }
+  
+              /* ]]> */
+              /* <![CDATA[ */
+              @font-face {
+                font-family: 'oswaldcustom';
+                src: url('https://cdn2.boxxerworld.com/assets/fonts/oswald-semibold.woff2') format('woff2'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/oswald-semibold.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
+              }
+  
+              /* ]]> */
+              /* <![CDATA[ */
+              @font-face {
+                font-family: 'BERRYBOLD';
+                src: url('https://cdn2.boxxerworld.com/assets/fonts/BERRYBOLD.otf')
+                    format('opentype');
+                src: url(https://cdn2.boxxerworld.com/assets/fonts/'BERRYBOLD-Bold.woff2') format('woff2'),
+                    url(https://cdn2.boxxerworld.com/assets/fonts/'BERRYBOLD-Bold.woff') format('woff');
+                font-weight: bold;
+                font-style: normal;
+                font-display: swap;
+              }
+  
+              /* ]]> */
+              /* <![CDATA[ */
+              @font-face {
+                  font-family: 'gravtrac';
+                  src: url('https://cdn2.boxxerworld.com/assets/fonts/gravtrac.eot');
+                  src: url('https://cdn2.boxxerworld.com/assets/fonts/gravtrac.eot?#iefix') format('embedded-opentype'),
+                      url('https://cdn2.boxxerworld.com/assets/fonts/gravtrac.woff2') format('woff2'),
+                      url('https://cdn2.boxxerworld.com/assets/fonts/gravtrac.woff') format('woff'),
+                      url('https://cdn2.boxxerworld.com/assets/fonts/gravtrac.ttf') format('truetype'),
+                      url('https://cdn2.boxxerworld.com/assets/fonts/gravtrac.svg#GravtracCpRg-Bold') format('svg');
+                  font-weight: bold;
+                  font-style: normal;
+                  font-display: swap;
+                }
+              /* ]]> */
+              /* <![CDATA[ */
+              @font-face {
+                  font-family: 'anotherdanger';
+                  src: url('https://cdn2.boxxerworld.com/assets/fonts/AnotherDanger.otf')
+                      format('opentype');
+                  src:url('https://cdn2.boxxerworld.com/assets/fonts/AnotherDanger.ttf')
+                      format('truetype'),
+                      url('https://cdn2.boxxerworld.com/assets/fonts/AnotherDanger.woff2') format('woff2'),
+                      url('https://cdn2.boxxerworld.com/assets/fonts/AnotherDanger.woff') format('woff');
+                  font-weight: normal;
+                  font-style: normal;
+                  font-display: swap;
+                }
+              /* ]]> */
+              /* <![CDATA[ */
+              @font-face {
+                font-family: 'monte';
+                src: url('https://cdn2.boxxerworld.com/assets/fonts/diamante-serial-bold-webfont.eot');
+                src: url('https://cdn2.boxxerworld.com/assets/fonts/diamante-serial-bold-webfont.eot?#iefix') format('embedded-opentype'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/diamante-serial-bold-webfont.woff2') format('woff2'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/diamante-serial-bold-webfont.woff') format('woff'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/diamante-serial-bold-webfont.ttf') format('truetype'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/diamante-serial-bold-webfont.svg#diamante-serialbold') format('svg');
+                font-weight: normal;
+                font-style: normal;
+              }
+  
+              /* ]]> */
+              /* <![CDATA[ */
+              @font-face {
+                font-family: 'college';
+                src: url('https://cdn2.boxxerworld.com/assets/fonts/college_block-webfont.eot');
+                src: url('https://cdn2.boxxerworld.com/assets/fonts/college_block-webfont.eot?#iefix') format('embedded-opentype'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/college_block-webfont.woff2') format('woff2'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/college_block-webfont.woff') format('woff'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/college_block-webfont.ttf') format('truetype'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/college_block-webfont.svg#college_blockregular') format('svg');
+                font-weight: normal;
+                font-style: normal;
+              }
+  
+              /* ]]> */
+              /* <![CDATA[ */
+              @font-face {
+                font-family: 'ballantines';
+                src: url('https://cdn2.boxxerworld.com/assets/fonts/ballantines-bold-webfont.eot');
+                src: url('https://cdn2.boxxerworld.com/assets/fonts/ballantines-bold-webfont.eot?#iefix') format('embedded-opentype'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/ballantines-bold-webfont.woff2') format('woff2'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/ballantines-bold-webfont.woff') format('woff'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/ballantines-bold-webfont.ttf') format('truetype'),
+                  url('https://cdn2.boxxerworld.com/assets/fonts/ballantines-bold-webfont.svg#ballantinesbold') format('svg');
+                font-weight: normal;
+                font-style: normal;
+              }
+  
+              /* ]]> */
+            </style>
+            <svg:filter [id]="filter.id" *ngFor="let filter of svgService.nameFilters">
+              <svg:feImage width="4" height="4" [attr.xlink:href]="filter.crystal" *ngIf="filter.crystal" />
+              <svg:feTile result="dots" *ngIf="filter.crystal" />
+              <svg:feComposite in="dots" in2="SourceGraphic" operator="in" result="comp" *ngIf="filter.crystal">
+              </svg:feComposite>
+              <feOffset in="SourceAlpha" dx="0.3333333333333333" dy="1.6666666666666667" result="15"></feOffset>
+              <feGaussianBlur stdDeviation="1" in="15" result="16"></feGaussianBlur>
+              <feSpecularLighting surfaceScale="2" specularConstant="0.8" specularExponent="15" in="16" result="17">
+                <fePointLight x="-1000" y="-5000" z="300"></fePointLight>
+              </feSpecularLighting>
+              <feComposite in="17" in2="SourceAlpha" operator="in" result="18"></feComposite>
+              <feOffset in="SourceAlpha" dx="-0.3333333333333333" dy="-1.6666666666666667" result="19"></feOffset>
+              <feGaussianBlur stdDeviation="1" in="19" result="20"></feGaussianBlur>
+              <feSpecularLighting surfaceScale="2" specularConstant="1.8" specularExponent="6" in="20" result="21">
+                <fePointLight x="1000" y="5000" z="300"></fePointLight>
+              </feSpecularLighting>
+              <feComposite in="21" in2="SourceAlpha" operator="in" result="22"></feComposite>
+              <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" in="22" result="23"></feColorMatrix>
+              <feComposite k1="0" k2="0.8" k3="0.5" k4="0" in="18" in2="23" operator="arithmetic" result="24">
+              </feComposite>
+              <feOffset result="offOut" in="SourceGraphic" dx="1" dy="1" />
+              <feColorMatrix result="matrixOut" in="offOut" type="matrix"
+                values="0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.1 0 0 0 0 0 0.5 0" />
+              <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="3" />
+              <feBlend in="SourceGraphic" in2="blurOut" mode="normal" result="shadow" />
+              <svg:feMerge>
+                <svg:feMergeNode in="shadow" />
+                <svg:feMergeNode in="SourceGraphic" />
+                <svg:feMergeNode in="comp" *ngIf="filter.crystal" />
+                <feMergeNode in="24" *ngIf="filter.text3d"></feMergeNode>
+              </svg:feMerge>
+            </svg:filter>
+            <svg:pattern *ngFor="let pattern of svgService.patterns" x="0" y="0" [attr.width]="width"
+              [attr.height]="height" [attr.viewBox]="alignedViewBox" patternUnits="userSpaceOnUse" [id]="pattern.id"
+              externalResourcesRequired="true">
+              <svg:rect [attr.width]="width" [attr.height]="height" [attr.fill]="pattern.hex" *ngIf="pattern.hex">
+              </svg:rect>
+              <svg:image [attr.xlink:href]="pattern.image" preserveAspectRatio="xMidYMid slice" x="0" y="0"
+                [attr.width]="width" [attr.height]="height" *ngIf="pattern.image"></svg:image>
+            </svg:pattern>
+            <svg:pattern *ngFor="let pattern of svgService.nameFillPatterns" x="0" y="0" [attr.width]="width"
+              [attr.height]="height" [attr.viewBox]="alignedViewBox" patternUnits="userSpaceOnUse" [id]="pattern.id"
+              externalResourcesRequired="true">
+              <svg:rect [attr.width]="width" [attr.height]="height" [attr.fill]="pattern.hex" *ngIf="pattern.hex">
+              </svg:rect>
+              <svg:image [attr.xlink:href]="pattern.image" preserveAspectRatio="none" x="0" y="0" width="100%"
+                height="100%" *ngIf="pattern.image"></svg:image>
+            </svg:pattern>
+            <svg:pattern *ngFor="let pattern of svgService.nameOutlinePatterns" x="0" y="0" [attr.width]="width"
+              [attr.height]="height" patternUnits="userSpaceOnUse" [id]="pattern.id" [attr.viewBox]="alignedViewBox"
+              externalResourcesRequired="true">
+              <svg:rect [attr.width]="width" [attr.height]="height" [attr.fill]="pattern.hex" *ngIf="pattern.hex">
+              </svg:rect>
+              <svg:image [attr.xlink:href]="pattern.image" preserveAspectRatio="none" x="0" y="0" width="100%"
+                height="100%" *ngIf="pattern.image"></svg:image>
+            </svg:pattern>
+          </svg:defs>
+          <svg:g *ngIf="templateLoaded && (designService.design$ | async).boxxer_logo as logo">
+            <svg:g *ngIf="!logo.remove_logo">
+              <svg:g bx-svg-waist-label [position]="optionsService.getWaistBadge()[0]"></svg:g>
+              <svg:g bx-svg-waist-label [position]="optionsService.getWaistBadge()[1]"></svg:g>
+            </svg:g>
+            <svg:g class="draggable" bx-svg-logo [width]="width" [height]="height" [logo]="logo"
+              *ngIf="logo.position && !logo.remove_logo" [bxBoxxerLogo]="logo" tourAnchor="boxxer.logo"></svg:g>
+          </svg:g>
+          <svg:g class="draggable" bx-svg-text *ngFor="let name of (designService.design$ | async).names" [name]="name"
+            [width]="width" [height]="height" [bxSvgMove]="name" [isText]="true"></svg:g>
+          <svg:g class="draggable" bx-svg-image *ngFor="let flag of (designService.design$ | async).flags"
+            [image]="flag.flag ? flag.flag.image : null" [object]="flag" [width]="width" [height]="height"
+            [bxSvgMove]="flag"></svg:g>
+          <svg:g class="draggable" bx-svg-image *ngFor="let logo of (designService.design$ | async).logos"
+            [image]="logo.image ? logo.image.image : null" [object]="logo" [width]="width" [height]="height"
+            [bxSvgMove]="logo"></svg:g>
+          <svg:g class="draggable" bx-svg-image *ngFor="let upload of (designService.design$ | async).uploads"
+            [image]="upload.image" [object]="upload" [width]="width" [height]="height" [bxSvgMove]="upload"></svg:g>
+        </svg>
+        <div class="template-rotator">
+          <div *ngIf="designService.selectedObject && (designService.dragObject | async) as object">
+            <mat-slider [min]="-180" [max]="180" [step]="10" [tickInterval]="2" [value]="object.position.rotate"
+              (input)="rotateObject($event)" [thumbLabel]="true"></mat-slider>
+            <h4>Rotate</h4>
+          </div>
+        </div>
+      </div>
+      <div class="template-scale">
+        <mat-slider [min]="1" [max]="4" [step]="0.1" [thumbLabel]="true" [value]="object.position.scale" [vertical]="true"
+          (input)="scaleObject($event)"
+          *ngIf="designService.selectedObject && (designService.dragObject | async) as object"></mat-slider>
+        <h4 *ngIf="designService.selectedObject">Enlarge</h4>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="designService.selectedObject && (designService.dragObject | async) as object" >
+    <bx-editbar [ngStyle]="getTransformStyle()" [flag]="object" *ngIf="object.type === 'flag'"></bx-editbar>
+    <bx-editbar [ngStyle]="getTransformStyle()" [logo]="object" *ngIf="object.type === 'logo'"></bx-editbar>
+    <bx-editbar [ngStyle]="getTransformStyle()" [name]="object" *ngIf="object.type === 'name'"></bx-editbar>
+    <bx-editbar [ngStyle]="getTransformStyle()" [upload]="object" *ngIf="object.type === 'upload'"></bx-editbar>
+  </ng-container>
+</div>

@@ -1,10 +1,10 @@
 export const environment = {
   production: true,
-  host: 'https://api.skyeathletic.com',
-  api_url: 'https://api.skyeathletic.com/',
-  site: 'https://skyeathletic.com',
+  host: 'https://api.boxxerworld.com',
+  api_url: 'https://api.boxxerworld.com/',
+  site: 'https://www.boxxerworld.com',
   image_cdn: 'https://img.boxxerworld.com',
-  stripe_key: 'pk_test_gm5ngDkM9un8t17TjhnvqhLh',
-  admin: 'https://admin.skyeathletic.com',
-  domain: '.skyeathletic.com',
+  stripe_key: 'pk_live_S3Xp4BXTis0goqlMzE9kXPn1',
+  admin: 'https://admin.boxxerworld.com',
+  domain: '.boxxerworld.com',
 };

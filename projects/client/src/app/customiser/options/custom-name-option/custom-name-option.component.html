@@ -58,10 +58,10 @@
         <mat-step [completed]="stepOneComplete" editable="true" #step1>
           <div class="content">
             <ng-template matStepLabel>
-              <span [class.complete]="stepOneComplete">Select font and text</span>
+              <span [class.complete]="stepOneComplete" class="d-flex align-items-center">Select font and text <mat-icon class="ml-2 text-danger " matTooltip="Length- Stick to shorter text on waist bands.  Long or mutliple words (eg over 7 characters) remove stretch, look thin and aren’t recommended" matTooltipClass="tooltipFont" matTooltipPosition="below" role="img" >info</mat-icon></span>
             </ng-template>
             <ul class="fonts">
-              <li class="{{ font.value }}" [ngClass]="{
+              <li class="{{ font.value }} font-item" [ngClass]="{
                   selected: nameForm.get('font').value === font.value
                 }"
                 (click)="setFont(font.value)" *ngFor="let font of fonts">
@@ -95,6 +95,7 @@
                 </ng-template>
               </li>
             </ul>
+            <p *ngIf="nameForm.get('name_type').value == '5a91828051d62f8a45c9c60d'" class="text-danger">Please do not choose embroidery text or logos on top of sequins. We can use thick-style print material which will look great and you can choose a plain colour or glitter outline.</p>
             <button class="btn btn-danger btn-info" (click)="showExamples('name-styles')">
               <fa-icon [icon]="['fal', 'info-circle']"></fa-icon> View examples.
             </button>
@@ -103,7 +104,7 @@
         <mat-step [completed]="stepTwoComplete" editable="true">
           <div class="content">
             <ng-template matStepLabel>
-              <span [class.complete]="stepTwoComplete">Select colours</span>
+              <span [class.complete]="stepTwoComplete" class="d-flex align-items-center">Select colours <mat-icon class="ml-2 text-danger " matTooltip="Text outline colour should contrast to the base material colour. Eg dont choose a blue outline on a blue waist band." matTooltipClass="tooltipFont" matTooltipPosition="below" role="img" >info</mat-icon></span>
             </ng-template>
             <bx-custom-name-decorative [form]="nameForm" [type]="selectedType" *ngIf="selectedType" [selectedFill]="selectedFill"
               [selectedOutline]="selectedOutline" (nameColourFillSelected)="setFillColour($event)"

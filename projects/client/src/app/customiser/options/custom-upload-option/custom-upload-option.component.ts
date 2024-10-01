@@ -12,9 +12,10 @@ import { Store, select } from '@ngrx/store';
 import { CustomSetting } from '@global/models/custom-setting';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { MatDialog } from '@angular/material/dialog';
 import { GraphicPriceSize } from '@global/models/graphic-price';
 import { switchMap, map, tap } from 'rxjs/operators';
+import { UploadSizingInfoComponent } from '@app/customiser/components/upload-sizing-info/upload-sizing-info.component';
 
 @Component({
   selector: 'bx-custom-upload-option',
@@ -40,14 +41,24 @@ export class CustomUploadOptionComponent implements OnInit, OnDestroy {
   uploadSizes$: Observable<GraphicPriceSize[]>;
   hasSizes = false;
   price = 0;
+  custom_Settings: CustomSetting;
   constructor(
     private optionsService: CustomiserOptionsService,
     private designService: DesignService,
     private route: ActivatedRoute,
     private store: Store<fromCustomiser.State>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {
     this.customSettings$ = store.pipe(select(fromCustomiser.getCustomSettings));
+    store
+      .pipe(
+        select(fromCustomiser.getCustomSettings),
+        untilComponentDestroyed(this)
+      )
+      .subscribe((settings: CustomSetting) => {
+        this.custom_Settings = settings;
+      });
     this.uploadSizes$ = store.pipe(select(fromCustomiser.getUploadSizes)).pipe(
       tap((resp) => {
         if (resp) {
@@ -66,6 +77,7 @@ export class CustomUploadOptionComponent implements OnInit, OnDestroy {
       },
       uploadMultiple: false,
       maxFiles: 1,
+      // acceptedFiles: 'image/*, application/pdf'
     };
 
     this.route.params
@@ -83,6 +95,7 @@ export class CustomUploadOptionComponent implements OnInit, OnDestroy {
           this.currentUpload = this.selectedUpload;
           this.canDelete = true;
           this.price = this.selectedUpload.price;
+          this.updatePriceList(upload.print_type)
         }
         this.uploadForm = this.fb.group({
           remove_background: [
@@ -100,6 +113,24 @@ export class CustomUploadOptionComponent implements OnInit, OnDestroy {
               ? this.selectedUpload.size
               : null,
             Validators.required,
+          ],
+          color: [
+            this.selectedUpload && this.selectedUpload.color
+              ? this.selectedUpload.color
+              : null,
+              Validators.required,
+          ],
+          print_type: [
+            this.selectedUpload && this.selectedUpload.print_type
+              ? this.selectedUpload.print_type
+              : null,
+              Validators.required,
+          ],
+          print_type_price: [
+            this.selectedUpload && this.selectedUpload.print_type_price
+              ? this.selectedUpload.print_type_price
+              : null,
+              Validators.required,
           ],
         });
       });
@@ -125,11 +156,11 @@ export class CustomUploadOptionComponent implements OnInit, OnDestroy {
             );
           }),
           map((findSize) => {
-            return findSize && findSize.price ? findSize.price : 10;
+            return findSize && findSize.price ? findSize.price: 10 ;
           }),
           untilComponentDestroyed(this)
         )
-        .subscribe((resp) => (this.price = resp));
+        .subscribe((resp) => (this.price = resp+this.uploadForm.get('print_type_price').value));
     }
   }
 
@@ -137,7 +168,8 @@ export class CustomUploadOptionComponent implements OnInit, OnDestroy {
     return (
       this.selectedUpload &&
       this.selectedUpload.image &&
-      this.uploadForm.get('size').valid
+      this.uploadForm.get('size').valid &&
+      this.uploadForm.get('color').valid
     );
   }
 
@@ -149,6 +181,9 @@ export class CustomUploadOptionComponent implements OnInit, OnDestroy {
           'uploads.$.image': this.selectedUpload.image,
           'uploads.$.size': this.uploadForm.get('size').value,
           'uploads.$.instructions': this.uploadForm.get('instructions').value,
+          'uploads.$.color': this.uploadForm.get('color').value,
+          'uploads.$.print_type_price': this.uploadForm.get('print_type_price').value,
+          'uploads.$.print_type': this.uploadForm.get('print_type').value,
           'uploads.$.remove_background': this.uploadForm.get(
             'remove_background'
           ).value,
@@ -159,6 +194,15 @@ export class CustomUploadOptionComponent implements OnInit, OnDestroy {
       this.selectedUpload.instructions = this.uploadForm.get(
         'instructions'
       ).value;
+      this.selectedUpload.color = this.uploadForm.get(
+        'color'
+      ).value;
+      this.selectedUpload.print_type = this.uploadForm.get(
+        'print_type'
+      ).value;
+      this.selectedUpload.print_type_price = this.uploadForm.get(
+        'print_type_price'
+      ).value;
       this.selectedUpload.size = this.uploadForm.get('size').value;
       this.selectedUpload.remove_background = this.uploadForm.get(
         'remove_background'
@@ -168,6 +212,7 @@ export class CustomUploadOptionComponent implements OnInit, OnDestroy {
       };
       this.designService.saveOption(true, { $addToSet: data });
     }
+   
   }
 
   cancel() {
@@ -193,7 +238,6 @@ export class CustomUploadOptionComponent implements OnInit, OnDestroy {
     const file = resp[0];
     const image: Image = resp[1];
     const resize = file.width / 50;
-
     if (this.selectedUpload) {
       this.selectedUpload.image = image;
       this.selectedUpload.position.width = file.width / resize;
@@ -201,7 +245,6 @@ export class CustomUploadOptionComponent implements OnInit, OnDestroy {
       this.selectedUpload.position.aspect_ratio = file.width / file.height;
       return;
     }
-
     this.selectedUpload = {
       price: 0,
       size: null,
@@ -221,6 +264,52 @@ export class CustomUploadOptionComponent implements OnInit, OnDestroy {
   removeImage() {
     this.selectedUpload.image = null;
   }
-
+  setPrintType(value){
+    this.updatePriceList(value)
+    this.uploadForm.get('print_type').setValue(value);
+    this.uploadForm.get('print_type_price').setValue(value != 'PRINT' ? this.custom_Settings.graphic_print_embroidery_price : this.custom_Settings.graphic_print_apparel_price);
+    if(this.uploadForm.get('size').value){
+      this.uploadSizes$.subscribe(
+        (sizes) => {
+          const size = sizes.find((s) => s.title === this.uploadForm.get('size').value)
+        this.price = size.price + this.uploadForm.get('print_type_price').value
+          })
+    }else{
+      this.price = this.uploadForm.get('print_type_price').value
+    }
+  }
+  updatePriceList(value){
+    if(value == 'PRINT'){
+      this.uploadSizes$ = this.store.pipe(select(fromCustomiser.getUploadSizes)).pipe(
+        tap((resp) => {
+          if (resp) {
+            this.hasSizes = true;
+          }
+          this.sizesSetup();
+        })
+      );
+    }else{
+      this.uploadSizes$ = this.store.pipe(select(fromCustomiser.getUploadEmbroiderySizes)).pipe(
+        tap((resp) => {
+          if (resp) {
+            this.hasSizes = true;
+          }
+          this.sizesSetup();
+        })
+      );
+    }
+  }
+  openModal(){
+    const modalRef = this.dialog.open(UploadSizingInfoComponent, {
+      data: { title: `Profile` },
+      minWidth: '300px',
+    });
+    modalRef
+      .afterClosed()
+      .pipe(untilComponentDestroyed(this))
+      .subscribe(confirmed => {
+      });
+  }
+  
   ngOnDestroy() {}
 }

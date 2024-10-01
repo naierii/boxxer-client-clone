@@ -8,7 +8,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatStepperModule } from '@angular/material/stepper';
-
+import {MatIconModule} from '@angular/material/icon'
+import { MatTooltipModule} from '@angular/material/tooltip';
 const MAT_MODULES = [
   MatCheckboxModule,
   MatDialogModule,
@@ -18,7 +19,9 @@ const MAT_MODULES = [
   MatMenuModule,
   MatSelectModule,
   MatStepperModule,
-  MatSliderModule
+  MatSliderModule,
+  MatIconModule,
+  MatTooltipModule
 ];
 
 @NgModule({

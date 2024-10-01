@@ -39,6 +39,7 @@ export class TemplateComponent implements OnDestroy, AfterViewInit {
   @Input()
   product: CustomProduct;
   cartOpen$: Observable<boolean>;
+  @Input() onEmptySide: boolean
   @ViewChild('customDesign', { static: false })
   customDesign: ElementRef;
   viewBox = '0 0 0 0';
@@ -48,6 +49,24 @@ export class TemplateComponent implements OnDestroy, AfterViewInit {
   settings$: Observable<CustomProductSetting[]>;
   muay_thai$: Observable<CustomProductSetting[]>;
   design: CustomDesign;
+  translateX = 0;
+  translateY = 0;
+
+  screenWidth: number;
+  activeZoom = 100
+  scale2 = this.activeZoom;
+  zoomSize=[{name:"Fit",value:'fit'},
+    {name:"Fill",value:"fill"},
+    {name:"200%",value:200},
+    {name:"175%",value:175},
+    {name:"150%",value:150},
+    {name:"125%",value:125},
+    {name:"100%",value:100},
+    {name:"90%",value:90},
+    {name:"75%",value:75},
+    {name:"50%",value:50},
+    {name:"25%",value:25},
+  ]
   get width(): number {
     const params = this.viewBox.split(' ');
     return parseInt(params[2], 10);
@@ -91,12 +110,17 @@ export class TemplateComponent implements OnDestroy, AfterViewInit {
   @HostListener('document:click')
   @HostListener('document:touchstart')
   clickout() {
-    if (!this.wasInside) {
+    if (!this.wasInside || this.onEmptySide == true) {
       this.designService.selectedObject = null;
     }
     this.wasInside = false;
-  }
+  } 
 
+   // Listener for window resize to update screen width dynamically
+   @HostListener('window:resize', ['$event'])
+   onResize(event: Event): void {
+     this.screenWidth = window.innerWidth;
+   }
   constructor(
     actionsSubj: ActionsSubject,
     public optionsService: CustomiserOptionsService,
@@ -112,6 +136,7 @@ export class TemplateComponent implements OnDestroy, AfterViewInit {
     private el: ElementRef,
     private cookieService: CookieService
   ) {
+    this.onEmptySide=false
     actionsSubj.pipe(untilComponentDestroyed(this)).subscribe((data: any) => {
       if (data && data.type === '[Cart] Custom Success') {
         this.designService.deleteToken();
@@ -167,6 +192,7 @@ export class TemplateComponent implements OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.svgService.svg = this.customDesign;
+    this.getScreenWidth();
   }
 
   setUpTemplate() {
@@ -314,6 +340,112 @@ export class TemplateComponent implements OnDestroy, AfterViewInit {
       svg_data: this.svgXml
     });
   }
+  zoomIn() {
+    if (this.scale2 < 250) {
+      this.scale2 += 1; // Increase scale
+      this.activeZoom = this.scale2
+      this.translateY += 5;
+      this.translateX -= 0.2;
+    }
+  }
 
+  zoomOut() {
+    if (this.scale2 > 25) {
+      this.scale2 -= 1;
+      this.activeZoom = this.scale2
+      this.translateY -= 5;
+      this.translateX += 0.2;
+    }
+  }
+
+  getScaleStyle() {
+    return {
+      transform: `scale(${this.activeZoom}%)`,
+    };
+  }
+  getPopupTransformStyle(){
+    return {
+      transform: `scale(1)`,
+    };
+  }
+  getTransformStyle() {
+    if(this.translateY>0 && this.screenWidth >767) {
+      return {
+        transform: `translate(0px, ${this.translateY}px)`,
+      };
+    }
+    
+  }
+  onScroll(event: WheelEvent): void {
+    event.preventDefault(); // Prevent default scrolling behavior
+    if (event.deltaY < 0) {
+      // Zoom in
+      this.zoomIn()
+    } else {
+      // Zoom out
+      this.zoomOut()
+    }
+  }
+   // Method to get the current screen width
+   getScreenWidth(): void {
+    this.screenWidth = window.innerWidth;
+  }
+
+  onTemplateControlsClick(event: MouseEvent | TouchEvent): void {
+    //prevent propagation to parent element
+    event.stopPropagation();
+  }
+  updateZoom(value){
+    this.activeZoom = value;
+    this.scale2 = value;
+    if (value == 'fill') this.fillDesign()
+      if (value == 'fit') this.fitDesign()
+    this.translateY = 5 * (this.scale2 - 100)
+    this.getScaleStyle();
+  }
+ 
+  fillDesign(){
+    const parentdiv = document.getElementsByClassName("cs-customizerr")
+    if(parentdiv){
+      let parentWidth = parentdiv[0].clientWidth
+      let parentHeight = parentdiv[0].clientHeight
+      const childDiv = document.getElementById("template")
+      if(childDiv){
+        let childWidth = childDiv.clientWidth
+        let childHeight = childDiv.clientHeight
+        // const scaleFactor = Math.max(childWidth / parentWidth, childHeight / parentHeight);
+        const scaleFactor = Math.max(parentWidth / childWidth, parentHeight / childHeight);
+        const scaleValue =parseInt((100 * scaleFactor).toFixed(0))
+        this.scale2 = scaleValue - 75
+        if(this.screenWidth >767){
+          this.scale2 = scaleValue - 10
+        }
+        if(this.screenWidth <450){
+          this.scale2 = scaleValue - 200
+        }
+        this.activeZoom = this.scale2
+      }
+    }
+  }
+  fitDesign(){
+    const parentdiv = document.getElementsByClassName("cs-customizerr")
+    if(parentdiv){
+      let parentWidth = parentdiv[0].clientWidth
+      let parentHeight = parentdiv[0].clientHeight
+      const childDiv = document.getElementById("template")
+      if(childDiv){
+        let childWidth = childDiv.clientWidth
+        let childHeight = childDiv.clientHeight
+        // const scaleFactor = Math.min(childWidth / parentWidth, childHeight / parentHeight);
+        const scaleFactor = Math.min(parentWidth / childWidth, parentHeight / childHeight);
+        const scaleValue =parseInt((100 * scaleFactor).toFixed(0))
+        this.scale2 = scaleValue - 7
+        if(this.screenWidth >767){
+          this.scale2 = scaleValue - 2
+        }
+        this.activeZoom = this.scale2
+      }
+    }
+  }
   ngOnDestroy() {}
 }

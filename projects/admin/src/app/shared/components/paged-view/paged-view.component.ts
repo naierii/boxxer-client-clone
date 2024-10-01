@@ -19,7 +19,7 @@ import { untilComponentDestroyed } from '@global/untilDestroy';
 export class PagedViewComponent implements OnInit, OnDestroy, AfterViewInit {
   terms: string;
   maxSize = 5;
-  limit = 25;
+  limit = 30;
   startPage: number;
   page: number;
   page$: Subject<number> = new Subject();

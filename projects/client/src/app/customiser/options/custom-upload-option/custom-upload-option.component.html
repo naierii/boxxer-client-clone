@@ -18,10 +18,16 @@
               [fixedWidth]="true"
               size="1x"
             ></fa-icon>
-            <h5>Click or drag images here to upload</h5>
+            <h5>Upload jpeg or png</h5>
           </div>
         </div>
         <ng-template #uploadImage>
+          <!-- <div class="engraving-image" *ngIf="selectedUpload.ispdf">
+            <img [bxLazysizes]="selectedUpload.image.key" [crop_ratio]="1" />
+            <button class="btn btn-solid btn-block" (click)="removeImage()">
+              Clear PDF
+            </button>
+          </div> -->
           <div class="engraving-image">
             <img [bxLazysizes]="selectedUpload.image.key" [crop_ratio]="1" />
             <button class="btn btn-solid btn-block" (click)="removeImage()">
@@ -30,25 +36,36 @@
           </div>
         </ng-template>
         <div class="upload-options" [formGroup]="uploadForm">
-          <p class="danger">
-            Logos will normally be printed. We may not be able to use low
-            quality images. If there is a problem we will email you.
-          </p>
-          <mat-checkbox formControlName="remove_background"
-            >Do you want us to remove the background around this logo when we
-            make your item?</mat-checkbox
-          >
-          <mat-form-field>
-            <textarea
-              matInput
-              placeholder="Special instructions about logo"
-              matTextareaAutosize
-              matAutosizeMinRows="3"
-              matAutosizeMaxRows="10"
-              formControlName="instructions"
-            ></textarea>
-          </mat-form-field>
-          <h4 [hidden]="!hasSizes">Select size</h4>
+          <!-- <p class="danger">
+            You can upload a jpeg or png including a screen shot. If you have a higher quality image, eg pdf, pls note this in the box below
+            </p> -->
+          <ul class="name-style"  [ngClass]="{ invalid: !uploadForm.get('print_type').valid }">
+            <li [ngClass]="{
+              selected: uploadForm.get('print_type').value === 'PRINT'
+            }" (click)="setPrintType('PRINT')">
+              PRINT (Affordable) <br />
+              <div *ngIf="
+                  custom_Settings.graphic_print_apparel_price;
+                ">
+                <bx-price [price]="custom_Settings.graphic_print_apparel_price"></bx-price>
+              </div>
+             
+            </li>
+            <li [ngClass]="{
+              selected: uploadForm.get('print_type').value === 'EMBROIDERY'
+            }" (click)="setPrintType('EMBROIDERY')">
+              EMBROIDERY (Luxury) <br />
+              <div *ngIf="
+                  custom_Settings.graphic_print_embroidery_price;
+                ">
+                <bx-price [price]="custom_Settings.graphic_print_embroidery_price"></bx-price>
+              </div>
+            </li>
+          </ul>
+          
+          <p class="text-danger" *ngIf="uploadForm.get('print_type').value === 'EMBROIDERY'">Embroidery- we may need to simplify and remove small details. Gradient colours aren’t possible. Backgrounds will always be removed.</p>
+          <label [hidden]="!hasSizes" class="d-flex align-items-center">Select Size <mat-icon class="ml-2 text-danger" title="How to Choose the Right Size for Your Logo"
+            (click)="openModal()">info</mat-icon> </label>
           <mat-radio-group class="graphic-sizes" formControlName="size">
             <mat-radio-button
               class="option"
@@ -59,9 +76,36 @@
               ><br /><small>{{ size.description }}</small>
             </mat-radio-button>
           </mat-radio-group>
-          <p [hidden]="!hasSizes">
-            Logo size will be at the widest or longest point depending on shape
+          <p class="danger">
+            Choose logo size carefully and submit all logos needed before ordering. Size is measured as above. Later upgrades in size or adding additional graphics will delay production and an admin fee of <bx-price price="2"></bx-price> per graphic/ logo applies.
           </p>
+          <mat-checkbox formControlName="remove_background" *ngIf="uploadForm.get('print_type').value === 'PRINT'" class="my-1"
+          >Remove Logo Background? (recomended! patches are ugly!)</mat-checkbox
+        >
+          <!-- <p [hidden]="!hasSizes">
+            Logo size will be at the widest or longest point depending on shape
+          </p> -->
+          <mat-form-field>
+            <label>Enter Logo Main Colour for us to make (contrasting to the material it will be on) <b class="text-danger">*</b></label>
+            <input
+              matInput
+              placeholder=""
+              formControlName="color"
+            >
+          </mat-form-field>
+          <mat-form-field>
+            <label>Any special instructions about graphic/ logo</label>
+            <textarea
+              matInput
+              placeholder=""
+              matTextareaAutosize
+              matAutosizeMinRows="3"
+              matAutosizeMaxRows="10"
+              formControlName="instructions"
+            ></textarea>
+          </mat-form-field>
+          <br />
+          <br />
         </div>
       </div>
     </div>

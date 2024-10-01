@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  labels:
+    app.kubernetes.io/component: controller 
+  name: nginx
+  annotations:
+    ingressclass.kubernetes.io/is-default-class: "true"
+spec:
+  controller: k8s.io/ingress-nginx
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: boxxer-client-prod-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      if ($host = 'boxxerworld.com' ) {
+        rewrite ^ https://www.boxxerworld.com$request_uri permanent;
+      }
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    cert-manager.io/cluster-issuer: letsencrypt-prod-dns
+    cert-manager.io/issue-temporary-certificate: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - boxxerworld.com
+      secretName: boxxer-client-prod-naked-cert
+  rules:
+    - host: boxxerworld.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service: 
+                name: boxxer-client
+                port: 
+                  number: 8080

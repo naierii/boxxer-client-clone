@@ -13,4 +13,5 @@ export interface GraphicPrice {
   type: string;
   categories: Term[];
   sizes: GraphicPriceSize[];
+  weight: number
 }

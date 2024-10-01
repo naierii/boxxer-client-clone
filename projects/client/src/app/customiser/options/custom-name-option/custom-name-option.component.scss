@@ -11,6 +11,34 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'BERRYBOLD';
+  src: url('https://cdn2.boxxerworld.com/assets/fonts/BERRYBOLD.otf')
+      format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'anotherdanger';
+  src: url('https://cdn2.boxxerworld.com/assets/fonts/AnotherDanger.otf')
+      format('opentype');
+  src:url('https://cdn2.boxxerworld.com/assets/fonts/AnotherDanger.ttf')
+      format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'gravtrac';
+  src: url('https://cdn2.boxxerworld.com/assets/fonts/gravtrac.eot');
+  src: url('https://cdn2.boxxerworld.com/assets/fonts/gravtrac.eot?#iefix') format('embedded-opentype'),
+      url('https://cdn2.boxxerworld.com/assets/fonts/gravtrac.woff2') format('woff2'),
+      url('https://cdn2.boxxerworld.com/assets/fonts/gravtrac.woff') format('woff'),
+      url('https://cdn2.boxxerworld.com/assets/fonts/gravtrac.ttf') format('truetype'),
+      url('https://cdn2.boxxerworld.com/assets/fonts/gravtrac.svg#GravtracCpRg-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: 'monte';
@@ -97,19 +125,36 @@
   li.Arial {
     font-family: Arial;
     font-weight: bold;
+    line-height: 19px;
+    font-size: 19px;
   }
   li.monte {
     font-family: 'monte';
   }
   li.oswaldcustom {
-    font-family: 'oswaldcustom';
+    font-family: "oswaldcustom";
+    line-height: 19px;
+    font-size: 19px;
+  }
+  li.BERRYBOLD {
+    font-family: "BERRYBOLD";
+    font-size: 25px;
+    line-height: 12px;
+  }
+  li.anotherdanger {
+    font-family: 'anotherdanger';
+  }
+  li.gravtrac {
+    font-family: 'gravtrac';
   }
   li.college {
     font-family: 'college';
   }
   li.ballantines {
-    font-family: 'ballantines';
+    font-family: "ballantines";
     text-transform: none;
+    font-size: 30px;
+    line-height: 12px;
   }
 }
 
@@ -128,4 +173,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.font-item {
+  font-size: 16px;   /* Base size for all fonts */
+  line-height: 1.5;  /* Ensures consistent spacing */
+  padding: 8px 0;    /* Add padding to each item */
+  margin: 0;  /* Default scale */
+  display: inline-block; /* Prevent scaling from affecting layout */
+}
+::ng-deep .tooltipFont{
+  font-size: 16px;
+  background: grey;
 }

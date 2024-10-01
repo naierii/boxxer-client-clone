@@ -1,14 +1,16 @@
 <tr>
-  <td class="center">
+  <td class="center" style="cursor: pointer;" >
     <div *ngIf="item.custom_product; else listingImage">
       <img
         [bxLazysizes]="item.custom_design.image.key"
+        (click)="openModal(template,item.custom_design.image.key)"
         *ngIf="item | hasKey: 'custom_design.image.key'"
       />
     </div>
     <ng-template #listingImage>
       <img
         [bxLazysizes]="getReadyMadeImage(item.product_variation)"
+        (click)="openModal(template,getReadyMadeImage(item.product_variation))"
         *ngIf="getReadyMadeImage(item.product_variation)"
       />
     </ng-template>
@@ -64,3 +66,10 @@
     </div>
   </td>
 </tr>
+<ng-template #template>
+  <div class="modal-content" (wheel)="onScroll($event)" [ngStyle]="getScaleStyle()" style="transform-origin: top">
+    <div class="modal-body" >
+      <img [src]="imagelink">
+    </div>
+  </div>
+</ng-template>

@@ -104,6 +104,15 @@ export class SvgTextComponent {
       case 'oswaldcustom':
         correction = 0;
         break;
+      case 'BERRYBOLD':
+        correction = 0;
+        break;
+      case 'anotherdanger':
+        correction = 0;
+        break;
+      case 'gravtrac':
+          correction = 0;
+          break;
       case 'ballantines':
         correction = 4;
         break;

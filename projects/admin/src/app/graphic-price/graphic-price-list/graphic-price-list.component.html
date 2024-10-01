@@ -3,14 +3,15 @@
     <table class="table table-striped mt-3">
       <thead>
         <tr>
+          <th class="fit"></th>
           <th>Title</th>
           <th>Type</th>
           <th>Categories</th>
           <th class="fit"></th>
         </tr>
       </thead>
-      <tbody>
-        <tr bx-graphic-price-item *ngFor="let item of items" [item]="item" (onDeleted)="listView.deleteConfirm($event)"></tr>
+      <tbody [dragula]='"graphic-prices"' [dragulaModel]="items" #bag>
+        <tr bx-graphic-price-item *ngFor="let item of items; let i = index" [item]="item" (onDeleted)="listView.deleteConfirm($event)"   [attr.data-id]="item._id" [attr.data-index]="i"></tr>
       </tbody>
     </table>
     <div *ngIf="(totalCount$ | async) as totalCount">

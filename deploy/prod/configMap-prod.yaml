@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  MAINTENANCE: "false"
+  NODE_ENV: production
+  SERVER: flynn
+  INDEX_FILE: index-prod
+  CLIENT_DOMAIN: www.boxxerworld.com
+  ADMIN_DOMAIN: admin.boxxerworld.com
+  CDN_DOMAIN: cdn2.boxxerworld.com
+kind: ConfigMap
+metadata:
+  name: boxxer-client-prod
+  namespace: default

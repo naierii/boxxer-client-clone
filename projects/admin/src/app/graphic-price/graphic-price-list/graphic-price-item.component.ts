@@ -9,6 +9,12 @@ import { GraphicPrice } from '@global/models/graphic-price';
 export class GraphicPriceItemComponent {
   @Input() item: GraphicPrice;
   @Output() onDeleted = new EventEmitter<string>();
+  obj={
+    'Logo':"Graphic Bank",
+    'Upload':"Print Upload",
+    'UploadEmbroidery':"Embroidery Upload",
+    'Flag':"Flag"
+  }
   delete(id: string) {
     this.onDeleted.emit(id);
   }

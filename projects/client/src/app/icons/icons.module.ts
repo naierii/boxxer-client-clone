@@ -23,6 +23,7 @@ import { faLockAlt } from '@font/pro-light-svg-icons/faLockAlt';
 import { faMapMarker } from '@font/pro-light-svg-icons/faMapMarker';
 import { faCreditCardFront } from '@font/pro-light-svg-icons/faCreditCardFront';
 import { faPlus } from '@font/pro-light-svg-icons/faPlus';
+import { faMinus } from '@font/pro-light-svg-icons/faMinus';
 
 import { faPlayCircle } from '@fortawesome/free-solid-svg-icons/faPlayCircle';
 
@@ -68,7 +69,8 @@ export class IconsModule {
       faCcPaypal,
       faCcAmex,
       faCcMastercard,
-      faCcVisa
+      faCcVisa,
+      faMinus
     );
   }
 }

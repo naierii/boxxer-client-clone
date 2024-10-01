@@ -33,10 +33,10 @@ export class SocketService {
     return this.service
       .watch()
       .find({
-        query
+        query,
       })
       .pipe(
-        tap(resp => {
+        tap((resp) => {
           this.onEnd();
         }),
         catchError(this.handleError.bind(this))
@@ -53,10 +53,10 @@ export class SocketService {
     return this.service
       .watch()
       .get(id, {
-        query
+        query,
       })
       .pipe(
-        tap(resp => {
+        tap((resp) => {
           this.onEnd();
         }),
         catchError(this.handleError.bind(this))
@@ -64,14 +64,15 @@ export class SocketService {
   }
 
   create(data: any, params?: any) {
+    this.loading_enabled = true;
     this.showLoader();
     if (!params) {
       params = {};
     }
     params = Object.assign(params, {
       query: {
-        $client: { schema: 'po-admin' }
-      }
+        $client: { schema: 'po-admin' },
+      },
     });
     return this.service
       .watch()
@@ -96,15 +97,15 @@ export class SocketService {
     }
     params = Object.assign(params, {
       query: {
-        $client: { schema: 'po-admin' }
-      }
+        $client: { schema: 'po-admin' },
+      },
     });
 
     return this.service
       .watch()
       .patch(id, data, params || {})
       .pipe(
-        tap(resp => {
+        tap((resp) => {
           this.onEnd();
         }),
         catchError(this.handleError.bind(this))
@@ -141,6 +142,7 @@ export class SocketService {
 
     this.hideLoader();
     if (error && error.code === 401) {
+      this.feathers.logout();
       this.router.navigate(['/auth', 'login']);
     }
 

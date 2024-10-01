@@ -4,12 +4,12 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: true,
-  host: 'https://api.skyeathletic.com',
-  api_url: 'https://api.skyeathletic.com/',
-  site: 'https://skyeathletic.com',
+  production: false,
+  host: 'http://localhost:3030',
+  api_url: 'http://localhost:3030/',
+  site: 'https://localhost:4200',
   image_cdn: 'https://img.boxxerworld.com',
   stripe_key: 'pk_test_gm5ngDkM9un8t17TjhnvqhLh',
-  admin: 'https://admin.skyeathletic.com',
-  domain: '.skyeathletic.com',
+  admin: 'https://localhost:4201',
+  domain: 'localhost',
 };

@@ -57,6 +57,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 };
 
 import { CustomMaterialColourComponent } from './components/custom-material-colour/custom-material-colour.component';
+import { UploadSizingInfoComponent } from './components/upload-sizing-info/upload-sizing-info.component';
 
 @NgModule({
   imports: [
@@ -103,8 +104,9 @@ import { CustomMaterialColourComponent } from './components/custom-material-colo
     SvgLogoComponent,
     BoxxerLogoDirective,
     CustomMaterialColourComponent,
+    UploadSizingInfoComponent
   ],
-  entryComponents: [],
+  entryComponents: [UploadSizingInfoComponent],
   providers: [
     CustomiserOptionsService,
     SvgService,

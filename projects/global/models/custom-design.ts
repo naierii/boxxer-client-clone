@@ -34,6 +34,9 @@ export interface CustomDesignImage {
   size_info?: string;
   remove_background?: boolean;
   instructions?: string;
+  color?: string;
+  print_type?: string;
+  print_type_price?: number;
   type?: string;
   _id?: string;
 }
@@ -46,6 +49,7 @@ export interface CustomDesignLogo {
   size_info?: string;
   instructions?: string;
   type?: string;
+  color?: string;
   _id?: string;
 }
 

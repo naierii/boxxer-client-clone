@@ -5,6 +5,6 @@ export const environment = {
   site: 'https://staging.boxxerworld.com',
   image_cdn: 'https://img.boxxerworld.com',
   stripe_key: 'pk_test_gm5ngDkM9un8t17TjhnvqhLh',
-  admin: 'https://admin.boxxerworld.com',
+  admin: 'https://staging-admin.boxxerworld.com',
   domain: '.boxxerworld.com',
 };

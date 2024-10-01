@@ -33,6 +33,7 @@ export interface CustomProduct {
   flag_sizes: GraphicPriceSize[];
   logo_sizes: GraphicPriceSize[];
   upload_sizes: GraphicPriceSize[];
+  upload_embroidery_sizes: GraphicPriceSize[];
   createdAt: Date;
   updatedAt: Date;
 }

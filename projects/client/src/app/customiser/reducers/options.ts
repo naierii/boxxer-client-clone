@@ -18,6 +18,7 @@ export interface State {
   flag_sizes: GraphicPriceSize[];
   logo_sizes: GraphicPriceSize[];
   upload_sizes: GraphicPriceSize[];
+  upload_embroidery_sizes: GraphicPriceSize[];
   sizes: any[];
 }
 
@@ -30,6 +31,7 @@ const initialState: State = {
   flag_sizes: [],
   logo_sizes: [],
   upload_sizes: [],
+  upload_embroidery_sizes: [],
   sizes: []
 };
 
@@ -50,6 +52,7 @@ export function reducer(state = initialState, action: OptionsActions): State {
         flag_sizes: action.payload.flag_sizes,
         logo_sizes: action.payload.logo_sizes,
         upload_sizes: action.payload.upload_sizes,
+        upload_embroidery_sizes: action.payload.upload_embroidery_sizes,
         sizes: action.payload.sizes ? action.payload.sizes : []
       };
     default: {
@@ -66,4 +69,5 @@ export const getPanels = (state: State) => state.settings;
 export const getFlagSizes = (state: State) => state.flag_sizes;
 export const getLogoSizes = (state: State) => state.logo_sizes;
 export const getUploadSizes = (state: State) => state.upload_sizes;
+export const getUploadEmbroiderySizes = (state: State) => state.upload_embroidery_sizes;
 export const getSizes = (state: State) => state.sizes;

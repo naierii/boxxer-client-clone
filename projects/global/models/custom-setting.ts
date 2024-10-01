@@ -92,6 +92,8 @@ export interface CustomSetting {
   upload_price: number;
   remove_logo_price: number;
   muay_thai_price: number;
+  graphic_print_apparel_price: number;
+  graphic_print_embroidery_price: number;
   design_areas: DesignArea[];
   material_groups: MaterialGroup[];
   name_fill_materials: TermMaterial[];

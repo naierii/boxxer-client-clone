@@ -1,3 +1,6 @@
+@import 'variables';
+@import 'mixins';
+@import 'partial';
 .upload-options {
   margin-top: 1rem;
 }
@@ -11,4 +14,14 @@
     margin: 5px 0;
     flex: 0 1 50%;
   }
+}
+.name-style {
+  @extend %button-group-select;
+  margin-top: 1rem;
+}
+label{
+  font-weight: 400;
+  font-size: 18px;
+  font-family: 'Oswald', sans-serif;
+  margin: 0 0 1rem;
 }

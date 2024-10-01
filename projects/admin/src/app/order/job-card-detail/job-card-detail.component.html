@@ -80,8 +80,10 @@
             <div *ngIf="order.item.custom_product; else listingImage">
               <h6>{{ order.item.custom_product.title }}</h6>
               <img
+               style="cursor: pointer;"
                 [bxLazysizes]="order.item.custom_design.image.key"
                 *ngIf="order | hasKey: 'item.custom_design.image.key'"
+                (click)="openModal(template,order.item.custom_design.image.key)"
               />
               <div>
                 <a [attr.href]="editLink">Edit design</a>
@@ -510,12 +512,17 @@
                   [public_id]="logo.image.image.key"
                   [size]="64"
                   *ngIf="logo.image"
+                  (click)="openModal(template,logo.image.image.key)"
+                  style="cursor: pointer;"
                 ></bx-image-thumb>
                 <div class="media-body">
                   <h5 class="mt-0 mb-1">Logo</h5>
                   {{ logo.image?.title }}
                   <div *ngIf="logo.size">{{ logo.size }}</div>
                   <div *ngIf="logo.size_info">{{ logo.size_info }}</div>
+                  <div *ngIf="logo.color">
+                    <h6 class="mb-0">Main Color</h6>
+                    {{ logo.color }}</div>
                   <div *ngIf="logo.instructions">
                     <h6>Instructions</h6>
                     <span [innerText]="logo.instructions"></span>
@@ -537,11 +544,17 @@
                   [public_id]="upload.image.key"
                   [size]="64"
                   *ngIf="upload.image"
+                  (click)="openModal(template,upload.image.key)"
+                  style="cursor: pointer;"
                 ></bx-image-thumb>
                 <div class="media-body">
                   <h5 class="mt-0 mb-1">Upload</h5>
                   <div *ngIf="upload.size">{{ upload.size }}</div>
                   <div *ngIf="upload.size_info">{{ upload.size_info }}</div>
+                  <div *ngIf="upload.print_type">{{ upload.print_type }}</div>
+                  <div *ngIf="upload.color">
+                    <h6 class="mb-0">Main Color</h6>
+                    {{ upload.color }}</div>
                   <a
                     target="_blank"
                     href="https://boxxer-images.ams3.digitaloceanspaces.com/{{
@@ -638,3 +651,10 @@
     </div>
   </div>
 </div>
+<ng-template #template>
+  <div class="modal-content" (wheel)="onScroll($event)" [ngStyle]="getScaleStyle()" style="transform-origin: top">
+    <div class="modal-body" >
+      <img [src]="imagelink">
+    </div>
+  </div>
+</ng-template>

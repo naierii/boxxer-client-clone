@@ -7,9 +7,19 @@
           changing the colour, please enter below.
         </p>
         <mat-form-field>
-          <textarea
+          <label class="mb-1 d-flex ng-tns-c47-10"><span>Enter desired logo main colour (make it contrast to base fabric)<b class="text-danger">*</b> </span>
+            <mat-icon class="ml-2 text-danger " matTooltip="Logos need to stand out from the background material so they should be a clearly contrasting colour to the fabric. Eg logos on black material should be white or another light colour" matTooltipClass="tooltipFont" matTooltipPosition="below">info</mat-icon></label>
+          <input
             matInput
-            placeholder="Special instructions about graphic"
+            placeholder=""
+            formControlName="color"
+          >
+        </mat-form-field>
+      <mat-form-field>
+        <label class="mb-1">Any special instructions about graphic/ logo</label>
+        <textarea
+          matInput
+          placeholder=""
             matTextareaAutosize
             matAutosizeMinRows="3"
             matAutosizeMaxRows="10"

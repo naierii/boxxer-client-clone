@@ -124,6 +124,18 @@ export class CustomSettingsComponent implements OnInit, OnDestroy {
           : null,
         Validators.required
       ],
+      graphic_print_apparel_price: [
+        this.item && this.item.graphic_print_apparel_price
+          ? this.item.graphic_print_apparel_price
+          : null,
+        Validators.required
+      ],
+      graphic_print_embroidery_price: [
+        this.item && this.item.graphic_print_embroidery_price
+          ? this.item.graphic_print_embroidery_price
+          : null,
+        Validators.required
+      ],
       design_areas: this.fb.array([]),
       material_groups: this.fb.array([]),
       name_types: this.fb.array([]),

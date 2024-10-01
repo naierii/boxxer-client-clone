@@ -17,7 +17,7 @@
   <bx-custom-material-group [materials]="type.crystal_material.materials" [selectedMaterial]="selectedCrystal"
     (materialColourSelected)="colourCrystalSelected($event)" *ngIf="form.get('add_crystals').value">
     <div class="sub-header">
-      <h4>Choose crystal colour</h4>
+      <h4 class="d-flex align-items-center">Choose crystal colour <mat-icon class="ml-2 text-danger " matTooltip="Crystals on text look best in the same colour as the main text colour or in diamante." matTooltipClass="tooltipFont" matTooltipPosition="below" role="img" >info</mat-icon></h4>
     </div>
   </bx-custom-material-group>
 </div>

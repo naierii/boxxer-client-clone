@@ -29,6 +29,7 @@ export class CustomiserComponent implements OnInit, OnDestroy {
   @ViewChild('toolbar', { static: true })
   toolbar: ToolbarComponent;
   product: CustomProduct;
+  onEmptySide=false
   constructor(
     public designService: DesignService,
     public optionsService: CustomiserOptionsService,
@@ -157,7 +158,9 @@ export class CustomiserComponent implements OnInit, OnDestroy {
       this.renderer.addClass(this.ps.getNativeDocument().body, 'modal');
     }
   }
-
+  templateEvent(event: MouseEvent | TouchEvent): void {
+    this.onEmptySide = true
+  }
   ngOnDestroy() {
     this.store.dispatch(new design.ResetDesign(this.optionsService.getLogo()));
     if (this.ps.isBrowser && this.ps.getNativeDocument()) {

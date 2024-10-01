@@ -67,8 +67,16 @@ export class CustomNameOptionComponent implements OnInit, OnDestroy {
   fontSize = '48px';
   fonts = [
     {
-      title: 'Arial',
-      value: 'Arial',
+      title: 'BERRY BOLD',
+      value: 'BERRYBOLD',
+    },
+    {
+      title: 'Another Danger',
+      value: 'anotherdanger',
+    },
+    {
+      title: 'Gravtrac',
+      value: 'gravtrac',
     },
     {
       title: 'Oswald',
@@ -258,7 +266,7 @@ export class CustomNameOptionComponent implements OnInit, OnDestroy {
         Validators.required,
       ],
       font: [
-        this.selectedName ? this.selectedName.font : 'Arial',
+        this.selectedName ? this.selectedName.font : 'BERRYBOLD',
         Validators.required,
       ],
       fill: [

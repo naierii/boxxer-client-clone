@@ -13,12 +13,26 @@
           <input type="email" class="form-control" placeholder="Email" formControlName="email" required>
         </bx-form-field>
         <bx-form-field label="Password">
-          <input type="password" class="form-control" placeholder="Password" formControlName="password" minlength="8">
+          <div class="input-group mb-4">
+            <input [type]="passwordType" class="form-control" placeholder="Password" formControlName="password" minlength="8">
+            <div class="input-group-append">
+              <span class="input-group-text" id="password-toggle" (click)="showHidePassword()">
+                <i [ngClass]="passwordType == 'text' ? 'fa fa-eye-slash' : 'fa fa-eye'" id="password-toggle-icon"></i>
+              </span>
+            </div>
+          </div>
           <span class="help-block text-danger" *ngIf="userForm.controls['password'].hasError('minlength') && !userForm.controls['password'].touched">Please
             enter a password of at least 8 characters</span>
         </bx-form-field>
         <bx-form-field label="Confirm Password">
-          <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirm_password">
+          <div class="input-group mb-4">
+            <input [type]="confirmPasswordType" class="form-control" placeholder="Confirm Password" formControlName="confirm_password">
+            <div class="input-group-append">
+              <span class="input-group-text" id="password-toggle" (click)="showHideConfirmPassword()">
+                <i [ngClass]="confirmPasswordType == 'text' ? 'fa fa-eye-slash' : 'fa fa-eye'" id="password-toggle-icon"></i>
+              </span>
+            </div>
+          </div>
           <span class="help-block text-danger" *ngIf="userForm.controls['confirm_password'].hasError('minlength') && !userForm.controls['confirm_password'].touched">Please
             enter a password of at least 8 characters</span>
           <span class="help-block text-danger" *ngIf="userForm.controls['confirm_password'].hasError('MatchPassword') && !userForm.controls['confirm_password'].touched">Passwords

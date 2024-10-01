@@ -26,7 +26,7 @@ import { Actions, ofType } from '@ngrx/effects';
 
 @Injectable()
 export class ResolverService implements Resolve<any> {
-  private roles = ['admin', 'staff', 'accounts'];
+  private roles = ['admin', 'staff', 'accounts',"order_commenter"];
   constructor(
     private auth: AuthService,
     private api: ApiService,
