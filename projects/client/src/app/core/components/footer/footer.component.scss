@@ -10,7 +10,7 @@ $container-max-widths: (
   sm: 100%,
   md: 100%,
   lg: 100%,
-  xl: 100%
+  xl: 100%,
 );
 
 :host {
@@ -31,7 +31,17 @@ ul {
   padding: 0;
   margin: 0;
 }
-
+.mw-180px {
+  max-width: 180px;
+}
+.mw-250px {
+  max-width: 250px;
+}
+.btn-green {
+  background-color: #63b20b;
+  border-color: #63b20b;
+  color: #fff !important;
+}
 .wrapper {
   @include make-container();
   @include make-container-max-widths($container-max-widths);
@@ -98,7 +108,6 @@ ul {
   }
 }
 
-
 /* Footer */
 .social i {
   color: #fff;
@@ -106,7 +115,6 @@ ul {
 }
 hr.hr-footer {
   color: #464646;
- 
 }
 .terms span {
   margin: 0px 5px;
@@ -117,11 +125,11 @@ hr.hr-footer {
 .footer-list li a {
   color: #7a7a7a;
   font-size: 12px;
-}   
+}
 .footer-list li {
   padding-bottom: 5px;
 }
-.text-right.social svg {
+.social svg {
   width: 22px;
   color: #fff;
   margin-left: 10px;
@@ -129,11 +137,11 @@ hr.hr-footer {
 li.footer-menu-list {
   margin-top: 10px;
 }
-li.footer-menu-list a{
+li.footer-menu-list a {
   color: #7a7a7a;
 }
-.horizontal-line-footer{
-  width:100%;
+.horizontal-line-footer {
+  width: 100%;
   margin: 20px 0;
 }
 .footer-foot-menu span {
@@ -141,17 +149,17 @@ li.footer-menu-list a{
   color: #6a6a6a;
 }
 
-@media only screen and (max-width: 768px){
-  li.footer-menu-list{
+@media only screen and (max-width: 768px) {
+  li.footer-menu-list {
     font-size: 10px;
   }
   .fmenu h3 {
     font-size: 12px;
-}
-.text-right.social {
-  margin-top: 20px;
-}
-.footer-foot-menu span {
-  font-size: 10px;
-}
+  }
+  .social {
+    margin-top: 20px;
+  }
+  .footer-foot-menu span {
+    font-size: 10px;
+  }
 }
